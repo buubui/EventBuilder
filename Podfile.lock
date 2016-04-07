@@ -1,0 +1,81 @@
+PODS:
+  - Alamofire (3.3.0)
+  - ChameleonFramework/Default (2.1.0)
+  - ChameleonFramework/Swift (2.1.0):
+    - ChameleonFramework/Default
+  - DZNEmptyDataSet (1.7.3)
+  - EZLoadingActivity (0.8)
+  - Firebase (2.5.1)
+  - FirebaseUI/Core (0.3.2):
+    - Firebase (~> 2.2)
+  - FlatUIKit (1.6.2)
+  - Font-Awesome-Swift (1.4.6)
+  - ForecastView (0.3.1)
+  - IQKeyboardManagerSwift (4.0.0)
+  - KIF (3.4.1):
+    - KIF/Core (= 3.4.1)
+  - KIF/Core (3.4.1)
+  - Material (1.38.5)
+  - MXParallaxHeader (0.5.0)
+  - Nimble (4.0.0)
+  - OHHTTPStubs (5.0.0):
+    - OHHTTPStubs/Default (= 5.0.0)
+  - OHHTTPStubs/Core (5.0.0)
+  - OHHTTPStubs/Default (5.0.0):
+    - OHHTTPStubs/Core
+    - OHHTTPStubs/JSON
+    - OHHTTPStubs/NSURLSession
+    - OHHTTPStubs/OHPathHelpers
+  - OHHTTPStubs/JSON (5.0.0):
+    - OHHTTPStubs/Core
+  - OHHTTPStubs/NSURLSession (5.0.0):
+    - OHHTTPStubs/Core
+  - OHHTTPStubs/OHPathHelpers (5.0.0)
+  - Quick (0.9.1)
+  - ReachabilitySwift (2.3.3)
+  - SwiftSpinner (0.9.1)
+  - SwiftValidator (3.0.3)
+
+DEPENDENCIES:
+  - Alamofire (~> 3.0)
+  - ChameleonFramework/Swift
+  - DZNEmptyDataSet
+  - EZLoadingActivity
+  - Firebase
+  - FirebaseUI/Core
+  - FlatUIKit
+  - Font-Awesome-Swift (~> 1.4.6)
+  - ForecastView
+  - IQKeyboardManagerSwift
+  - KIF
+  - Material
+  - MXParallaxHeader
+  - Nimble
+  - OHHTTPStubs
+  - Quick
+  - ReachabilitySwift
+  - SwiftSpinner
+  - SwiftValidator
+
+SPEC CHECKSUMS:
+  Alamofire: 9054db4a1b1ca9e363223183e01cea380159a27c
+  ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
+  DZNEmptyDataSet: dd7cca17c1d07dfa78956859b1e70a52505678ef
+  EZLoadingActivity: 6fd75a05765a4085f4b6fef6f62edf9f144b3139
+  Firebase: 3565ea88b830f28f2c77ecc524622bc71a20d085
+  FirebaseUI: 95621dce04f0313495c86e1fba503254e0ec48b1
+  FlatUIKit: 1b41f0d4952ce8d970d8479ce79df54a960242c4
+  Font-Awesome-Swift: a965c23e619514be65de9b113f49038ca683c1bb
+  ForecastView: aee4963879f8a34cdbca84df1f6ffdeb1ff986da
+  IQKeyboardManagerSwift: ede2a27b4e1ce053d03073b9c7fa439322f5e405
+  KIF: 2275c6d59c77e5e56f660f006b99d73780130540
+  Material: e382debf52b8070a235f5f67d9394524f16a8e6e
+  MXParallaxHeader: c7dfdf8d769a8eb868a431ec3aeaf994a147b8bc
+  Nimble: 72bcc3e2f02242e6bfaaf8d9412ca7bfe3d8b417
+  OHHTTPStubs: a5d2e9eea07869d42ec03338325f398bc520e159
+  Quick: a5221fc21788b6aeda934805e68b061839bc3165
+  ReachabilitySwift: e0f6b6f280effb47731acfaaa2d5ffe223703793
+  SwiftSpinner: 09a60c00f4dfa2097b4deabd26f513ad077af4f1
+  SwiftValidator: 0b6a48bf10364411b0d64c97f78665ff87ca9f8b
+
+COCOAPODS: 0.39.0

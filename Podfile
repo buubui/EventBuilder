@@ -20,6 +20,7 @@ target 'EventBuilder' do
   pod 'ChameleonFramework/Swift'
   pod 'Font-Awesome-Swift', '~> 1.4.6'
   pod 'DZNEmptyDataSet'
+  pod "StatusBarNotificationCenter"
 end
 
 target 'EventBuilderTests' do

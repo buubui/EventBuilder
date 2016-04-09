@@ -8,8 +8,28 @@
 
 import UIKit
 
+class Helper {
+  class func isTestMode() -> Bool {
+    #if DEBUG
+      if env("TESTING") == "1" {
+        return true
+      }
+    #endif
+    return false
+  }
+
+  class func env(key: String) -> String? {
+    let dict = NSProcessInfo.processInfo().environment
+    if dict[key] == nil {
+      print("CAN NOT LOAD ENV VAR: \(key)")
+    }
+    return dict[key]
+  }
+}
+
 func runInMainThread(completion: (() -> Void)) {
   dispatch_async(dispatch_get_main_queue()) {
     completion()
   }
 }
+

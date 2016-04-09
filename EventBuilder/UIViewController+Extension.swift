@@ -8,6 +8,8 @@
 
 import UIKit
 import EZLoadingActivity
+import StatusBarNotificationCenter
+import FlatUIKit
 
 extension UIViewController {
 
@@ -19,4 +21,12 @@ extension UIViewController {
     EZLoadingActivity.hide(success: success, animated: animated)
   }
 
+  func showNotificationMessage(message: String, error: Bool) {
+    var notificationCenterConfiguration = NotificationCenterConfiguration(baseWindow: view.window!)
+    notificationCenterConfiguration.style = .NavigationBar
+    var notificationLabelConfiguration = NotificationLabelConfiguration()
+    notificationLabelConfiguration.backgroundColor = error ? UIColor.flatRedColor() : UIColor.flatGreenColor()
+    notificationLabelConfiguration.textColor = UIColor.flatWhiteColor()
+    StatusBarNotificationCenter.showStatusBarNotificationWithMessage(message, forDuration: 2, withNotificationCenterConfiguration: notificationCenterConfiguration, andNotificationLabelConfiguration: notificationLabelConfiguration)
+  }
 }

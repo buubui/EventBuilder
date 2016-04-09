@@ -21,6 +21,7 @@
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ccT-IP-1Zl" customClass="BTextField" customModule="EventBuilder" customModuleProvider="target">
                                 <rect key="frame" x="40" y="219" width="520" height="30"/>
+                                <accessibility key="accessibilityConfiguration" label="Login - EmailTextField"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
@@ -29,6 +30,7 @@
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HaW-0y-oo4" customClass="BTextField" customModule="EventBuilder" customModuleProvider="target">
                                 <rect key="frame" x="40" y="289" width="520" height="30"/>
+                                <accessibility key="accessibilityConfiguration" label="Login - PasswordField"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="go" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                                 <connections>
@@ -57,6 +59,7 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gb6-5W-3e8" customClass="RaisedButton" customModule="Material">
                                 <rect key="frame" x="40" y="515" width="520" height="35"/>
+                                <accessibility key="accessibilityConfiguration" label="Login - LoginButton"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="jeS-8W-2Pg"/>
                                 </constraints>

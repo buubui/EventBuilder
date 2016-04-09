@@ -70,7 +70,12 @@ class LoginViewController: UIViewController {
           self?.hideLoadingActivity(success: error == nil)
         }
         if let error = error {
-          print(error)
+          print(error.localizedDescription)
+          if error.domain == "FirebaseAuthentication" && (error.code == -8 || error.code == -6) {
+            self?.showNotificationMessage("Invalid email or password", error: true)
+          } else {
+            self?.showNotificationMessage(error.localizedDescription, error: true)
+          }
         } else {
           print(FirebaseService.shareInstance.authData)
           self?.performSegueWithIdentifier("showMainView", sender: self)

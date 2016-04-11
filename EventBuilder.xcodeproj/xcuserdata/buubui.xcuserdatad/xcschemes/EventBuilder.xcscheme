@@ -41,6 +41,15 @@
                <Test
                   Identifier = "BaseIntegrationTest">
                </Test>
+               <Test
+                  Identifier = "SideMenuTests">
+               </Test>
+               <Test
+                  Identifier = "SignInTests">
+               </Test>
+               <Test
+                  Identifier = "SignUpTests">
+               </Test>
             </SkippedTests>
          </TestableReference>
       </Testables>

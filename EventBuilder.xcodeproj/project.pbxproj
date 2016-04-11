@@ -13,6 +13,7 @@
 		020857591CB66E6500D70932 /* SignInTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020857581CB66E6500D70932 /* SignInTests.swift */; };
 		0246EA201CBB723D00485096 /* SSASideMenu+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0246EA1F1CBB723D00485096 /* SSASideMenu+Extension.swift */; };
 		0246EA221CBB72D600485096 /* SideMenuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0246EA211CBB72D600485096 /* SideMenuTests.swift */; };
+		0246EA241CBB784600485096 /* SignOutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0246EA231CBB784600485096 /* SignOutTests.swift */; };
 		0253E9DD1CB1741900C175D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0253E9DC1CB1741900C175D7 /* AppDelegate.swift */; };
 		0253E9DF1CB1741900C175D7 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0253E9DE1CB1741900C175D7 /* SignInViewController.swift */; };
 		0253E9E21CB1741A00C175D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0253E9E01CB1741A00C175D7 /* Main.storyboard */; };
@@ -59,6 +60,7 @@
 		020857581CB66E6500D70932 /* SignInTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInTests.swift; sourceTree = "<group>"; };
 		0246EA1F1CBB723D00485096 /* SSASideMenu+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SSASideMenu+Extension.swift"; sourceTree = "<group>"; };
 		0246EA211CBB72D600485096 /* SideMenuTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuTests.swift; sourceTree = "<group>"; };
+		0246EA231CBB784600485096 /* SignOutTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignOutTests.swift; sourceTree = "<group>"; };
 		0253E9D91CB1741900C175D7 /* EventBuilder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EventBuilder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0253E9DC1CB1741900C175D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0253E9DE1CB1741900C175D7 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				020857581CB66E6500D70932 /* SignInTests.swift */,
 				02869AF51CB8C466000CE60F /* SignUpTests.swift */,
 				0246EA211CBB72D600485096 /* SideMenuTests.swift */,
+				0246EA231CBB784600485096 /* SignOutTests.swift */,
 			);
 			path = IntegrationTests;
 			sourceTree = "<group>";
@@ -480,6 +483,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				020857551CB66DF200D70932 /* KIFTestCase+Extension.swift in Sources */,
+				0246EA241CBB784600485096 /* SignOutTests.swift in Sources */,
 				020857561CB66DF200D70932 /* KIFUITestActor+Extension.swift in Sources */,
 				02869AF61CB8C466000CE60F /* SignUpTests.swift in Sources */,
 				020857591CB66E6500D70932 /* SignInTests.swift in Sources */,

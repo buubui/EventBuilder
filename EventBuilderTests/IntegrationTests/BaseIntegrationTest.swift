@@ -11,9 +11,16 @@ import Fakery
 
 class BaseIntegrationTest: KIFTestCase {
   let faker = Faker()
+  var shouldSignIn: Bool {
+    return true
+  }
+
   override func beforeEach() {
     super.beforeEach()
     returnLoginScreen()
+    if shouldSignIn {
+      signInWithValidCredential()
+    }
   }
 
   func returnLoginScreen() {

@@ -10,6 +10,10 @@ import KIF
 
 class SignInTests: BaseIntegrationTest {
 
+  override var shouldSignIn: Bool {
+    return false
+  }
+
   func testSignInSucess() {
     signInWithValidCredential()
   }

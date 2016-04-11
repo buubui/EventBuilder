@@ -90,15 +90,23 @@ extension SideMenuViewController: UITableViewDataSource, UITableViewDelegate {
 
     Helper.waitForTimeInterval(1)
 
-    guard let controller = item.controller else {
-//      do sign out
+    guard let sideMenuViewController = sideMenuViewController else {
       return
     }
-    if let sideMenuViewController = sideMenuViewController {
-      let navController = sideMenuViewController.contentViewController as! UINavigationController
-      navController.viewControllers = [controller]
-      controller.setupRootViewController()
+
+    defer {
       sideMenuViewController.hideMenuViewController()
     }
+
+    guard let controller = item.controller else {
+      showAlert(message: "Do you really want to sign out?") {
+        FirebaseService.shareInstance.signOut()
+      }
+      return
+    }
+
+    let navController = sideMenuViewController.contentViewController as! UINavigationController
+    navController.viewControllers = [controller]
+    controller.setupRootViewController()
   }
 }

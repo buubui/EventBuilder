@@ -3,6 +3,7 @@ PODS:
   - ChameleonFramework/Default (2.1.0)
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
+  - DOAlertController (1.0.0)
   - DZNEmptyDataSet (1.7.3)
   - EZLoadingActivity (0.8)
   - Fakery (1.1.2):
@@ -44,6 +45,8 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 3.0)
   - ChameleonFramework/Swift
+  - DOAlertController (from `https://github.com/buubui/DOAlertController`, branch
+    `dev`)
   - DZNEmptyDataSet
   - EZLoadingActivity
   - Fakery
@@ -66,10 +69,16 @@ DEPENDENCIES:
   - SwiftValidator
 
 EXTERNAL SOURCES:
+  DOAlertController:
+    :branch: dev
+    :git: https://github.com/buubui/DOAlertController
   SSASideMenu:
     :git: https://github.com/mbalex99/SSASideMenu.git
 
 CHECKOUT OPTIONS:
+  DOAlertController:
+    :commit: f780a14b8ee405d87cb2c136b9d7bc3c229d0898
+    :git: https://github.com/buubui/DOAlertController
   SSASideMenu:
     :commit: 5d3de08428b839e30ad6210cf359730f60da37bf
     :git: https://github.com/mbalex99/SSASideMenu.git
@@ -77,6 +86,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: 9054db4a1b1ca9e363223183e01cea380159a27c
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
+  DOAlertController: 64a9470255f5255e579d86a018684efc1d083ece
   DZNEmptyDataSet: dd7cca17c1d07dfa78956859b1e70a52505678ef
   EZLoadingActivity: 6fd75a05765a4085f4b6fef6f62edf9f144b3139
   Fakery: a4121424cf731cacc04a5ff1735fcc6e3efc656d

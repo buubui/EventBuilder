@@ -17,4 +17,8 @@ struct Constant {
   }
   static let foursquareClientId = "A4FAXPDG3HGQRLRMF4TRBPJLUNWGSW30FQZJQZPQNPVUGZ4I"
   static let foursquareClientSecret = "DI0S43SU324RWRIY3YVRGPCHX4CCGHZDPNXCLAHZM55BKNSZ"
+
+  struct Notification {
+    static let didSignOut = "didSignOutNotification"
+  }
 }

@@ -22,6 +22,7 @@ target 'EventBuilder' do
   pod 'DZNEmptyDataSet'
   pod "StatusBarNotificationCenter"
   pod 'SSASideMenu', :git => 'https://github.com/mbalex99/SSASideMenu.git'
+  pod 'DOAlertController' , :git => 'https://github.com/buubui/DOAlertController', :branch => 'dev'
 end
 
 target 'EventBuilderTests' do

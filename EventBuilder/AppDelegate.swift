@@ -17,12 +17,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    setupIQKeyboardManager()
+    setupNotifications()
+    return true
+  }
+
+  func setupIQKeyboardManager() {
     IQKeyboardManager.sharedManager().enable = true
     IQKeyboardManager.sharedManager().enableAutoToolbar = false
     IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
-//    IQKeyboardManager.sharedManager().shouldAdoptDefaultKeyboardAnimation = true
-//    IQKeyboardManager.sharedManager().layoutIfNeededOnUpdate = true
-    return true
+  }
+
+  func setupNotifications() {
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.didSignOut), name: Constant.Notification.didSignOut, object: nil)
+  }
+
+  func didSignOut() {
+    let loginController = UIStoryboard.mainStoryBoard.instantiateInitialViewController()!
+    window?.rootViewController = loginController
   }
 
   func applicationWillResignActive(application: UIApplication) {

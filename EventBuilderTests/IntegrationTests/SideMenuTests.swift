@@ -10,9 +10,12 @@ import KIF
 
 class SideMenuTests: BaseIntegrationTest {
 
-  func testElements() {
-    signInWithValidCredential()
+  override func beforeEach() {
+    super.beforeEach()
     tester().tapViewWithAccessibilityLabel("LeftMenuBarButton")
+  }
+
+  func testElements() {
     for label in ["My Events", "Explore", "Profile", "Sign out"] {
       tester().waitForViewWithAccessibilityLabel(label)
     }

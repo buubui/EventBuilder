@@ -11,6 +11,10 @@ import UIKit
 
 class SignUpTests: BaseIntegrationTest {
 
+  override var shouldSignIn: Bool {
+    return false
+  }
+
   override func beforeEach() {
     super.beforeEach()
     tester().tapViewWithAccessibilityLabel("SignIn - SignUpButton")

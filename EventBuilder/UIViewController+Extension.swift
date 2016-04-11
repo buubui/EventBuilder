@@ -9,7 +9,7 @@
 import UIKit
 import EZLoadingActivity
 import StatusBarNotificationCenter
-import FlatUIKit
+import DOAlertController
 
 extension UIViewController {
 
@@ -34,5 +34,29 @@ extension UIViewController {
     let button = UIBarButtonItem(image: UIImage(named: "menu"), style: .Plain, target: self, action: #selector(UIViewController.presentLeftMenuViewController))
     button.accessibilityLabel = "LeftMenuBarButton"
     navigationItem.leftBarButtonItem = button
+  }
+
+  func showAlert(message message: String, completion: (() -> Void)?) {
+    let alertController = DOAlertController(title: nil, message: message, preferredStyle: .Alert)
+    alertController.alertViewBgColor = UIColor.flatWhiteColor()
+    alertController.buttonBgColor[.Default] = UIColor.flatSkyBlueColorDark()
+    alertController.buttonBgColor[.Cancel] = UIColor.flatGrayColor()
+    alertController.buttonHeight = 30
+    alertController.buttonMargin = 15
+    alertController.buttonCornerRadius = 2
+    var cancelTitle = "OK"
+    if let completion = completion{
+      cancelTitle = "Cancel"
+      let okAction = DOAlertAction(title: "OK", style: .Default) { action in
+        alertController.dismissViewControllerAnimated(true) {
+          Helper.waitForTimeInterval(0.2)
+          completion()
+        }
+      }
+      alertController.addAction(okAction)
+    }
+    let cancelAction = DOAlertAction(title: cancelTitle, style: .Cancel, handler: nil)
+    alertController.addAction(cancelAction)
+    presentViewController(alertController, animated: true, completion: nil)
   }
 }

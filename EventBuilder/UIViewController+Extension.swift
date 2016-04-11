@@ -22,11 +22,17 @@ extension UIViewController {
   }
 
   func showNotificationMessage(message: String, error: Bool) {
-    var notificationCenterConfiguration = NotificationCenterConfiguration(baseWindow: view.window!)
+    var notificationCenterConfiguration = NotificationCenterConfiguration(baseWindow: UIApplication.sharedApplication().delegate!.window!!)
     notificationCenterConfiguration.style = .NavigationBar
     var notificationLabelConfiguration = NotificationLabelConfiguration()
     notificationLabelConfiguration.backgroundColor = error ? UIColor.flatRedColor() : UIColor.flatGreenColor()
     notificationLabelConfiguration.textColor = UIColor.flatWhiteColor()
     StatusBarNotificationCenter.showStatusBarNotificationWithMessage(message, forDuration: 2, withNotificationCenterConfiguration: notificationCenterConfiguration, andNotificationLabelConfiguration: notificationLabelConfiguration)
+  }
+
+  func setupRootViewController() {
+    let button = UIBarButtonItem(image: UIImage(named: "menu"), style: .Plain, target: self, action: #selector(UIViewController.presentLeftMenuViewController))
+    button.accessibilityLabel = "LeftMenuBarButton"
+    navigationItem.leftBarButtonItem = button
   }
 }

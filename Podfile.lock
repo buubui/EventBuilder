@@ -5,6 +5,8 @@ PODS:
     - ChameleonFramework/Default
   - DZNEmptyDataSet (1.7.3)
   - EZLoadingActivity (0.8)
+  - Fakery (1.1.2):
+    - SwiftyJSON
   - Firebase (2.5.1)
   - FirebaseUI/Core (0.3.2):
     - Firebase (~> 2.2)
@@ -33,15 +35,18 @@ PODS:
   - OHHTTPStubs/OHPathHelpers (5.0.0)
   - Quick (0.9.1)
   - ReachabilitySwift (2.3.3)
+  - SSASideMenu (1.0.4)
   - StatusBarNotificationCenter (1.1.3)
   - SwiftSpinner (0.9.1)
   - SwiftValidator (3.0.3)
+  - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
   - Alamofire (~> 3.0)
   - ChameleonFramework/Swift
   - DZNEmptyDataSet
   - EZLoadingActivity
+  - Fakery
   - Firebase
   - FirebaseUI/Core
   - FlatUIKit
@@ -55,15 +60,26 @@ DEPENDENCIES:
   - OHHTTPStubs
   - Quick
   - ReachabilitySwift
+  - SSASideMenu (from `https://github.com/mbalex99/SSASideMenu.git`)
   - StatusBarNotificationCenter
   - SwiftSpinner
   - SwiftValidator
+
+EXTERNAL SOURCES:
+  SSASideMenu:
+    :git: https://github.com/mbalex99/SSASideMenu.git
+
+CHECKOUT OPTIONS:
+  SSASideMenu:
+    :commit: 5d3de08428b839e30ad6210cf359730f60da37bf
+    :git: https://github.com/mbalex99/SSASideMenu.git
 
 SPEC CHECKSUMS:
   Alamofire: 9054db4a1b1ca9e363223183e01cea380159a27c
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   DZNEmptyDataSet: dd7cca17c1d07dfa78956859b1e70a52505678ef
   EZLoadingActivity: 6fd75a05765a4085f4b6fef6f62edf9f144b3139
+  Fakery: a4121424cf731cacc04a5ff1735fcc6e3efc656d
   Firebase: 3565ea88b830f28f2c77ecc524622bc71a20d085
   FirebaseUI: 95621dce04f0313495c86e1fba503254e0ec48b1
   FlatUIKit: 1b41f0d4952ce8d970d8479ce79df54a960242c4
@@ -77,8 +93,10 @@ SPEC CHECKSUMS:
   OHHTTPStubs: a5d2e9eea07869d42ec03338325f398bc520e159
   Quick: a5221fc21788b6aeda934805e68b061839bc3165
   ReachabilitySwift: e0f6b6f280effb47731acfaaa2d5ffe223703793
+  SSASideMenu: 3f2de95caf05725520213eee731f8b92dd4e3016
   StatusBarNotificationCenter: f788bd9192bf5f7a40117f96a173a138be739823
   SwiftSpinner: 09a60c00f4dfa2097b4deabd26f513ad077af4f1
   SwiftValidator: 0b6a48bf10364411b0d64c97f78665ff87ca9f8b
+  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
 COCOAPODS: 0.39.0

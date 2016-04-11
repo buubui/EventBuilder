@@ -8,15 +8,21 @@
 
 import UIKit
 import DZNEmptyDataSet
+import FlatUIKit
 
 class MyEventViewController: UIViewController {
   @IBOutlet weak var tableView: UITableView!
+
+  class func instantiateStoryboard() -> MyEventViewController {
+    return UIStoryboard.mainStoryBoard.instantiateViewControllerWithIdentifier("MyEventViewController") as! MyEventViewController
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
     tableView.tableFooterView = UIView()
     tableView.emptyDataSetSource = self
     tableView.emptyDataSetDelegate = self
+    setupRootViewController()
   }
 }
 

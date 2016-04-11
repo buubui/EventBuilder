@@ -7,8 +7,10 @@
 //
 
 import KIF
+import Fakery
 
 class BaseIntegrationTest: KIFTestCase {
+  let faker = Faker()
   override func beforeEach() {
     super.beforeEach()
     returnLoginScreen()
@@ -18,5 +20,10 @@ class BaseIntegrationTest: KIFTestCase {
     let loginController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
     let delegate = UIApplication.sharedApplication().delegate!
     delegate.window?!.rootViewController = loginController
+  }
+
+  func signInWithValidCredential() {
+    signInWithEmail(TestConstant.email, password: TestConstant.password)
+    tester().waitForViewWithAccessibilityLabel("My Events")
   }
 }

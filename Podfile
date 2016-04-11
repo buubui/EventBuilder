@@ -21,6 +21,7 @@ target 'EventBuilder' do
   pod 'Font-Awesome-Swift', '~> 1.4.6'
   pod 'DZNEmptyDataSet'
   pod "StatusBarNotificationCenter"
+  pod 'SSASideMenu', :git => 'https://github.com/mbalex99/SSASideMenu.git'
 end
 
 target 'EventBuilderTests' do
@@ -28,4 +29,5 @@ target 'EventBuilderTests' do
   pod 'Nimble'
   pod 'OHHTTPStubs'
   pod 'KIF'
+  pod 'Fakery'
 end

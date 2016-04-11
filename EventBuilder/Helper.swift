@@ -25,6 +25,10 @@ class Helper {
     }
     return dict[key]
   }
+
+  class func waitForTimeInterval(interval: NSTimeInterval) {
+    NSRunLoop.currentRunLoop().runUntilDate(NSDate(timeIntervalSinceNow: interval))
+  }
 }
 
 func runInMainThread(completion: (() -> Void)) {

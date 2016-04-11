@@ -10,9 +10,11 @@
 		0208574D1CB661CD00D70932 /* MyEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0208574C1CB661CD00D70932 /* MyEventViewController.swift */; };
 		020857551CB66DF200D70932 /* KIFTestCase+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020857531CB66DF200D70932 /* KIFTestCase+Extension.swift */; };
 		020857561CB66DF200D70932 /* KIFUITestActor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020857541CB66DF200D70932 /* KIFUITestActor+Extension.swift */; };
-		020857591CB66E6500D70932 /* LoginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020857581CB66E6500D70932 /* LoginTests.swift */; };
+		020857591CB66E6500D70932 /* SignInTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020857581CB66E6500D70932 /* SignInTests.swift */; };
+		0246EA201CBB723D00485096 /* SSASideMenu+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0246EA1F1CBB723D00485096 /* SSASideMenu+Extension.swift */; };
+		0246EA221CBB72D600485096 /* SideMenuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0246EA211CBB72D600485096 /* SideMenuTests.swift */; };
 		0253E9DD1CB1741900C175D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0253E9DC1CB1741900C175D7 /* AppDelegate.swift */; };
-		0253E9DF1CB1741900C175D7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0253E9DE1CB1741900C175D7 /* LoginViewController.swift */; };
+		0253E9DF1CB1741900C175D7 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0253E9DE1CB1741900C175D7 /* SignInViewController.swift */; };
 		0253E9E21CB1741A00C175D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0253E9E01CB1741A00C175D7 /* Main.storyboard */; };
 		0253E9E51CB1741A00C175D7 /* EventBuilder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0253E9E31CB1741A00C175D7 /* EventBuilder.xcdatamodeld */; };
 		0253E9E71CB1741A00C175D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0253E9E61CB1741A00C175D7 /* Assets.xcassets */; };
@@ -24,6 +26,14 @@
 		0258CEE41CB514220003261E /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0258CEDF1CB514220003261E /* Lato-Italic.ttf */; };
 		0258CEE51CB514220003261E /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0258CEE01CB514220003261E /* Lato-Light.ttf */; };
 		0258CEE61CB514220003261E /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0258CEE11CB514220003261E /* Lato-Regular.ttf */; };
+		02869AF01CB8B78E000CE60F /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02869AEF1CB8B78E000CE60F /* SignUpViewController.swift */; };
+		02869AF21CB8BC54000CE60F /* SignInBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02869AF11CB8BC54000CE60F /* SignInBaseViewController.swift */; };
+		02869AF41CB8C34C000CE60F /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02869AF31CB8C34C000CE60F /* UIStoryboard+Extension.swift */; };
+		02869AF61CB8C466000CE60F /* SignUpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02869AF51CB8C466000CE60F /* SignUpTests.swift */; };
+		02869AF81CB8E38C000CE60F /* TestConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02869AF71CB8E38C000CE60F /* TestConstant.swift */; };
+		02869AFC1CBAB5C0000CE60F /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02869AFB1CBAB5C0000CE60F /* SideMenuViewController.swift */; };
+		02869AFE1CBAD8F3000CE60F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02869AFD1CBAD8F3000CE60F /* ProfileViewController.swift */; };
+		02869B021CBB6FC3000CE60F /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02869B011CBB6FC3000CE60F /* CustomNavigationController.swift */; };
 		02963D531CB67B7900DA8D77 /* BaseIntegrationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02963D521CB67B7900DA8D77 /* BaseIntegrationTest.swift */; };
 		02DF46D11CB38BE5009CAB6A /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DF46D01CB38BE5009CAB6A /* FirebaseService.swift */; };
 		02DF46D41CB39278009CAB6A /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DF46D31CB39278009CAB6A /* UIViewController+Extension.swift */; };
@@ -46,10 +56,12 @@
 		0208574C1CB661CD00D70932 /* MyEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyEventViewController.swift; sourceTree = "<group>"; };
 		020857531CB66DF200D70932 /* KIFTestCase+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KIFTestCase+Extension.swift"; sourceTree = "<group>"; };
 		020857541CB66DF200D70932 /* KIFUITestActor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KIFUITestActor+Extension.swift"; sourceTree = "<group>"; };
-		020857581CB66E6500D70932 /* LoginTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginTests.swift; sourceTree = "<group>"; };
+		020857581CB66E6500D70932 /* SignInTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInTests.swift; sourceTree = "<group>"; };
+		0246EA1F1CBB723D00485096 /* SSASideMenu+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SSASideMenu+Extension.swift"; sourceTree = "<group>"; };
+		0246EA211CBB72D600485096 /* SideMenuTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuTests.swift; sourceTree = "<group>"; };
 		0253E9D91CB1741900C175D7 /* EventBuilder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EventBuilder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0253E9DC1CB1741900C175D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0253E9DE1CB1741900C175D7 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		0253E9DE1CB1741900C175D7 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		0253E9E11CB1741A00C175D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0253E9E41CB1741A00C175D7 /* EventBuilder.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EventBuilder.xcdatamodel; sourceTree = "<group>"; };
 		0253E9E61CB1741A00C175D7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -64,6 +76,14 @@
 		0258CEDF1CB514220003261E /* Lato-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Italic.ttf"; sourceTree = "<group>"; };
 		0258CEE01CB514220003261E /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
 		0258CEE11CB514220003261E /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		02869AEF1CB8B78E000CE60F /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		02869AF11CB8BC54000CE60F /* SignInBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInBaseViewController.swift; sourceTree = "<group>"; };
+		02869AF31CB8C34C000CE60F /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
+		02869AF51CB8C466000CE60F /* SignUpTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpTests.swift; sourceTree = "<group>"; };
+		02869AF71CB8E38C000CE60F /* TestConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestConstant.swift; sourceTree = "<group>"; };
+		02869AFB1CBAB5C0000CE60F /* SideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
+		02869AFD1CBAD8F3000CE60F /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		02869B011CBB6FC3000CE60F /* CustomNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 		02963D521CB67B7900DA8D77 /* BaseIntegrationTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseIntegrationTest.swift; sourceTree = "<group>"; };
 		02DF46D01CB38BE5009CAB6A /* FirebaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 		02DF46D31CB39278009CAB6A /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
@@ -108,8 +128,10 @@
 		020857571CB66E5400D70932 /* IntegrationTests */ = {
 			isa = PBXGroup;
 			children = (
-				020857581CB66E6500D70932 /* LoginTests.swift */,
 				02963D521CB67B7900DA8D77 /* BaseIntegrationTest.swift */,
+				020857581CB66E6500D70932 /* SignInTests.swift */,
+				02869AF51CB8C466000CE60F /* SignUpTests.swift */,
+				0246EA211CBB72D600485096 /* SideMenuTests.swift */,
 			);
 			path = IntegrationTests;
 			sourceTree = "<group>";
@@ -160,6 +182,7 @@
 				020857571CB66E5400D70932 /* IntegrationTests */,
 				0253E9F61CB1741A00C175D7 /* Info.plist */,
 				020857521CB66DF200D70932 /* Extension */,
+				02869AF71CB8E38C000CE60F /* TestConstant.swift */,
 			);
 			path = EventBuilderTests;
 			sourceTree = "<group>";
@@ -175,8 +198,13 @@
 		0253EA061CB2DAF600C175D7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				0253E9DE1CB1741900C175D7 /* LoginViewController.swift */,
+				02869AF11CB8BC54000CE60F /* SignInBaseViewController.swift */,
+				0253E9DE1CB1741900C175D7 /* SignInViewController.swift */,
+				02869AEF1CB8B78E000CE60F /* SignUpViewController.swift */,
 				0208574C1CB661CD00D70932 /* MyEventViewController.swift */,
+				02869AFB1CBAB5C0000CE60F /* SideMenuViewController.swift */,
+				02869AFD1CBAD8F3000CE60F /* ProfileViewController.swift */,
+				02869B011CBB6FC3000CE60F /* CustomNavigationController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -197,6 +225,8 @@
 			isa = PBXGroup;
 			children = (
 				02DF46D31CB39278009CAB6A /* UIViewController+Extension.swift */,
+				02869AF31CB8C34C000CE60F /* UIStoryboard+Extension.swift */,
+				0246EA1F1CBB723D00485096 /* SSASideMenu+Extension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -427,14 +457,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				0208574D1CB661CD00D70932 /* MyEventViewController.swift in Sources */,
-				0253E9DF1CB1741900C175D7 /* LoginViewController.swift in Sources */,
+				02869AF21CB8BC54000CE60F /* SignInBaseViewController.swift in Sources */,
+				02869AF41CB8C34C000CE60F /* UIStoryboard+Extension.swift in Sources */,
+				0253E9DF1CB1741900C175D7 /* SignInViewController.swift in Sources */,
+				02869B021CBB6FC3000CE60F /* CustomNavigationController.swift in Sources */,
+				02869AFC1CBAB5C0000CE60F /* SideMenuViewController.swift in Sources */,
+				02869AF01CB8B78E000CE60F /* SignUpViewController.swift in Sources */,
 				0253E9E51CB1741A00C175D7 /* EventBuilder.xcdatamodeld in Sources */,
 				0253EA341CB387D000C175D7 /* Constant.swift in Sources */,
 				0253EA041CB2D6E600C175D7 /* BTextField.swift in Sources */,
 				02DF46D41CB39278009CAB6A /* UIViewController+Extension.swift in Sources */,
 				02DF46D11CB38BE5009CAB6A /* FirebaseService.swift in Sources */,
+				02869AFE1CBAD8F3000CE60F /* ProfileViewController.swift in Sources */,
 				0253E9DD1CB1741900C175D7 /* AppDelegate.swift in Sources */,
 				02DF46D61CB3BF9C009CAB6A /* Helper.swift in Sources */,
+				0246EA201CBB723D00485096 /* SSASideMenu+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,8 +481,11 @@
 			files = (
 				020857551CB66DF200D70932 /* KIFTestCase+Extension.swift in Sources */,
 				020857561CB66DF200D70932 /* KIFUITestActor+Extension.swift in Sources */,
-				020857591CB66E6500D70932 /* LoginTests.swift in Sources */,
+				02869AF61CB8C466000CE60F /* SignUpTests.swift in Sources */,
+				020857591CB66E6500D70932 /* SignInTests.swift in Sources */,
 				02963D531CB67B7900DA8D77 /* BaseIntegrationTest.swift in Sources */,
+				02869AF81CB8E38C000CE60F /* TestConstant.swift in Sources */,
+				0246EA221CBB72D600485096 /* SideMenuTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

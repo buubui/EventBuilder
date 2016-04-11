@@ -11,14 +11,24 @@ import Firebase
 
 class FirebaseService: NSObject {
   static var shareInstance = FirebaseService()
+  let ref: Firebase
   private var _authData: FAuthData!
+
+  override init() {
+    ref = Firebase(url: Constant.firebaseUrl)
+    super.init()
+  }
   var authData: FAuthData? {
     return _authData
   }
   func signIn(email email: String, password: String, completion: ( (error:NSError?) -> Void)?) {
-    let ref = Firebase(url: Constant.firebaseUrl)
     ref.authUser(email, password: password) { [weak self] error, authData in
       self?._authData = authData
+      completion?(error: error)
+    }
+  }
+  func signUp(email email: String, password: String, completion: ( (error:NSError?) -> Void)?) {
+    ref.createUser(email, password: password) { error in
       completion?(error: error)
     }
   }

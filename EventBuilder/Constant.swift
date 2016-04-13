@@ -21,4 +21,8 @@ struct Constant {
   struct Notification {
     static let didSignOut = "didSignOutNotification"
   }
+
+  struct Firebase {
+    static let profilePath = "profiles"
+  }
 }

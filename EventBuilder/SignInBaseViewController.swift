@@ -16,7 +16,7 @@ class SignInBaseViewController: UIViewController {
   @IBOutlet weak var labelIcon: UILabel!
   @IBOutlet weak var iconBg: MaterialView!
 
-  private let validator = Validator()
+  let validator = Validator()
 
   override func viewDidLoad() {
     super.viewDidLoad()

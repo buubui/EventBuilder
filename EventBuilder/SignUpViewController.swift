@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import SwiftValidator
 
 class SignUpViewController: SignInBaseViewController {
+
+  @IBOutlet weak var nameTextField: BTextField!
 
   class func instantiateStoryboard() -> SignUpViewController {
     return UIStoryboard.mainStoryBoard.instantiateViewControllerWithIdentifier("SignUpViewController") as! SignUpViewController
@@ -18,12 +21,18 @@ class SignUpViewController: SignInBaseViewController {
     super.viewDidLoad()
   }
 
+  override func setupValidator() {
+    super.setupValidator()
+    validator.registerField(nameTextField, errorLabel: nameTextField.detailLabel!, rules: [RequiredRule()])
+  }
+
   func signUp() {
     let email = emailTextField.text!
     let password = passwordTextField.text!
+    let name = nameTextField.text!
     validateWithCompletion(textField: nil) {
       self.showLoadingActivity(text: "Signing up...")
-      FirebaseService.shareInstance.signUp(email: email, password: password) { [weak self] error in
+      FirebaseService.shareInstance.signUp(email: email, password: password, name: name) { [weak self] error in
         guard let unwrappedSelf = self else {
           return
         }

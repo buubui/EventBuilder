@@ -14,6 +14,9 @@
 		0246EA201CBB723D00485096 /* SSASideMenu+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0246EA1F1CBB723D00485096 /* SSASideMenu+Extension.swift */; };
 		0246EA221CBB72D600485096 /* SideMenuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0246EA211CBB72D600485096 /* SideMenuTests.swift */; };
 		0246EA241CBB784600485096 /* SignOutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0246EA231CBB784600485096 /* SignOutTests.swift */; };
+		0246EA281CBBC4A400485096 /* ProfileScreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0246EA271CBBC4A400485096 /* ProfileScreenTests.swift */; };
+		0246EA2A1CBCCE4600485096 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0246EA291CBCCE4600485096 /* EditProfileViewController.swift */; };
+		0246EA2C1CBCD10500485096 /* EditableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0246EA2B1CBCD10500485096 /* EditableTableViewCell.swift */; };
 		0253E9DD1CB1741900C175D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0253E9DC1CB1741900C175D7 /* AppDelegate.swift */; };
 		0253E9DF1CB1741900C175D7 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0253E9DE1CB1741900C175D7 /* SignInViewController.swift */; };
 		0253E9E21CB1741A00C175D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0253E9E01CB1741A00C175D7 /* Main.storyboard */; };
@@ -61,6 +64,9 @@
 		0246EA1F1CBB723D00485096 /* SSASideMenu+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SSASideMenu+Extension.swift"; sourceTree = "<group>"; };
 		0246EA211CBB72D600485096 /* SideMenuTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuTests.swift; sourceTree = "<group>"; };
 		0246EA231CBB784600485096 /* SignOutTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignOutTests.swift; sourceTree = "<group>"; };
+		0246EA271CBBC4A400485096 /* ProfileScreenTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileScreenTests.swift; sourceTree = "<group>"; };
+		0246EA291CBCCE4600485096 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		0246EA2B1CBCD10500485096 /* EditableTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditableTableViewCell.swift; sourceTree = "<group>"; };
 		0253E9D91CB1741900C175D7 /* EventBuilder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EventBuilder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0253E9DC1CB1741900C175D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0253E9DE1CB1741900C175D7 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -135,6 +141,7 @@
 				02869AF51CB8C466000CE60F /* SignUpTests.swift */,
 				0246EA211CBB72D600485096 /* SideMenuTests.swift */,
 				0246EA231CBB784600485096 /* SignOutTests.swift */,
+				0246EA271CBBC4A400485096 /* ProfileScreenTests.swift */,
 			);
 			path = IntegrationTests;
 			sourceTree = "<group>";
@@ -164,8 +171,8 @@
 			children = (
 				0258CEDC1CB514220003261E /* Fonts */,
 				02DF46D21CB39263009CAB6A /* Extensions */,
-				0253E9DC1CB1741900C175D7 /* AppDelegate.swift */,
 				0253EA061CB2DAF600C175D7 /* Controllers */,
+				0253E9DC1CB1741900C175D7 /* AppDelegate.swift */,
 				0253E9E01CB1741A00C175D7 /* Main.storyboard */,
 				0253E9E61CB1741A00C175D7 /* Assets.xcassets */,
 				0253E9E81CB1741A00C175D7 /* LaunchScreen.storyboard */,
@@ -175,6 +182,7 @@
 				0253EA331CB387D000C175D7 /* Constant.swift */,
 				02DF46D01CB38BE5009CAB6A /* FirebaseService.swift */,
 				02DF46D51CB3BF9C009CAB6A /* Helper.swift */,
+				0246EA2B1CBCD10500485096 /* EditableTableViewCell.swift */,
 			);
 			path = EventBuilder;
 			sourceTree = "<group>";
@@ -208,6 +216,7 @@
 				02869AFB1CBAB5C0000CE60F /* SideMenuViewController.swift */,
 				02869AFD1CBAD8F3000CE60F /* ProfileViewController.swift */,
 				02869B011CBB6FC3000CE60F /* CustomNavigationController.swift */,
+				0246EA291CBCCE4600485096 /* EditProfileViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -468,7 +477,9 @@
 				02869AF01CB8B78E000CE60F /* SignUpViewController.swift in Sources */,
 				0253E9E51CB1741A00C175D7 /* EventBuilder.xcdatamodeld in Sources */,
 				0253EA341CB387D000C175D7 /* Constant.swift in Sources */,
+				0246EA2C1CBCD10500485096 /* EditableTableViewCell.swift in Sources */,
 				0253EA041CB2D6E600C175D7 /* BTextField.swift in Sources */,
+				0246EA2A1CBCCE4600485096 /* EditProfileViewController.swift in Sources */,
 				02DF46D41CB39278009CAB6A /* UIViewController+Extension.swift in Sources */,
 				02DF46D11CB38BE5009CAB6A /* FirebaseService.swift in Sources */,
 				02869AFE1CBAD8F3000CE60F /* ProfileViewController.swift in Sources */,
@@ -486,6 +497,7 @@
 				0246EA241CBB784600485096 /* SignOutTests.swift in Sources */,
 				020857561CB66DF200D70932 /* KIFUITestActor+Extension.swift in Sources */,
 				02869AF61CB8C466000CE60F /* SignUpTests.swift in Sources */,
+				0246EA281CBBC4A400485096 /* ProfileScreenTests.swift in Sources */,
 				020857591CB66E6500D70932 /* SignInTests.swift in Sources */,
 				02963D531CB67B7900DA8D77 /* BaseIntegrationTest.swift in Sources */,
 				02869AF81CB8E38C000CE60F /* TestConstant.swift in Sources */,

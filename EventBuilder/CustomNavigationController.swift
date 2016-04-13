@@ -14,7 +14,7 @@ class CustomNavigationController: UINavigationController {
     super.viewDidLoad()
     navigationBar.configureFlatNavigationBarWithColor(UIColor.pomegranateColor())
   }
-
+  
   override func preferredStatusBarStyle() -> UIStatusBarStyle {
     return .LightContent
   }

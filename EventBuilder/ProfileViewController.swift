@@ -11,6 +11,17 @@ import Material
 
 class ProfileViewController: UIViewController {
 
+  var user: User? {
+    willSet {
+      if let user = user {
+        user.stopObserveFirebaseChange()
+      }
+    }
+    didSet {
+      registerUserNotification()
+    }
+  }
+
   enum ProfileCellItem: Int {
     case Email, Phone
 
@@ -24,8 +35,7 @@ class ProfileViewController: UIViewController {
 
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var profilePictureView: MaterialView!
-
-  let user = (email: "user@abc.com", phone: "+84 983 123 123")
+  @IBOutlet weak var nameLabel: UILabel!
 
   class func instantiateStoryboard() -> ProfileViewController {
     return UIStoryboard.mainStoryBoard.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
@@ -35,8 +45,38 @@ class ProfileViewController: UIViewController {
     super.viewDidLoad()
     tableView.tableFooterView = UIView()
     profilePictureView.depth = .Depth3
+    if user == nil {
+      let context = CoreDataStackManager.sharedInstance.mainQueueContext
+      context.performBlock {
+        self.user = User.findOrNewByUId(User.currentUId, context: context)
+        self.reloadData()
+      }
+    }
   }
 
+  func registerUserNotification() {
+    NSNotificationCenter.defaultCenter().removeObserver(self, name: Constant.Notification.didChangeUserObject, object: nil)
+    if let user = user {
+      NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ProfileViewController.didChangeUserObject(notification:)), name: Constant.Notification.didChangeUserObject, object: user)
+      user.startObserveFirebaseChange()
+    }
+  }
+
+  func didChangeUserObject(notification notification: NSNotification) {
+    reloadData()
+  }
+
+  func reloadData() {
+    profilePictureView.image = user?.image ?? UIImage.defaultProfilePicture()
+    nameLabel.text = user?.name
+    tableView.reloadData()
+  }
+
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if let navController = segue.destinationViewController as? CustomNavigationController, controller = navController.viewControllers.first as? EditProfileViewController where segue.identifier == "showEditProfile" {
+      controller.user = user
+    }
+  }
 
   @IBAction func editButtonDidTap(sender: UIButton) {
     showEditProfileScreen()
@@ -54,13 +94,16 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
   }
 
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    guard let _ = user else {
+      return 0
+    }
     return 2
   }
 
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("ProfileCell")!
     cell
-    guard let item = ProfileCellItem(rawValue: indexPath.row) else {
+    guard let item = ProfileCellItem(rawValue: indexPath.row), user = user else {
       return cell
     }
     cell.textLabel?.text = item.label

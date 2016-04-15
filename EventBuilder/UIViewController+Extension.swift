@@ -17,7 +17,7 @@ extension UIViewController {
     EZLoadingActivity.show(text, disableUI: true)
   }
 
-  func hideLoadingActivity(success success: Bool?, animated: Bool = true) {
+  func hideLoadingActivity(success success: Bool? = nil, animated: Bool = true) {
     EZLoadingActivity.hide(success: success, animated: animated)
   }
 
@@ -57,6 +57,21 @@ extension UIViewController {
     }
     let cancelAction = DOAlertAction(title: cancelTitle, style: .Cancel, handler: nil)
     alertController.addAction(cancelAction)
+    presentViewController(alertController, animated: true, completion: nil)
+  }
+
+  func showActionSheet(message message: String, actions: [(title: String, action: (() -> ()))]) {
+    let alertController = DOAlertController(title: nil, message: message, preferredStyle: .ActionSheet)
+    alertController.alertViewBgColor = UIColor.flatWhiteColor()
+    alertController.buttonBgColor[.Default] = UIColor.flatSkyBlueColorDark()
+    alertController.buttonBgColor[.Cancel] = UIColor.flatGrayColor()
+    for actionInfo in actions {
+      let action = DOAlertAction(title: actionInfo.title, style: .Default) { action in
+        actionInfo.action()
+      }
+      alertController.addAction(action)
+    }
+    alertController.addAction(DOAlertAction(title: "Cancel", style: .Cancel, handler: nil))
     presentViewController(alertController, animated: true, completion: nil)
   }
 }

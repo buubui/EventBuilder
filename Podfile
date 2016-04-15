@@ -23,6 +23,7 @@ target 'EventBuilder' do
   pod "StatusBarNotificationCenter"
   pod 'SSASideMenu', :git => 'https://github.com/mbalex99/SSASideMenu.git'
   pod 'DOAlertController' , :git => 'https://github.com/buubui/DOAlertController', :branch => 'dev'
+  pod 'ALCameraViewController'
 end
 
 target 'EventBuilderTests' do

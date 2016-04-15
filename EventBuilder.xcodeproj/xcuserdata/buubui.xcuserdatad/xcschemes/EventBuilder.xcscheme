@@ -26,7 +26,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "NO">
+      shouldUseLaunchSchemeArgsEnv = "NO"
+      codeCoverageEnabled = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -41,15 +42,6 @@
                <Test
                   Identifier = "BaseIntegrationTest">
                </Test>
-               <Test
-                  Identifier = "SideMenuTests">
-               </Test>
-               <Test
-                  Identifier = "SignInTests">
-               </Test>
-               <Test
-                  Identifier = "SignUpTests">
-               </Test>
             </SkippedTests>
          </TestableReference>
       </Testables>
@@ -62,6 +54,12 @@
             ReferencedContainer = "container:EventBuilder.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "-com.apple.CoreData.ConcurrencyDebug 1"
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "TESTING"
@@ -92,6 +90,12 @@
             ReferencedContainer = "container:EventBuilder.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "-com.apple.CoreData.ConcurrencyDebug 1"
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

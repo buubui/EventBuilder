@@ -14,8 +14,10 @@ class ProfileScreenTests: BaseIntegrationTest {
     tapProfileMenuItem()
   }
 
-  func testElements() {
-    tester().waitForViewWithAccessibilityLabel("Profile")
+  func testProfile() {
+    tester().waitForViewWithAccessibilityLabel("Tester")
+    tester().waitForViewWithAccessibilityLabel("tester@udacity.com")
+    tester().waitForViewWithAccessibilityLabel("123 123 123")
   }
 }
 

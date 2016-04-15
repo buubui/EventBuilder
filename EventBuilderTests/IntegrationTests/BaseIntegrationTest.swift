@@ -8,11 +8,17 @@
 
 import KIF
 import Fakery
+@testable import EventBuilder
 
 class BaseIntegrationTest: KIFTestCase {
   let faker = Faker()
   var shouldSignIn: Bool {
     return true
+  }
+
+  override func beforeAll() {
+    super.beforeAll()
+    initFirebaseProfiles()
   }
 
   override func beforeEach() {
@@ -32,5 +38,12 @@ class BaseIntegrationTest: KIFTestCase {
   func signInWithValidCredential() {
     signInWithEmail(TestConstant.email, password: TestConstant.password)
     tester().waitForViewWithAccessibilityLabel("My Events")
+  }
+
+  func initFirebaseProfiles() {
+    let firebase = FirebaseService.shareInstance.ref.childByAppendingPath("profiles")
+    firebase.setValue(TestConstant.defaultFireBaseProfiles) { (error, firebase) in
+
+    }
   }
 }

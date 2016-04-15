@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (3.3.0)
+  - ALCameraViewController (1.1.9)
   - ChameleonFramework/Default (2.1.0)
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
@@ -44,6 +45,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 3.0)
+  - ALCameraViewController
   - ChameleonFramework/Swift
   - DOAlertController (from `https://github.com/buubui/DOAlertController`, branch
     `dev`)
@@ -85,6 +87,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: 9054db4a1b1ca9e363223183e01cea380159a27c
+  ALCameraViewController: f171ffb7e84d211277a0f97823a2bda7418dc573
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   DOAlertController: 64a9470255f5255e579d86a018684efc1d083ece
   DZNEmptyDataSet: dd7cca17c1d07dfa78956859b1e70a52505678ef

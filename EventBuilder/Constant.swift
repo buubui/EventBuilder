@@ -9,6 +9,8 @@
 import UIKit
 
 struct Constant {
+  static let sqliteFileName = "EventBuilder.sqlite"
+  static let defaultProfilePicture = "sample_profile_picture"
   static var firebaseUrl: String {
     if Helper.isTestMode() {
       return "https://udacitycapstonetest.firebaseio.com"
@@ -20,6 +22,7 @@ struct Constant {
 
   struct Notification {
     static let didSignOut = "didSignOutNotification"
+    static let didChangeUserObject = "didChangeUserObject"
   }
 
   struct Firebase {

@@ -26,6 +26,8 @@ struct Constant {
   }
 
   struct Firebase {
-    static let profilePath = "profiles"
+    static let profiles = "profiles"
+    static let events = "events"
+    static let places = "places"
   }
 }

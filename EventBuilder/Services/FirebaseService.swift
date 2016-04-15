@@ -47,13 +47,13 @@ class FirebaseService: NSObject {
   }
 
   func createProfile(uId uId: String, name: String, email: String) {
-    let firebase = ref.childByAppendingPath(Constant.Firebase.profilePath)
+    let firebase = ref.childByAppendingPath(Constant.Firebase.profiles)
     let data = [ uId: ["name" : name, "email": email]]
     firebase.updateChildValues(data)
   }
 
   func getProfile(uId uId: String, completion:( (data: [String: AnyObject]?) -> Void)?) {
-    let firebase = ref.childByAppendingPath("\(Constant.Firebase.profilePath)/\(uId)")
+    let firebase = ref.childByAppendingPath(Constant.Firebase.profiles).childByAppendingPath(uId)
     firebase.observeSingleEventOfType(.Value, withBlock: { snapshot in
       let dict = snapshot.value as? [String: AnyObject]
       completion?(data: dict)
@@ -61,7 +61,7 @@ class FirebaseService: NSObject {
   }
 
   func observeProfile(uId uId: String, completion:( (data: [String: AnyObject]?) -> Void)?) -> Firebase {
-    let firebase = ref.childByAppendingPath("\(Constant.Firebase.profilePath)/\(uId)")
+    let firebase = ref.childByAppendingPath(Constant.Firebase.profiles).childByAppendingPath(uId)
     firebase.observeEventType(.Value, withBlock: { snapshot in
       let dict = snapshot.value as? [String: AnyObject]
       completion?(data: dict)
@@ -70,15 +70,36 @@ class FirebaseService: NSObject {
   }
 
   func updateProfile(uId uId: String, data: [String: AnyObject], completion: ((error: NSError?)-> Void)? = nil) {
-    let firebase = ref.childByAppendingPath("\(Constant.Firebase.profilePath)/\(uId)")
-    firebase.updateChildValues(data) { error, newFirebase in
-      completion?(error: error)
-    }
+    let firebase = ref.childByAppendingPath(Constant.Firebase.profiles).childByAppendingPath(uId)
+    updateChildValues(data, firebase: firebase, completion: completion)
   }
 
   func signOut() {
     ref.unauth()
     _authData = nil
     NSNotificationCenter.defaultCenter().postNotificationName(Constant.Notification.didSignOut, object: self)
+  }
+
+  func createEvent(data: [String: AnyObject], completion:((error: NSError?) -> Void)?) {
+    let firebase = ref.childByAppendingPath(Constant.Firebase.events).childByAutoId()
+    updateChildValues(data, firebase: firebase, completion: completion)
+  }
+
+  func updatePlace(placeId placeId: String, data: [String: AnyObject], completion:((error: NSError?) -> Void)?) {
+    let firebase = ref.childByAppendingPath(Constant.Firebase.places).childByAppendingPath(placeId)
+    updateChildValues(data, firebase: firebase, completion: completion)
+  }
+
+
+  func setValue(value: AnyObject, firebase: Firebase, completion: ((error: NSError?) -> Void)?) {
+    firebase.setValue(value) { error, firebase in
+      completion?(error: error)
+    }
+  }
+
+  func updateChildValues(value: [NSObject: AnyObject], firebase: Firebase, completion: ((error: NSError?) -> Void)?) {
+    firebase.updateChildValues(value) { error, firebase in
+      completion?(error: error)
+    }
   }
 }

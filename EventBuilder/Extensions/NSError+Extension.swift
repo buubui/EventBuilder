@@ -8,6 +8,14 @@
 
 import UIKit
 
-class NSError_Extension: NSError {
+extension NSError {
+
+  convenience init(message: String) {
+    self.init(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: message])
+  }
+
+  class func invalidDataError() -> NSError {
+    return NSError(message: "Invalid Data")
+  }
 
 }

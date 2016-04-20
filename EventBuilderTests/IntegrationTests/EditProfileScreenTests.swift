@@ -26,7 +26,7 @@ class EditProfileScreenTests: BaseIntegrationTest {
     tester().tapScreenAtPoint(CGPoint(x: 35, y: 110))
     tester().tapViewWithAccessibilityLabel("confirmButton")
     tester().tapViewWithAccessibilityLabel("Save")
-    tester().waitForTimeInterval(10)
+    tester().waitForTimeInterval(20)
     tester().waitForViewWithAccessibilityLabel(newName)
     tester().waitForViewWithAccessibilityLabel(newPhone)
   }

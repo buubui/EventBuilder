@@ -13,7 +13,6 @@ import SwiftValidator
 class SignInBaseViewController: UIViewController {
   @IBOutlet weak var emailTextField: BTextField!
   @IBOutlet weak var passwordTextField: BTextField!
-  @IBOutlet weak var labelIcon: UILabel!
   @IBOutlet weak var iconBg: MaterialView!
 
   let validator = Validator()
@@ -26,11 +25,8 @@ class SignInBaseViewController: UIViewController {
 
   func setupIcon() {
     iconBg.shape = .Circle
-    iconBg.backgroundColor = UIColor.flatBlackColor()
+    iconBg.backgroundColor = UIColor.pomegranateColor()
     iconBg.depth = .Depth3
-    labelIcon.font = UIFont.iconFontWithSize(80)
-    labelIcon.textColor = UIColor.flatWhiteColorDark()
-    labelIcon.text = NSString.iconStringForEnum(.FUICalendar)
   }
 
   func setupValidator() {

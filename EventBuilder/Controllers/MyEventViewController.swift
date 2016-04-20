@@ -42,10 +42,11 @@ extension MyEventViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension MyEventViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
   func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
-    return UIImage(named: "no_event")!
+    return StyleKit.imageOfCalendar(frame: CGRect(x: 0, y:0, width: 200, height: 200), calendarColor: UIColor.flatWhiteColor(), wandColor: UIColor.flatWhiteColor())
   }
 
   func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-    return NSAttributedString(string: "No Event")
+    return NSAttributedString(string: "No Event", attributes: [NSForegroundColorAttributeName: UIColor(red: 0.929, green: 0.945, blue: 0.949, alpha: 1)])
   }
+
 }

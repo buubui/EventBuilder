@@ -17,6 +17,8 @@ class SignInViewController: SignInBaseViewController {
 
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
+    emailTextField.text = "buu@suremail.info"
+    passwordTextField.text = "password"
   }
 
   func signInWithPassword() {

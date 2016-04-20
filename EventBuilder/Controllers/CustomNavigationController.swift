@@ -13,6 +13,7 @@ class CustomNavigationController: UINavigationController {
   override func viewDidLoad() {
     super.viewDidLoad()
     navigationBar.configureFlatNavigationBarWithColor(UIColor.pomegranateColor())
+    navigationBar.tintColor = UIColor.flatWhiteColor()
   }
   
   override func preferredStatusBarStyle() -> UIStatusBarStyle {

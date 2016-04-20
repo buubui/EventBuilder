@@ -10,26 +10,24 @@ import UIKit
 
 class PlaceSearchViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+  @IBOutlet weak var searchField: UITextField!
 
-        // Do any additional setup after loading the view.
+  override func viewDidLoad() {
+    super.viewDidLoad()
+  }
+
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    guard let controller = segue.destinationViewController as? PlaceResultsViewController where segue.identifier == "showSearchResults" else {
+      return
     }
+    controller.query = searchField.text!
+  }
+}
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+extension PlaceSearchViewController: UITextFieldDelegate {
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+  func textFieldShouldReturn(textField: UITextField) -> Bool {
+    performSegueWithIdentifier("showSearchResults", sender: self)
+    return true
+  }
 }

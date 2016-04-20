@@ -7,29 +7,47 @@
 //
 
 import UIKit
+import CoreLocation
 
 class PlaceResultsViewController: UIViewController {
+  @IBOutlet weak var tableView: UITableView!
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+  var query: String = ""
 
-        // Do any additional setup after loading the view.
+  let locationManager = CLLocationManager()
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setupLocationManager()
+  }
+
+  private func setupLocationManager() {
+    locationManager.delegate = self
+    if CLLocationManager.authorizationStatus() == .NotDetermined {
+      locationManager.requestWhenInUseAuthorization()
     }
+    locationManager.distanceFilter = Constant.locationDistanceFilter
+  }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+  func startSearch(location location: CLLocation) {
+    let coordinate = location.coordinate
+    FoursquareService.shareInstance.explore(query: query, latitude: coordinate.latitude, longitude: coordinate.longitude) { error, data in
+      print(data)
     }
-    
+  }
+}
 
-    /*
-    // MARK: - Navigation
+extension PlaceResultsViewController: CLLocationManagerDelegate {
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+  func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+    if status == .AuthorizedAlways || status == .AuthorizedWhenInUse {
+      manager.startUpdatingLocation()
     }
-    */
+  }
 
+  func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    let newLocation = locations.last!
+    print("didUpdateToLocation", newLocation)
+    startSearch(location: newLocation)
+  }
 }

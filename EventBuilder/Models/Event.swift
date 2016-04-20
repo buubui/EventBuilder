@@ -12,6 +12,9 @@ import CoreData
 
 class Event: NSManagedObject {
 
-// Insert code here to add functionality to your managed object subclass
-
+  static let entityName = "Event"
+  
+  override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
+    super.init(entity: entity, insertIntoManagedObjectContext: context)
+  }
 }

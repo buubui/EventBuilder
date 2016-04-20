@@ -15,7 +15,7 @@ class FirebaseService: NSObject {
   private var _authData: FAuthData!
 
   override init() {
-    ref = Firebase(url: Constant.firebaseUrl)
+    ref = Firebase(url: Constant.Firebase.baseUrl)
     super.init()
   }
 

@@ -11,14 +11,7 @@ import UIKit
 struct Constant {
   static let sqliteFileName = "EventBuilder.sqlite"
   static let defaultProfilePicture = "sample_profile_picture"
-  static var firebaseUrl: String {
-    if Helper.isTestMode() {
-      return "https://udacitycapstonetest.firebaseio.com"
-    }
-    return "https://popping-torch-3350.firebaseio.com"
-  }
-  static let foursquareClientId = "A4FAXPDG3HGQRLRMF4TRBPJLUNWGSW30FQZJQZPQNPVUGZ4I"
-  static let foursquareClientSecret = "DI0S43SU324RWRIY3YVRGPCHX4CCGHZDPNXCLAHZM55BKNSZ"
+  static let locationDistanceFilter = 100.0
 
   struct Notification {
     static let didSignOut = "didSignOutNotification"
@@ -26,8 +19,22 @@ struct Constant {
   }
 
   struct Firebase {
+    static var baseUrl: String {
+      if Helper.isTestMode() {
+        return "https://udacitycapstonetest.firebaseio.com"
+      }
+      return "https://popping-torch-3350.firebaseio.com"
+    }
     static let profiles = "profiles"
     static let events = "events"
     static let places = "places"
+  }
+
+  struct Foursquare {
+    static let clientId = "A4FAXPDG3HGQRLRMF4TRBPJLUNWGSW30FQZJQZPQNPVUGZ4I"
+    static let clientSecret = "DI0S43SU324RWRIY3YVRGPCHX4CCGHZDPNXCLAHZM55BKNSZ"
+    
+    static let baseUrl = "https://api.foursquare.com/v2"
+    static let exploreUrl = "\(baseUrl)/venues/explore"
   }
 }

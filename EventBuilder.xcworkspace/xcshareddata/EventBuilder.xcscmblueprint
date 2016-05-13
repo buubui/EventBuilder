@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "BBBA2A2947F62E55A9809181729EEED511E9D489",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "BBBA2A2947F62E55A9809181729EEED511E9D489" : 0,
+    "3BA2B6E4F62548403835C413BC21068565899BF2" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "2C8D5CF6-0D2D-4C89-BE7D-C3998E848991",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "BBBA2A2947F62E55A9809181729EEED511E9D489" : "EventBuilder\/",
+    "3BA2B6E4F62548403835C413BC21068565899BF2" : "..\/..\/IOS\/ForecastView"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "EventBuilder",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "EventBuilder.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:buubui\/ForecastView.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "3BA2B6E4F62548403835C413BC21068565899BF2"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:buubui\/EventBuilder.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "BBBA2A2947F62E55A9809181729EEED511E9D489"
+    }
+  ]
+}

@@ -17,6 +17,7 @@ extension Place {
   @NSManaged var id: String?
   @NSManaged var name: String?
   @NSManaged var address: String?
+  @NSManaged var city: String?
   @NSManaged var latitude: NSNumber?
   @NSManaged var longitude: NSNumber?
   @NSManaged var events: NSSet?

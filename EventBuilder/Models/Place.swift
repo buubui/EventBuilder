@@ -34,6 +34,10 @@ class Place: NSManagedObject {
       address = theAdress
     }
 
+    if let theCity = dictionary["city"] as? String {
+      city = theCity
+    }
+
     if let lat = dictionary["latitude"] as? Double {
       latitude = NSNumber(double: lat)
     }
@@ -41,5 +45,28 @@ class Place: NSManagedObject {
     if let long = dictionary["longitude"] as? Double {
       longitude = NSNumber(double: long)
     }
+  }
+
+  convenience init(venue: FQVenue, context: NSManagedObjectContext) {
+    let entity =  NSEntityDescription.entityForName(Place.entityName, inManagedObjectContext: context)!
+    self.init(entity: entity, insertIntoManagedObjectContext: context)
+    id = venue.id
+    name = venue.name
+    latitude = venue.location.latitude
+    longitude = venue.location.longitude
+    address = venue.location.address
+    city = venue.location.city
+  }
+
+  func toDictionary() -> [String: AnyObject] {
+    var dict = [String: AnyObject]()
+    dict["id"] = id
+    dict["name"] = name
+    dict["latitude"] = latitude
+    dict["longitude"] = longitude
+    dict["address"] = address
+    dict["city"] = city
+
+    return dict
   }
 }

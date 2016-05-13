@@ -16,6 +16,15 @@ class PlaceSearchViewController: UIViewController {
     super.viewDidLoad()
   }
 
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+    searchField.becomeFirstResponder()
+  }
+
+  @IBAction func cancelBarButtonDidTap(sender: UIBarButtonItem) {
+    dismissViewControllerAnimated(true, completion: nil)
+  }
+
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     guard let controller = segue.destinationViewController as? PlaceResultsViewController where segue.identifier == "showSearchResults" else {
       return

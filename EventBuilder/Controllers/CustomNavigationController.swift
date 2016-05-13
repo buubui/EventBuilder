@@ -14,6 +14,8 @@ class CustomNavigationController: UINavigationController {
     super.viewDidLoad()
     navigationBar.configureFlatNavigationBarWithColor(UIColor.pomegranateColor())
     navigationBar.tintColor = UIColor.flatWhiteColor()
+    navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.flatWhiteColor()]
+    navigationBar.translucent = false
   }
   
   override func preferredStatusBarStyle() -> UIStatusBarStyle {

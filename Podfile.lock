@@ -7,11 +7,10 @@ PODS:
   - DOAlertController (1.0.0)
   - DZNEmptyDataSet (1.7.3)
   - EZLoadingActivity (0.8)
+  - EZSwiftExtensions (1.4)
   - Fakery (1.1.2):
     - SwiftyJSON
   - Firebase (2.5.1)
-  - FirebaseUI/Core (0.3.2):
-    - Firebase (~> 2.2)
   - FlatUIKit (1.6.2)
   - Font-Awesome-Swift (1.4.6)
   - ForecastView (0.3.1)
@@ -51,12 +50,12 @@ DEPENDENCIES:
     `dev`)
   - DZNEmptyDataSet
   - EZLoadingActivity
+  - EZSwiftExtensions
   - Fakery
   - Firebase
-  - FirebaseUI/Core
   - FlatUIKit
   - Font-Awesome-Swift (~> 1.4.6)
-  - ForecastView
+  - ForecastView (from `https://github.com/buubui/ForecastView.git`, branch `dev`)
   - IQKeyboardManagerSwift
   - KIF
   - Material
@@ -69,18 +68,25 @@ DEPENDENCIES:
   - StatusBarNotificationCenter
   - SwiftSpinner
   - SwiftValidator
+  - SwiftyJSON
 
 EXTERNAL SOURCES:
   DOAlertController:
     :branch: dev
     :git: https://github.com/buubui/DOAlertController
+  ForecastView:
+    :branch: dev
+    :git: https://github.com/buubui/ForecastView.git
   SSASideMenu:
     :git: https://github.com/mbalex99/SSASideMenu.git
 
 CHECKOUT OPTIONS:
   DOAlertController:
-    :commit: f780a14b8ee405d87cb2c136b9d7bc3c229d0898
+    :commit: 3c9a0aa2dce4dc7e35c994490e3d983086464b2a
     :git: https://github.com/buubui/DOAlertController
+  ForecastView:
+    :commit: 99181d2eec62c006e445f5b10706a212a865f9c6
+    :git: https://github.com/buubui/ForecastView.git
   SSASideMenu:
     :commit: 5d3de08428b839e30ad6210cf359730f60da37bf
     :git: https://github.com/mbalex99/SSASideMenu.git
@@ -92,12 +98,12 @@ SPEC CHECKSUMS:
   DOAlertController: 64a9470255f5255e579d86a018684efc1d083ece
   DZNEmptyDataSet: dd7cca17c1d07dfa78956859b1e70a52505678ef
   EZLoadingActivity: 6fd75a05765a4085f4b6fef6f62edf9f144b3139
+  EZSwiftExtensions: db7be0022fce8e92cdfe0fadddaf835fcd9696db
   Fakery: a4121424cf731cacc04a5ff1735fcc6e3efc656d
   Firebase: 3565ea88b830f28f2c77ecc524622bc71a20d085
-  FirebaseUI: 95621dce04f0313495c86e1fba503254e0ec48b1
   FlatUIKit: 1b41f0d4952ce8d970d8479ce79df54a960242c4
   Font-Awesome-Swift: a965c23e619514be65de9b113f49038ca683c1bb
-  ForecastView: aee4963879f8a34cdbca84df1f6ffdeb1ff986da
+  ForecastView: b21b11748e45204dac52dde179eb2905f56c69ce
   IQKeyboardManagerSwift: ede2a27b4e1ce053d03073b9c7fa439322f5e405
   KIF: 2275c6d59c77e5e56f660f006b99d73780130540
   Material: e382debf52b8070a235f5f67d9394524f16a8e6e

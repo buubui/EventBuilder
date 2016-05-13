@@ -43,16 +43,16 @@ class EditProfileViewController: UIViewController {
 
   func save() {
     showLoadingActivity(text: "Updating...")
-    user.updateFirebase { error in
+    user.updateFirebase { [weak self] error in
       defer {
-        self.hideLoadingActivity()
+        self?.hideLoadingActivity()
       }
       if let error = error {
-        self.showNotificationMessage(error.localizedDescription, error: true)
+        self?.showNotificationMessage(error.localizedDescription, error: true)
         return
       }
-      self.user.save()
-      self.dismissViewControllerAnimated(true, completion: nil)
+      self?.user.save()
+      self?.dismissViewControllerAnimated(true, completion: nil)
     }
   }
 

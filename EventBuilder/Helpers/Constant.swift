@@ -36,5 +36,10 @@ struct Constant {
     
     static let baseUrl = "https://api.foursquare.com/v2"
     static let exploreUrl = "\(baseUrl)/venues/explore"
+    static let searchUrl = "\(baseUrl)/venues/search"
+  }
+
+  struct Wunderground {
+    static let apiKey = "1f7a5ff12079d1bd"
   }
 }

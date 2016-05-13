@@ -8,13 +8,21 @@
 
 import UIKit
 import CoreLocation
+import MapKit
 
 class PlaceResultsViewController: UIViewController {
-  @IBOutlet weak var tableView: UITableView!
+
+  @IBOutlet weak var mapView: MKMapView!
 
   var query: String = ""
 
   let locationManager = CLLocationManager()
+
+  var data = [FQVenue]() {
+    didSet {
+      reloadData()
+    }
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -29,10 +37,31 @@ class PlaceResultsViewController: UIViewController {
     locationManager.distanceFilter = Constant.locationDistanceFilter
   }
 
+  func reloadData() {
+    runInMainThread {
+      self.mapView.removeAnnotations(self.mapView.annotations)
+      for venue in self.data {
+        self.mapView.addAnnotation(VenueAnnotation(venue: venue))
+      }
+    }
+  }
+
   func startSearch(location location: CLLocation) {
     let coordinate = location.coordinate
-    FoursquareService.shareInstance.explore(query: query, latitude: coordinate.latitude, longitude: coordinate.longitude) { error, data in
-      print(data)
+    FoursquareService.shareInstance.search(query: query, latitude: coordinate.latitude, longitude: coordinate.longitude) { [weak self] error, data in
+      if let data = data {
+        self?.data = data
+      }
+    }
+  }
+
+  func selectVenueAnnotation(annotation: VenueAnnotation) {
+    performSegueWithIdentifier("showNewEvent", sender: annotation)
+  }
+
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if let controller = segue.destinationViewController as? NewEventViewController, annotation = sender as? VenueAnnotation where segue.identifier == "showNewEvent" {
+      controller.venue = annotation.venue
     }
   }
 }
@@ -49,5 +78,23 @@ extension PlaceResultsViewController: CLLocationManagerDelegate {
     let newLocation = locations.last!
     print("didUpdateToLocation", newLocation)
     startSearch(location: newLocation)
+    mapView.region = MKCoordinateRegionMakeWithDistance(newLocation.coordinate, 500, 500)
+  }
+}
+
+extension PlaceResultsViewController: MKMapViewDelegate {
+
+  func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+    let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "VenueAnnotation")
+    annotationView.canShowCallout = true
+    annotationView.rightCalloutAccessoryView = UIButton(type: .ContactAdd)
+    return annotationView
+  }
+
+  func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+    guard let annotation = view.annotation as? VenueAnnotation else {
+      return
+    }
+    selectVenueAnnotation(annotation)
   }
 }

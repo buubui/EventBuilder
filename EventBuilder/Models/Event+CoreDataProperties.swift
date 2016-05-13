@@ -2,7 +2,7 @@
 //  Event+CoreDataProperties.swift
 //  
 //
-//  Created by Buu Bui on 4/15/16.
+//  Created by Buu Bui on 5/4/16.
 //
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -14,11 +14,12 @@ import CoreData
 
 extension Event {
 
-    @NSManaged var name: String?
-    @NSManaged var timeInterval: NSNumber?
-    @NSManaged var status: String?
     @NSManaged var id: String?
-    @NSManaged var place: NSManagedObject?
+    @NSManaged var name: String?
+    @NSManaged var status: String?
+    @NSManaged var startDate: NSDate?
+    @NSManaged var endDate: NSDate?
     @NSManaged var participants: NSSet?
+    @NSManaged var place: Place?
 
 }

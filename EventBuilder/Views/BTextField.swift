@@ -32,17 +32,17 @@ class BTextField: TextField {
 
   private func setupUI() {
     borderStyle = .None
-    bottomBorderColor = MaterialColor.grey.base
-    placeholderTextColor = MaterialColor.grey.base
+    bottomBorderColor = UIColor.flatGrayColor()
+    placeholderTextColor = UIColor.flatGrayColor()
     titleLabel = UILabel()
     titleLabel!.font = RobotoFont.mediumWithSize(12)
-    titleLabelColor = MaterialColor.grey.base
-    titleLabelActiveColor = MaterialColor.blue.accent3
+    titleLabelColor = UIColor.flatGrayColor()
+    titleLabelActiveColor = UIColor.flatSkyBlueColor()
     detailLabel = UILabel()
     detailLabel!.font = RobotoFont.mediumWithSize(12)
-    detailLabelActiveColor = MaterialColor.red.accent3
+    detailLabelActiveColor = UIColor.pomegranateColor()
     detailLabelAutoHideEnabled = false
     detailLabelAnimationDistance = 2
-    titleLabelAnimationDistance = 2
+    titleLabelAnimationDistance = 0
   }
 }

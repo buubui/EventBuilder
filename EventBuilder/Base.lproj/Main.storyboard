@@ -28,6 +28,9 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ccT-IP-1Zl" customClass="BTextField" customModule="EventBuilder" customModuleProvider="target">
                                 <rect key="frame" x="36" y="178" width="248" height="30"/>
                                 <accessibility key="accessibilityConfiguration" label="SignIn - EmailTextField"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="MKr-0e-o0Z"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
@@ -75,7 +78,7 @@
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                        <color key="value" red="0.15410047769999999" green="0.41306763889999998" blue="0.69063264130000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="value" red="0.15410047769546509" green="0.41306763887405396" blue="0.69063264131546021" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -116,6 +119,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="HaW-0y-oo4" firstAttribute="height" secondItem="ccT-IP-1Zl" secondAttribute="height" id="3cC-4b-dlS"/>
                             <constraint firstItem="nGy-Ww-14b" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="56B-nC-b3a"/>
                             <constraint firstItem="ccT-IP-1Zl" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="MT7-PJ-rVh"/>
                             <constraint firstItem="ccT-IP-1Zl" firstAttribute="top" secondItem="nGy-Ww-14b" secondAttribute="bottom" constant="50" id="NvY-zQ-BZn"/>
@@ -594,6 +598,9 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GkK-pD-GBh" customClass="BTextField" customModule="EventBuilder" customModuleProvider="target">
                                 <rect key="frame" x="36" y="248" width="248" height="30"/>
                                 <accessibility key="accessibilityConfiguration" label="SignUp - EmailTextField"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="7LI-SJ-4uE"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
@@ -681,11 +688,14 @@
                         <constraints>
                             <constraint firstItem="bFo-gY-gZp" firstAttribute="top" secondItem="k9D-nb-B2w" secondAttribute="bottom" constant="30" id="7vq-JC-AEx"/>
                             <constraint firstItem="bFo-gY-gZp" firstAttribute="centerX" secondItem="Kpg-Nl-vN8" secondAttribute="centerX" id="89l-r5-mWa"/>
+                            <constraint firstItem="A8i-Un-hqS" firstAttribute="height" secondItem="GkK-pD-GBh" secondAttribute="height" id="AJ9-2Y-lLe"/>
                             <constraint firstItem="k9D-nb-B2w" firstAttribute="top" secondItem="8mo-XL-ypn" secondAttribute="bottom" constant="8" id="EHk-67-3zj"/>
+                            <constraint firstItem="Zxq-mu-kPl" firstAttribute="top" relation="greaterThanOrEqual" secondItem="CPm-rQ-Z1p" secondAttribute="bottom" constant="10" id="Hdp-h2-p9y"/>
                             <constraint firstItem="A8i-Un-hqS" firstAttribute="top" secondItem="GkK-pD-GBh" secondAttribute="bottom" constant="40" id="LhG-Ok-V4g"/>
                             <constraint firstItem="A8i-Un-hqS" firstAttribute="centerX" secondItem="GkK-pD-GBh" secondAttribute="centerX" id="Vtq-OB-ls7"/>
+                            <constraint firstItem="bFo-gY-gZp" firstAttribute="height" secondItem="GkK-pD-GBh" secondAttribute="height" id="aaR-1Q-gVe"/>
                             <constraint firstItem="GkK-pD-GBh" firstAttribute="leading" secondItem="Kpg-Nl-vN8" secondAttribute="leadingMargin" constant="20" id="bfF-PS-1p3"/>
-                            <constraint firstItem="Byc-og-dFe" firstAttribute="top" secondItem="Zxq-mu-kPl" secondAttribute="bottom" constant="50" id="cwY-B4-t5Y"/>
+                            <constraint firstItem="Byc-og-dFe" firstAttribute="top" secondItem="Zxq-mu-kPl" secondAttribute="bottom" priority="750" constant="50" id="cwY-B4-t5Y"/>
                             <constraint firstItem="Zxq-mu-kPl" firstAttribute="centerX" secondItem="Kpg-Nl-vN8" secondAttribute="centerX" id="e0r-aN-gcX"/>
                             <constraint firstItem="GkK-pD-GBh" firstAttribute="top" secondItem="bFo-gY-gZp" secondAttribute="bottom" constant="40" id="gr6-RI-UHd"/>
                             <constraint firstAttribute="trailingMargin" secondItem="GkK-pD-GBh" secondAttribute="trailing" constant="20" id="i2j-1e-Whx"/>

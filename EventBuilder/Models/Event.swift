@@ -44,20 +44,38 @@ class Event: NSManagedObject {
   }
 
   func createFirebaseEvent(completion: ((error: NSError?) -> Void)? = nil) {
+    if let context = managedObjectContext where  creator == nil {
+      creator = User.findOrNewByUId(User.currentUId, context: context)
+      participants = NSSet(object: creator!)
+    }
     let data = toDictionary()
-    FirebaseService.shareInstance.createEvent(data, completion: completion)
+    FirebaseService.shareInstance.createEvent(data) { error, firebase in
+      completion?(error: error)
+    }
   }
 
   func toDictionary() -> [String: AnyObject] {
     var dict = [String: AnyObject]()
     dict["name"] = name
     dict["status"] = status
-    dict["startDate"] = startDate?.timeIntervalSince1970
+    if let creator = creator {
+      dict["creator"] = creator.uId
+    }
+    if let startDate = startDate {
+      dict["startDate"] = startDate.timeIntervalSince1970
+    }
     if let endDate = endDate {
       dict["endDate"] = endDate.timeIntervalSince1970
     }
     if let place = place {
       dict["place"] = place.toDictionary()
+    }
+    if let participants = participants {
+      var participantsDict = [String: Bool]()
+      participants.forEach { p in
+        participantsDict[p.uId!!] = true
+      }
+      dict["participants"] = participantsDict
     }
 
     return dict

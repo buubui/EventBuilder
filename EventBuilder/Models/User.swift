@@ -141,7 +141,9 @@ class User: NSManagedObject {
       return
     }
     let data = toDictionary()
-    FirebaseService.shareInstance.updateProfile(uId: uId, data: data, completion: completion)
+    FirebaseService.shareInstance.updateProfile(uId: uId, data: data) { error, firebase in
+      completion?(error: error)
+    }
   }
 
   func save() {

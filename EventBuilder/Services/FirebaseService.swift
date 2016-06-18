@@ -87,8 +87,8 @@ class FirebaseService: NSObject {
     updateChildValues(data, firebase: firebase) { error, firebase in
       if let participants_dict = data["participants"] as? [String: Bool] {
         participants_dict.keys.forEach { uId in
-          let firebase = FirebaseService.shareInstance.ref.childByAppendingPath(Constant.Firebase.profiles).childByAppendingPath(uId).childByAppendingPath("events/\(firebase.key)")
-          FirebaseService.shareInstance.setValue(true, firebase: firebase, completion: nil)
+          let firebase = self.ref.childByAppendingPath(Constant.Firebase.profiles).childByAppendingPath(uId).childByAppendingPath("events/\(firebase.key)")
+          self.setValue(true, firebase: firebase, completion: nil)
         }
       }
       completion?(error: error, firebase: firebase)
@@ -101,15 +101,46 @@ class FirebaseService: NSObject {
     updateChildValues(data, firebase: firebase, completion: completion)
   }
 
+  func getEvent(key: String, completion: ((data: [String: AnyObject]) -> Void)?) {
+    let firebase = ref.childByAppendingPath(Constant.Firebase.events).childByAppendingPath(key)
+    retrieveData(firebase) { data in
+      guard let dict = data as? [String: AnyObject] else {
+        return
+      }
+      completion?(data: dict)
+    }
+  }
+
+  func getMyEvents(uId: String, completion: ((keys:[String], receivedEventDict: [String: AnyObject], receivedEventId: String) -> Void)?) {
+    let firebase = ref.childByAppendingPath(Constant.Firebase.profiles).childByAppendingPath(uId).childByAppendingPath("events")
+
+    retrieveData(firebase) { data in
+      guard let dict = data as? [String: AnyObject] else {
+        return
+      }
+      let keys = Array(dict.keys)
+      for key in keys {
+        self.getEvent(key) { data in
+          completion?(keys: keys, receivedEventDict: data, receivedEventId: key)
+        }
+      }
+    }
+  }
+
   func observeEvents(uId uId: String, completion:( (data: [String: AnyObject]?) -> Void)?) -> Firebase {
     let firebase = ref.childByAppendingPath(Constant.Firebase.profiles).childByAppendingPath(uId)
-    firebase.observeEventType(.Value, withBlock: { snapshot in
+    firebase.observeEventType(.ChildAdded, withBlock: { snapshot in
       let dict = snapshot.value as? [String: AnyObject]
       completion?(data: dict)
     })
     return firebase
   }
 
+  func retrieveData(firebase: Firebase, completion: ((data: AnyObject) -> Void)?) {
+    firebase.observeSingleEventOfType(.Value, withBlock: { snapshot in
+      completion?(data: snapshot.value)
+    })
+  }
 
   func setValue(value: AnyObject, firebase: Firebase, completion: FirebaseCompletion?) {
     firebase.setValue(value) { error, firebase in

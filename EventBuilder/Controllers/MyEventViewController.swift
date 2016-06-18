@@ -13,6 +13,9 @@ import FlatUIKit
 class MyEventViewController: UIViewController {
   @IBOutlet weak var tableView: UITableView!
 
+  var data =  [String: AnyObject]()
+  var keys = [String]()
+
   class func instantiateStoryboard() -> MyEventViewController {
     return UIStoryboard.mainStoryBoard.instantiateViewControllerWithIdentifier("MyEventViewController") as! MyEventViewController
   }
@@ -23,6 +26,19 @@ class MyEventViewController: UIViewController {
     tableView.emptyDataSetSource = self
     tableView.emptyDataSetDelegate = self
     setupRootViewController()
+    reload()
+  }
+
+  func reload() {
+    var receivedFirst = false
+    FirebaseService.shareInstance.getMyEvents(User.currentUId) { (keys, receivedEventDict, receivedEventId) in
+      if !receivedFirst {
+        self.keys = keys
+        receivedFirst = true
+      }
+      self.data[receivedEventId] = receivedEventDict
+      self.tableView.reloadData()
+    }
   }
 }
 
@@ -32,11 +48,14 @@ extension MyEventViewController: UITableViewDataSource, UITableViewDelegate {
   }
 
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 0
+    return data.count
   }
 
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    return UITableViewCell()
+    let cell = tableView.dequeueReusableCellWithIdentifier("EventCell")!
+    let item = Array(data.values)[indexPath.row]
+    cell.textLabel?.text = item["name"] as! String
+    return cell
   }
 }
 

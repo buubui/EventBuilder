@@ -22,8 +22,8 @@ target 'EventBuilder' do
   pod 'Font-Awesome-Swift', '~> 1.4.6'
   pod 'DZNEmptyDataSet'
   pod "StatusBarNotificationCenter"
-  pod 'SSASideMenu', :git => 'https://github.com/mbalex99/SSASideMenu.git'
-  pod 'DOAlertController' , :git => 'https://github.com/buubui/DOAlertController', :branch => 'dev'
+  pod 'SSASideMenu', git: 'https://github.com/mbalex99/SSASideMenu.git'
+  pod 'DOAlertController' , git: 'https://github.com/buubui/DOAlertController', branch: 'dev'
   pod 'ALCameraViewController'
   pod 'EZSwiftExtensions'
 end

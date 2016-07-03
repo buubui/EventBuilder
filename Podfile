@@ -5,7 +5,9 @@ target 'EventBuilder' do
   pod 'Alamofire', '~> 3.0'
   pod 'SwiftyJSON'
   pod 'ReachabilitySwift'
-  pod 'Firebase'
+  pod 'Firebase/Core'
+  pod 'Firebase/Database'
+  pod 'Firebase/Auth'
   # pod 'FirebaseUI/Core'
   # pod 'FirebaseUI/Facebook'
   # pod 'FirebaseUI/Password'
@@ -29,6 +31,8 @@ target 'EventBuilder' do
 end
 
 target 'EventBuilderTests' do
+  pod 'Firebase/Core'
+  pod 'Firebase/Auth'
   pod 'Quick'
   pod 'Nimble'
   pod 'OHHTTPStubs'

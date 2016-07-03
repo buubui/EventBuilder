@@ -36,7 +36,6 @@ class SignInViewController: SignInBaseViewController {
             self?.showNotificationMessage(error.localizedDescription, error: true)
           }
         } else {
-          print(FirebaseService.shareInstance.authData)
           self?.performSegueWithIdentifier("showMainView", sender: self)
         }
       }

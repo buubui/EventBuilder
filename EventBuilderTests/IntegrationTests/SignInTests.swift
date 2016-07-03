@@ -37,7 +37,7 @@ class SignInTests: BaseIntegrationTest {
 
   func testSignInFailure() {
     signInWithEmail(faker.internet.email(), password: faker.internet.password())
-    tester().waitForViewWithAccessibilityLabel("Invalid email or password")
+    tester().waitForViewWithAccessibilityLabel("There is no user record corresponding to this identifier. The user may have been deleted.")
   }
 }
 

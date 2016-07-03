@@ -27,6 +27,8 @@
 		0258CEE41CB514220003261E /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0258CEDF1CB514220003261E /* Lato-Italic.ttf */; };
 		0258CEE51CB514220003261E /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0258CEE01CB514220003261E /* Lato-Light.ttf */; };
 		0258CEE61CB514220003261E /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0258CEE11CB514220003261E /* Lato-Regular.ttf */; };
+		026E394E1D29598B005A25EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 026E394D1D29598B005A25EE /* GoogleService-Info.plist */; };
+		026E39561D296DF2005A25EE /* GoogleService-Info-Test.plist in Resources */ = {isa = PBXBuildFile; fileRef = 026E39531D296D1C005A25EE /* GoogleService-Info-Test.plist */; };
 		0272A9901CC0C14E00DCFDF9 /* EditProfileScreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0272A98F1CC0C14E00DCFDF9 /* EditProfileScreenTests.swift */; };
 		0272A9991CC0FA2900DCFDF9 /* NSManagedObjectContext+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0272A9941CC0FA2900DCFDF9 /* NSManagedObjectContext+Extension.swift */; };
 		0272A99A1CC0FA2900DCFDF9 /* SSASideMenu+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0272A9951CC0FA2900DCFDF9 /* SSASideMenu+Extension.swift */; };
@@ -107,6 +109,8 @@
 		0258CEDF1CB514220003261E /* Lato-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Italic.ttf"; sourceTree = "<group>"; };
 		0258CEE01CB514220003261E /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
 		0258CEE11CB514220003261E /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		026E394D1D29598B005A25EE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		026E39531D296D1C005A25EE /* GoogleService-Info-Test.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info-Test.plist"; path = "../EventBuilder/GoogleService-Info-Test.plist"; sourceTree = "<group>"; };
 		0272A98F1CC0C14E00DCFDF9 /* EditProfileScreenTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileScreenTests.swift; sourceTree = "<group>"; };
 		0272A9941CC0FA2900DCFDF9 /* NSManagedObjectContext+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Extension.swift"; sourceTree = "<group>"; };
 		0272A9951CC0FA2900DCFDF9 /* SSASideMenu+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SSASideMenu+Extension.swift"; sourceTree = "<group>"; };
@@ -233,6 +237,7 @@
 				0253E9DC1CB1741900C175D7 /* AppDelegate.swift */,
 				0253E9E61CB1741A00C175D7 /* Assets.xcassets */,
 				0253E9EB1CB1741A00C175D7 /* Info.plist */,
+				026E394D1D29598B005A25EE /* GoogleService-Info.plist */,
 				0253E9E31CB1741A00C175D7 /* EventBuilder.xcdatamodeld */,
 			);
 			path = EventBuilder;
@@ -243,6 +248,7 @@
 			children = (
 				020857571CB66E5400D70932 /* IntegrationTests */,
 				0253E9F61CB1741A00C175D7 /* Info.plist */,
+				026E39531D296D1C005A25EE /* GoogleService-Info-Test.plist */,
 				020857521CB66DF200D70932 /* Extension */,
 				02869AF71CB8E38C000CE60F /* TestConstant.swift */,
 			);
@@ -462,10 +468,12 @@
 			files = (
 				0253E9EA1CB1741A00C175D7 /* LaunchScreen.storyboard in Resources */,
 				0258CEE31CB514220003261E /* Lato-Bold.ttf in Resources */,
+				026E394E1D29598B005A25EE /* GoogleService-Info.plist in Resources */,
 				0253E9E71CB1741A00C175D7 /* Assets.xcassets in Resources */,
 				0258CEE61CB514220003261E /* Lato-Regular.ttf in Resources */,
 				0253E9E21CB1741A00C175D7 /* Main.storyboard in Resources */,
 				0258CEE41CB514220003261E /* Lato-Italic.ttf in Resources */,
+				026E39561D296DF2005A25EE /* GoogleService-Info-Test.plist in Resources */,
 				0258CEE21CB514220003261E /* flat-ui-icons-regular.ttf in Resources */,
 				0258CEE51CB514220003261E /* Lato-Light.ttf in Resources */,
 			);

@@ -9,11 +9,12 @@
 import Foundation
 import CoreData
 import Firebase
+import FirebaseDatabase
 
 class User: NSManagedObject {
   static var currentUId = ""
   static let entityName = "User"
-  private var firebase: Firebase?
+  private var firebase: FIRDatabaseReference?
 
   var image: UIImage? {
     get {
@@ -83,14 +84,18 @@ class User: NSManagedObject {
         }
       }
     }
-
   }
 
   func stopObserveFirebaseChange() {
     guard let firebase = firebase else {
       return
     }
-    firebase.removeValueWithCompletionBlock(nil)
+    firebase.removeValueWithCompletionBlock { error, ref in
+      guard let error = error else {
+        return
+      }
+      print(error.localizedDescription)
+    }
     self.firebase = nil
   }
 

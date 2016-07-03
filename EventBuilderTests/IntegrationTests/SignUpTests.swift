@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 @testable import EventBuilder
 
 class SignUpTests: BaseIntegrationTest {
@@ -28,7 +29,9 @@ class SignUpTests: BaseIntegrationTest {
     tester().waitForViewWithAccessibilityLabel("Sign up successfully, please sign in")
     signInWithEmail(email, password: password)
     tester().waitForViewWithAccessibilityLabel("No Event")
-    FirebaseService.shareInstance.ref.removeUser(email, password: password, withCompletionBlock: nil)
+    FIRAuth.auth()?.currentUser?.deleteWithCompletion() { error in
+
+    }
     NSRunLoop.currentRunLoop().runUntilDate(NSDate(timeIntervalSinceNow: 5))
   }
 
@@ -51,7 +54,7 @@ class SignUpTests: BaseIntegrationTest {
 
   func testSignUpFailure() {
     signUpWithEmail(TestConstant.email, password: faker.internet.password(), name: faker.name.name())
-    tester().waitForTappableViewWithAccessibilityLabel("This email address is already in use")
+    tester().waitForTappableViewWithAccessibilityLabel("The email address is already in use by another account.")
   }
 
   private

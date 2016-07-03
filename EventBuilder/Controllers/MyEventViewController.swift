@@ -15,6 +15,7 @@ class MyEventViewController: UIViewController {
 
   var data =  [String: AnyObject]()
   var keys = [String]()
+  var receivedKeys = [String]()
 
   class func instantiateStoryboard() -> MyEventViewController {
     return UIStoryboard.mainStoryBoard.instantiateViewControllerWithIdentifier("MyEventViewController") as! MyEventViewController
@@ -37,7 +38,19 @@ class MyEventViewController: UIViewController {
         receivedFirst = true
       }
       self.data[receivedEventId] = receivedEventDict
+      self.receivedKeys.append(receivedEventId)
       self.tableView.reloadData()
+    }
+  }
+
+  func itemAtIndex(index: Int) -> AnyObject? {
+    let key = receivedKeys[index]
+    return data[key]
+  }
+
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if let item = sender as? [String: AnyObject], controller =  segue.destinationViewController as? EventDetailsViewController where segue.identifier == "showEventDetails"  {
+      controller.event = item
     }
   }
 }
@@ -48,14 +61,19 @@ extension MyEventViewController: UITableViewDataSource, UITableViewDelegate {
   }
 
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return data.count
+    return receivedKeys.count
   }
 
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("EventCell")!
-    let item = Array(data.values)[indexPath.row]
-    cell.textLabel?.text = item["name"] as! String
+    let item = itemAtIndex(indexPath.row)!
+    cell.textLabel?.text = item["name"] as? String
     return cell
+  }
+
+  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    let item = itemAtIndex(indexPath.row)!
+    performSegueWithIdentifier("showEventDetails", sender: item)
   }
 }
 

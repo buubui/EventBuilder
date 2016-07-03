@@ -93,7 +93,22 @@ class FirebaseService: NSObject {
       }
       completion?(error: error, firebase: firebase)
     }
+  }
 
+  func isAttendEvent(eventId: String, userId: String, completion: ((value: Bool)-> Void)? ) {
+    let firebase = ref.childByAppendingPath(Constant.Firebase.events).childByAppendingPath(eventId).childByAppendingPath(Constant.Firebase.participants).childByAppendingPath(userId)
+    retrieveData(firebase) { data in
+      guard let value = data as? Bool else {
+        completion?(value: false)
+        return
+      }
+      completion?(value: value)
+    }
+  }
+
+  func attendEvent(eventId: String, userId: String, completion: FirebaseCompletion? ) {
+    let firebase = ref.childByAppendingPath(Constant.Firebase.events).childByAppendingPath(eventId).childByAppendingPath(Constant.Firebase.participants).childByAppendingPath(userId)
+    setValue(true, firebase: firebase, completion: completion)
   }
 
   func updatePlace(placeId placeId: String, data: [String: AnyObject], completion:FirebaseCompletion?) {
@@ -121,7 +136,55 @@ class FirebaseService: NSObject {
       let keys = Array(dict.keys)
       for key in keys {
         self.getEvent(key) { data in
-          completion?(keys: keys, receivedEventDict: data, receivedEventId: key)
+          var newData = data
+          newData["uId"] = key
+          completion?(keys: keys, receivedEventDict: newData, receivedEventId: key)
+        }
+      }
+    }
+  }
+
+  func getParticipantsOfEventId(uId: String, completion: ((keys:[String], receivedDict: [String: AnyObject], receivedUid: String) -> Void)?) {
+    let firebase = ref.childByAppendingPath(Constant.Firebase.events).childByAppendingPath(uId).childByAppendingPath("participants")
+
+    retrieveData(firebase) { data in
+      guard let dict = data as? [String: AnyObject] else {
+        return
+      }
+      let keys = Array(dict.keys)
+      for key in keys {
+        self.getProfile(key) { data in
+          var newData = data
+          newData["uId"] = key
+          completion?(keys: keys, receivedDict: newData, receivedUid: key)
+        }
+      }
+    }
+  }
+
+  func getProfile(key: String, completion: ((data: [String: AnyObject]) -> Void)?) {
+    let firebase = ref.childByAppendingPath(Constant.Firebase.profiles).childByAppendingPath(key)
+    retrieveData(firebase) { data in
+      guard let dict = data as? [String: AnyObject] else {
+        return
+      }
+      completion?(data: dict)
+    }
+  }
+
+  func getAllEvents(completion: ((keys:[String], receivedDict: [String: AnyObject], receivedUid: String) -> Void)?) {
+    let firebase = ref.childByAppendingPath(Constant.Firebase.events)
+
+    retrieveData(firebase) { data in
+      guard let dict = data as? [String: AnyObject] else {
+        return
+      }
+      let keys = Array(dict.keys)
+      for key in keys {
+        self.getEvent(key) { data in
+          var newData = data
+          newData["uId"] = key
+          completion?(keys: keys, receivedDict: newData, receivedUid: key)
         }
       }
     }

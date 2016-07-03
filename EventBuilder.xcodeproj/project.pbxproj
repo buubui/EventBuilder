@@ -12,6 +12,8 @@
 		020857591CB66E6500D70932 /* SignInTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020857581CB66E6500D70932 /* SignInTests.swift */; };
 		0219A5EA1CD085F200764FB6 /* FQVenue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0219A5E91CD085F200764FB6 /* FQVenue.swift */; };
 		0219A5EC1CD086DE00764FB6 /* FQLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0219A5EB1CD086DE00764FB6 /* FQLocation.swift */; };
+		022E57A01D26DAF900E5DDDD /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E579F1D26DAF900E5DDDD /* ExploreViewController.swift */; };
+		022E57A21D26E20300E5DDDD /* EventAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E57A11D26E20300E5DDDD /* EventAnnotation.swift */; };
 		0246EA221CBB72D600485096 /* SideMenuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0246EA211CBB72D600485096 /* SideMenuTests.swift */; };
 		0246EA241CBB784600485096 /* SignOutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0246EA231CBB784600485096 /* SignOutTests.swift */; };
 		0246EA281CBBC4A400485096 /* ProfileScreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0246EA271CBBC4A400485096 /* ProfileScreenTests.swift */; };
@@ -64,6 +66,8 @@
 		02982B881CBE53C40034E174 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02982B861CBE53C40034E174 /* User.swift */; };
 		02A943301CD091A700E66693 /* VenueAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A9432F1CD091A700E66693 /* VenueAnnotation.swift */; };
 		02B9A3001CD3607A00D44311 /* BTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B9A2FF1CD3607A00D44311 /* BTextView.swift */; };
+		02CCC1851D26BDA200195665 /* ParticipantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCC1841D26BDA200195665 /* ParticipantsViewController.swift */; };
+		02EE300B1D153B6800FDB934 /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EE300A1D153B6800FDB934 /* EventDetailsViewController.swift */; };
 		373CAD79A3BCB6D0880773C7 /* Pods_EventBuilderTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB635E45A49E3DAFC5B21D9C /* Pods_EventBuilderTests.framework */; };
 		8512ACB4D9125D2B86759355 /* Pods_EventBuilder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DF9634E93D5B581CD44F7F6 /* Pods_EventBuilder.framework */; };
 /* End PBXBuildFile section */
@@ -84,6 +88,8 @@
 		020857581CB66E6500D70932 /* SignInTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInTests.swift; sourceTree = "<group>"; };
 		0219A5E91CD085F200764FB6 /* FQVenue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FQVenue.swift; sourceTree = "<group>"; };
 		0219A5EB1CD086DE00764FB6 /* FQLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FQLocation.swift; sourceTree = "<group>"; };
+		022E579F1D26DAF900E5DDDD /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
+		022E57A11D26E20300E5DDDD /* EventAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventAnnotation.swift; sourceTree = "<group>"; };
 		0246EA211CBB72D600485096 /* SideMenuTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuTests.swift; sourceTree = "<group>"; };
 		0246EA231CBB784600485096 /* SignOutTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignOutTests.swift; sourceTree = "<group>"; };
 		0246EA271CBBC4A400485096 /* ProfileScreenTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileScreenTests.swift; sourceTree = "<group>"; };
@@ -140,6 +146,8 @@
 		02982B861CBE53C40034E174 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		02A9432F1CD091A700E66693 /* VenueAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueAnnotation.swift; sourceTree = "<group>"; };
 		02B9A2FF1CD3607A00D44311 /* BTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTextView.swift; sourceTree = "<group>"; };
+		02CCC1841D26BDA200195665 /* ParticipantsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantsViewController.swift; sourceTree = "<group>"; };
+		02EE300A1D153B6800FDB934 /* EventDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
 		2A33E395C866B17622AA1763 /* Pods-EventBuilderTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventBuilderTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EventBuilderTests/Pods-EventBuilderTests.release.xcconfig"; sourceTree = "<group>"; };
 		74F04319F21F01B4838312FC /* Pods-EventBuilderTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventBuilderTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EventBuilderTests/Pods-EventBuilderTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8DF9634E93D5B581CD44F7F6 /* Pods_EventBuilder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EventBuilder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -280,6 +288,9 @@
 				0272A9CF1CC48A1700DCFDF9 /* PlaceSearchViewController.swift */,
 				0272A9A21CC0FA3F00DCFDF9 /* PlaceResultsViewController.swift */,
 				02767ADF1CD0CAB800ED43B6 /* NewEventViewController.swift */,
+				02EE300A1D153B6800FDB934 /* EventDetailsViewController.swift */,
+				02CCC1841D26BDA200195665 /* ParticipantsViewController.swift */,
+				022E579F1D26DAF900E5DDDD /* ExploreViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -337,6 +348,7 @@
 				0219A5E91CD085F200764FB6 /* FQVenue.swift */,
 				0219A5EB1CD086DE00764FB6 /* FQLocation.swift */,
 				02A9432F1CD091A700E66693 /* VenueAnnotation.swift */,
+				022E57A11D26E20300E5DDDD /* EventAnnotation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -567,6 +579,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				02A943301CD091A700E66693 /* VenueAnnotation.swift in Sources */,
+				02CCC1851D26BDA200195665 /* ParticipantsViewController.swift in Sources */,
 				0272A9CA1CC105A000DCFDF9 /* Place+CoreDataProperties.swift in Sources */,
 				0272A9AF1CC0FA3F00DCFDF9 /* SignInViewController.swift in Sources */,
 				0272A9A91CC0FA3F00DCFDF9 /* EditProfileViewController.swift in Sources */,
@@ -579,6 +592,7 @@
 				0272A9B01CC0FA3F00DCFDF9 /* SignUpViewController.swift in Sources */,
 				0272A9AA1CC0FA3F00DCFDF9 /* MyEventViewController.swift in Sources */,
 				0272A9CC1CC28D6800DCFDF9 /* HttpClient.swift in Sources */,
+				022E57A21D26E20300E5DDDD /* EventAnnotation.swift in Sources */,
 				02982B881CBE53C40034E174 /* User.swift in Sources */,
 				0272A9BF1CC0FA6C00DCFDF9 /* FirebaseService.swift in Sources */,
 				0272A9AD1CC0FA3F00DCFDF9 /* SideMenuViewController.swift in Sources */,
@@ -591,6 +605,7 @@
 				0272A9D01CC48A1700DCFDF9 /* PlaceSearchViewController.swift in Sources */,
 				0272A9C61CC1056F00DCFDF9 /* Event+CoreDataProperties.swift in Sources */,
 				0272A9C91CC105A000DCFDF9 /* Place.swift in Sources */,
+				022E57A01D26DAF900E5DDDD /* ExploreViewController.swift in Sources */,
 				0272A9B91CC0FA5E00DCFDF9 /* Constant.swift in Sources */,
 				0272A99C1CC0FA2900DCFDF9 /* UIStoryboard+Extension.swift in Sources */,
 				0272A9CE1CC47DD500DCFDF9 /* NSError+Extension.swift in Sources */,
@@ -602,6 +617,7 @@
 				0272A9AE1CC0FA3F00DCFDF9 /* SignInBaseViewController.swift in Sources */,
 				0253E9DD1CB1741900C175D7 /* AppDelegate.swift in Sources */,
 				0272A9BE1CC0FA6C00DCFDF9 /* CoreDataStackManager.swift in Sources */,
+				02EE300B1D153B6800FDB934 /* EventDetailsViewController.swift in Sources */,
 				0219A5EA1CD085F200764FB6 /* FQVenue.swift in Sources */,
 				02B9A3001CD3607A00D44311 /* BTextView.swift in Sources */,
 				0272A9B41CC0FA4E00DCFDF9 /* BTextField.swift in Sources */,

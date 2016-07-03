@@ -73,7 +73,7 @@ class ProfileViewController: UIViewController {
   }
 
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    if let navController = segue.destinationViewController as? CustomNavigationController, controller = navController.viewControllers.first as? EditProfileViewController where segue.identifier == "showEditProfile" {
+    if let navController = segue.destinationViewController as? CustomNavigationController, controller = navController.topViewController as? EditProfileViewController where segue.identifier == "showEditProfile" {
       controller.user = user
     }
   }

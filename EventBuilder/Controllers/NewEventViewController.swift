@@ -41,8 +41,8 @@ class NewEventViewController: UIViewController {
   func eventInfo() -> [String: AnyObject] {
     return [
       "name" : nameTextField.text!,
-      "startDate": startDatePicker.date,
-      "endDate": endDatePicker.date,
+      "startDate": startDatePicker.date.timeIntervalSince1970,
+      "endDate": endDatePicker.date.timeIntervalSince1970,
       "description": descriptionTextView.text]
   }
 

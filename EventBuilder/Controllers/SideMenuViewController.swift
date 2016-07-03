@@ -39,7 +39,7 @@ class SideMenuViewController: UIViewController {
     var controller: UIViewController? {
       switch self {
       case .MyEvent: return MyEventViewController.instantiateStoryboard()
-      case .Explore: return MyEventViewController.instantiateStoryboard()
+      case .Explore: return ExploreViewController.instantiateStoryboard()
       case .Profile: return ProfileViewController.instantiateStoryboard()
       case .SignOut: return nil
       }

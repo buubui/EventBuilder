@@ -28,6 +28,7 @@ struct Constant {
     static let profiles = "profiles"
     static let events = "events"
     static let places = "places"
+    static let participants = "participants"
   }
 
   struct Foursquare {

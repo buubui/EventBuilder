@@ -25,6 +25,12 @@ struct Constant {
       }
       return "https://popping-torch-3350.firebaseio.com"
     }
+    static var storageUrl: String {
+      if Helper.isTestMode() {
+        return "gs://udacitycapstonetest.appspot.com"
+      }
+      return "gs://popping-torch-3350.appspot.com"
+    }
     static var baseTestUrl = "https://udacitycapstonetest.firebaseio.com"
     static let profiles = "profiles"
     static let events = "events"

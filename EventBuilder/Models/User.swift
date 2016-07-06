@@ -15,26 +15,17 @@ class User: NSManagedObject {
   static var currentUId = ""
   static let entityName = "User"
   private var firebase: FIRDatabaseReference?
+  private var imageChanged = false
 
   var image: UIImage? {
-    get {
-      guard let imageBase64 = imageBase64 else {
-        return nil
-      }
-      return UIImage.fromBase64(imageBase64)
-    }
-    set {
-      guard let newValue = newValue else {
-        imageBase64 = nil
-        return
-      }
-      imageBase64 = newValue.base64
+    didSet {
+      imageChanged = true
     }
   }
 
-  class func findOrNewByUId(anUid: String, context: NSManagedObjectContext) -> User {
+  class func findOrNewByUId(anId: String, context: NSManagedObjectContext) -> User {
     let request = NSFetchRequest(entityName: User.entityName)
-    request.predicate = NSPredicate(format: "uId = %@", anUid)
+    request.predicate = NSPredicate(format: "id = %@", anId)
     do {
       let result = try context.executeFetchRequest(request) as! [User]
       if let user = result.first {
@@ -43,7 +34,25 @@ class User: NSManagedObject {
     } catch {
       print(error)
     }
-    return User(dictionary: ["uId": anUid], context: context)
+    return User(dictionary: ["id": anId], context: context)
+  }
+
+  class func updateOrCreateByDictionary(dictionary: [String: AnyObject], context: NSManagedObjectContext) -> User? {
+    guard let anId = dictionary["id"] as? String else {
+      return nil
+    }
+    let request = NSFetchRequest(entityName: User.entityName)
+    request.predicate = NSPredicate(format: "id = %@", anId)
+    do {
+      let result = try context.executeFetchRequest(request) as! [User]
+      if let user = result.first {
+        user.update(dictionary)
+        return user
+      }
+    } catch {
+      print(error)
+    }
+    return User(dictionary: dictionary, context: context)
   }
 
   override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
@@ -55,8 +64,12 @@ class User: NSManagedObject {
     let entity =  NSEntityDescription.entityForName(User.entityName, inManagedObjectContext: context)!
     self.init(entity: entity, insertIntoManagedObjectContext: context)
 
-    if let theUId = dictionary["uId"] as? String {
-      uId = theUId
+    update(dictionary)
+  }
+
+  func update(dictionary: [String: AnyObject]) {
+    if let theId = dictionary["id"] as? String {
+      id = theId
     }
     if let theName = dictionary["name"] as? String {
       name = theName
@@ -69,14 +82,25 @@ class User: NSManagedObject {
     if let thePhone = dictionary["phone"] as? String {
       phone = thePhone
     }
+    save()
   }
 
+  func getMyEvents(completion:((keys:[String], receivedEvent: Event) -> Void)?) {
+    guard let id = id else {
+      return
+    }
+    FirebaseService.shareInstance.getMyEvents(id) { keys, receivedEventDict, receivedEventId in
+
+    }
+  }
+
+
   func startObserveFirebaseChange() {
-    guard let uId = uId, context = managedObjectContext where firebase == nil else {
+    guard let id = id, context = managedObjectContext where firebase == nil else {
       return
     }
     context.performBlockAndWait {
-      self.firebase = FirebaseService.shareInstance.observeProfile(uId: uId) { data in
+      self.firebase = FirebaseService.shareInstance.observeProfile(id: id) { data in
         if let data = data {
           context.performBlock {
             self.updateWithDictionary(data)
@@ -104,8 +128,8 @@ class User: NSManagedObject {
       return
     }
     context.performBlockAndWait {
-      if let theUId = dictionary["uId"] as? String {
-        self.uId = theUId
+      if let theId = dictionary["id"] as? String {
+        self.id = theId
       }
       if let theName = dictionary["name"] as? String {
         self.name = theName
@@ -119,8 +143,8 @@ class User: NSManagedObject {
         self.phone = thePhone
       }
 
-      if let theImageBase64 = dictionary["imageBase64"] as? String {
-        self.imageBase64 = theImageBase64
+      if let imageUrl = dictionary["imageUrl"] as? String {
+        self.imageUrl = imageUrl
       }
       context.saveRecursively()
       NSNotificationCenter.defaultCenter().postNotificationName(Constant.Notification.didChangeUserObject, object: self)
@@ -135,19 +159,35 @@ class User: NSManagedObject {
     if let phone = phone {
       data["phone"] = phone
     }
-    if let imageBase64 = imageBase64 {
-      data["imageBase64"] = imageBase64
+    if let imageUrl = imageUrl {
+      data["imageUrl"] = imageUrl
     }
     return data
   }
 
   func updateFirebase(completion: ((error: NSError?) -> Void)? = nil) {
-    guard let uId = uId else {
+    guard let id = id else {
       return
     }
-    let data = toDictionary()
-    FirebaseService.shareInstance.updateProfile(uId: uId, data: data) { error, firebase in
-      completion?(error: error)
+    var data = toDictionary()
+    if let image = image where imageChanged {
+      FirebaseService.shareInstance.uploadProfileImage(image, userId: id) { url, error in
+        if let error = error {
+          completion?(error: error)
+        } else {
+          if let url = url {
+            data["imageUrl"] = url.absoluteString
+          }
+          self.imageChanged = false
+          FirebaseService.shareInstance.updateProfile(id: id, data: data) { error, firebase in
+            completion?(error: error)
+          }
+        }
+      }
+    } else {
+      FirebaseService.shareInstance.updateProfile(id: id, data: data) { error, firebase in
+        completion?(error: error)
+      }
     }
   }
 

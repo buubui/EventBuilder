@@ -9,10 +9,12 @@
 import UIKit
 import Firebase
 import FirebaseDatabase
+import FirebaseStorage
 
 class FirebaseService: NSObject {
   static var shareInstance = FirebaseService()
   let ref: FIRDatabaseReference
+  let storageRef: FIRStorageReference
 
   typealias FirebaseCompletion = (error: NSError?, firebase: FIRDatabaseReference) -> Void
 
@@ -38,6 +40,8 @@ class FirebaseService: NSObject {
       FIRApp.configure()
     }
     ref = FIRDatabase.database().reference()
+    storageRef = FIRStorage.storage().referenceForURL(Constant.Firebase.storageUrl)
+
     super.init()
   }
 
@@ -61,26 +65,26 @@ class FirebaseService: NSObject {
       guard let user = user else {
         return
       }
-      self.createProfile(uId: user.uid, name: name, email: email)
+      self.createProfile(id: user.uid, name: name, email: email)
     }
   }
 
-  func createProfile(uId uId: String, name: String, email: String) {
+  func createProfile(id uId: String, name: String, email: String) {
     let firebase = ref.child(Constant.Firebase.profiles)
     let data = [ uId: ["name" : name, "email": email]]
     firebase.updateChildValues(data)
   }
 
-  func getProfile(uId uId: String, completion:( (data: [String: AnyObject]?) -> Void)?) {
-    let firebase = ref.child(Constant.Firebase.profiles).child(uId)
+  func getProfile(id id: String, completion:( (data: [String: AnyObject]?) -> Void)?) {
+    let firebase = ref.child(Constant.Firebase.profiles).child(id)
     firebase.observeSingleEventOfType(.Value, withBlock: { snapshot in
       let dict = snapshot.value as? [String: AnyObject]
       completion?(data: dict)
     })
   }
 
-  func observeProfile(uId uId: String, completion:( (data: [String: AnyObject]?) -> Void)?) -> FIRDatabaseReference {
-    let firebase = ref.child(Constant.Firebase.profiles).child(uId)
+  func observeProfile(id id: String, completion:( (data: [String: AnyObject]?) -> Void)?) -> FIRDatabaseReference {
+    let firebase = ref.child(Constant.Firebase.profiles).child(id)
     firebase.observeEventType(.Value, withBlock: { snapshot in
       let dict = snapshot.value as? [String: AnyObject]
       completion?(data: dict)
@@ -88,9 +92,21 @@ class FirebaseService: NSObject {
     return firebase
   }
 
-  func updateProfile(uId uId: String, data: [String: AnyObject], completion: FirebaseCompletion? = nil) {
-    let firebase = ref.child(Constant.Firebase.profiles).child(uId)
+  func updateProfile(id id: String, data: [String: AnyObject], completion: FirebaseCompletion? = nil) {
+    let firebase = ref.child(Constant.Firebase.profiles).child(id)
     updateChildValues(data, firebase: firebase, completion: completion)
+  }
+
+  func uploadProfileImage(image: UIImage, userId: String, completion: ((url: NSURL?, error: NSError?) -> Void)?) {
+    let fileRef = storageRef.child("users").child("\(userId).jpg")
+    guard let data = UIImageJPEGRepresentation(image, 0.8) else {
+      return
+    }
+    fileRef.putData(data, metadata: nil) { metadata, error in
+      defer {
+        completion?(url: metadata?.downloadURL(), error: error)
+      }
+    }
   }
 
   func signOut() {
@@ -153,15 +169,15 @@ class FirebaseService: NSObject {
       for key in keys {
         self.getEvent(key) { data in
           var newData = data
-          newData["uId"] = key
+          newData["id"] = key
           completion?(keys: keys, receivedEventDict: newData, receivedEventId: key)
         }
       }
     }
   }
 
-  func getParticipantsOfEventId(uId: String, completion: ((keys:[String], receivedDict: [String: AnyObject], receivedUid: String) -> Void)?) {
-    let firebase = ref.child(Constant.Firebase.events).child(uId).child("participants")
+  func getParticipantsOfEventId(id: String, completion: ((keys:[String], receivedDict: [String: AnyObject], receivedId: String) -> Void)?) {
+    let firebase = ref.child(Constant.Firebase.events).child(id).child("participants")
 
     retrieveData(firebase) { data in
       guard let dict = data as? [String: AnyObject] else {
@@ -171,8 +187,8 @@ class FirebaseService: NSObject {
       for key in keys {
         self.getProfile(key) { data in
           var newData = data
-          newData["uId"] = key
-          completion?(keys: keys, receivedDict: newData, receivedUid: key)
+          newData["id"] = key
+          completion?(keys: keys, receivedDict: newData, receivedId: key)
         }
       }
     }
@@ -188,7 +204,7 @@ class FirebaseService: NSObject {
     }
   }
 
-  func getAllEvents(completion: ((keys:[String], receivedDict: [String: AnyObject], receivedUid: String) -> Void)?) {
+  func getAllEvents(completion: ((keys:[String], receivedDict: [String: AnyObject], receivedId: String) -> Void)?) {
     let firebase = ref.child(Constant.Firebase.events)
 
     retrieveData(firebase) { data in
@@ -199,15 +215,15 @@ class FirebaseService: NSObject {
       for key in keys {
         self.getEvent(key) { data in
           var newData = data
-          newData["uId"] = key
-          completion?(keys: keys, receivedDict: newData, receivedUid: key)
+          newData["id"] = key
+          completion?(keys: keys, receivedDict: newData, receivedId: key)
         }
       }
     }
   }
 
-  func observeEvents(uId uId: String, completion:( (data: [String: AnyObject]?) -> Void)?) -> FIRDatabaseReference {
-    let firebase = ref.child(Constant.Firebase.profiles).child(uId)
+  func observeEvents(id id: String, completion:( (data: [String: AnyObject]?) -> Void)?) -> FIRDatabaseReference {
+    let firebase = ref.child(Constant.Firebase.profiles).child(id)
     firebase.observeEventType(.ChildAdded, withBlock: { snapshot in
       let dict = snapshot.value as? [String: AnyObject]
       completion?(data: dict)

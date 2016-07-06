@@ -24,7 +24,7 @@ class ParticipantsViewController: UIViewController {
 
   func reload() {
     var receivedFirst = false
-    FirebaseService.shareInstance.getParticipantsOfEventId(event["uId"] as! String) { keys, receivedDict, receivedUid in
+    FirebaseService.shareInstance.getParticipantsOfEventId(event["id"] as! String) { keys, receivedDict, receivedUid in
       if !receivedFirst {
         self.keys = keys
         receivedFirst = true

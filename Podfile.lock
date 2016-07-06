@@ -20,6 +20,9 @@ PODS:
   - Firebase/Database (3.3.0):
     - Firebase/Analytics (= 3.3.0)
     - FirebaseDatabase (= 3.0.2)
+  - Firebase/Storage (3.3.0):
+    - Firebase/Analytics (= 3.3.0)
+    - FirebaseStorage (= 1.0.2)
   - FirebaseAnalytics (3.2.1):
     - FirebaseInstanceID (~> 1.0)
     - GoogleInterchangeUtilities (~> 1.2)
@@ -33,6 +36,9 @@ PODS:
   - FirebaseDatabase (3.0.2):
     - FirebaseAnalytics (~> 3.2)
   - FirebaseInstanceID (1.0.7)
+  - FirebaseStorage (1.0.2):
+    - FirebaseAnalytics (~> 3.2)
+    - GoogleNetworkingUtilities (~> 1.2)
   - FlatUIKit (1.6.2)
   - Font-Awesome-Swift (1.4.6)
   - ForecastView (0.3.1)
@@ -46,6 +52,7 @@ PODS:
   - GoogleSymbolUtilities (1.1.1)
   - GoogleUtilities (1.3.1):
     - GoogleSymbolUtilities (~> 1.0)
+  - HanekeSwift (0.10.1)
   - IQKeyboardManagerSwift (4.0.0)
   - KIF (3.4.2):
     - KIF/Core (= 3.4.2)
@@ -86,9 +93,11 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
+  - Firebase/Storage
   - FlatUIKit
   - Font-Awesome-Swift (~> 1.4.6)
   - ForecastView (from `https://github.com/buubui/ForecastView.git`, branch `dev`)
+  - HanekeSwift
   - IQKeyboardManagerSwift
   - KIF
   - Material
@@ -138,6 +147,7 @@ SPEC CHECKSUMS:
   FirebaseAuth: 5efddc3fae47042b73585f083f956462be4f5b8e
   FirebaseDatabase: 59bea2e7dfd81b3b8b2f8e396caf1a52c2ced6f7
   FirebaseInstanceID: a9d923f3d0b6fbf9fac89310860357aaadc34be5
+  FirebaseStorage: fa2a87dee81f682f553af6839daa37a750e65f6a
   FlatUIKit: 1b41f0d4952ce8d970d8479ce79df54a960242c4
   Font-Awesome-Swift: a965c23e619514be65de9b113f49038ca683c1bb
   ForecastView: b21b11748e45204dac52dde179eb2905f56c69ce
@@ -146,6 +156,7 @@ SPEC CHECKSUMS:
   GoogleParsingUtilities: 30b3896f9ee167dc78747f013d3de157ced1cadf
   GoogleSymbolUtilities: 33117db1b5f290c6fbf259585e4885b4c84b98d7
   GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
+  HanekeSwift: 08e47d3d0f2899ec58e5d257beba0de619aca9e8
   IQKeyboardManagerSwift: ede2a27b4e1ce053d03073b9c7fa439322f5e405
   KIF: b518c9831453abea5afdbbde3908ec47832d6d56
   Material: e382debf52b8070a235f5f67d9394524f16a8e6e
@@ -160,6 +171,6 @@ SPEC CHECKSUMS:
   SwiftValidator: 0b6a48bf10364411b0d64c97f78665ff87ca9f8b
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: 6031b338be22802298b48fe187177ebf3655f4da
+PODFILE CHECKSUM: e60a4bcde7405b255a7819399cf12cdd9e260344
 
 COCOAPODS: 1.0.1

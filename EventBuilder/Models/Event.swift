@@ -43,6 +43,24 @@ class Event: NSManagedObject {
     }
   }
 
+//  class func updateOrCreateByDictionary(dictionary: [String: AnyObject], context: NSManagedObjectContext) -> Event? {
+//    guard let anId = dictionary["id"] as? String else {
+//      return nil
+//    }
+//    let request = NSFetchRequest(entityName: User.entityName)
+//    request.predicate = NSPredicate(format: "id = %@", anId)
+//    do {
+//      let result = try context.executeFetchRequest(request) as! [User]
+//      if let user = result.first {
+//        user.update(dictionary)
+//        return user
+//      }
+//    } catch {
+//      print(error)
+//    }
+//    return User(dictionary: dictionary, context: context)
+//  }
+
   func createFirebaseEvent(completion: ((error: NSError?) -> Void)? = nil) {
     if let context = managedObjectContext where  creator == nil {
       creator = User.findOrNewByUId(User.currentUId, context: context)
@@ -54,12 +72,24 @@ class Event: NSManagedObject {
     }
   }
 
+  func getParticipants(completion:((keys:[String], receivedUser: User) -> Void)?) {
+    guard let id = id else {
+      return
+    }
+    FirebaseService.shareInstance.getParticipantsOfEventId(id) { keys, receivedDict, receivedUid in
+      guard let user = User.updateOrCreateByDictionary(receivedDict, context: CoreDataStackManager.sharedInstance.newPrivateQueueContext()) else {
+        return
+      }
+      completion?(keys: keys, receivedUser: user)
+    }
+  }
+
   func toDictionary() -> [String: AnyObject] {
     var dict = [String: AnyObject]()
     dict["name"] = name
     dict["status"] = status
     if let creator = creator {
-      dict["creator"] = creator.uId
+      dict["creator"] = creator.id
     }
     if let startDate = startDate {
       dict["startDate"] = startDate.timeIntervalSince1970
@@ -73,7 +103,7 @@ class Event: NSManagedObject {
     if let participants = participants {
       var participantsDict = [String: Bool]()
       participants.forEach { p in
-        participantsDict[p.uId!!] = true
+        participantsDict[p.id!!] = true
       }
       dict["participants"] = participantsDict
     }

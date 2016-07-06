@@ -14,6 +14,7 @@ class EventDetailsViewController: UIViewController {
 
   @IBOutlet weak var venueLabel: UILabel!
   @IBOutlet weak var dateLabel: UILabel!
+  @IBOutlet weak var detailDateLabel: UILabel!
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var descriptionLabel: UILabel!
   @IBOutlet weak var mapView: MKMapView!
@@ -32,9 +33,16 @@ class EventDetailsViewController: UIViewController {
     print(event)
     nameLabel.text = event["name"] as? String
     descriptionLabel.text = "descriptionLabel"
-    let startDate = NSDate(timeIntervalSince1970: event["startDate"] as! NSTimeInterval).toString(format: "E, MMM dd yyyy h:mm a")
-    let endDate = NSDate(timeIntervalSince1970: event["endDate"] as! NSTimeInterval).toString(format: "E, MMM dd yyyy h:mm a")
-    dateLabel.text =  "start at \(startDate)\n end at \(endDate)"
+    let startDate = NSDate(timeIntervalSince1970: event["startDate"] as! NSTimeInterval)
+    let endDate = NSDate(timeIntervalSince1970: event["endDate"] as! NSTimeInterval)
+    var titleDate = startDate.toString(format: "MMM d")
+    let endTitleDate = endDate.toString(format: "MMM d")
+    if endTitleDate != titleDate {
+      titleDate += " -  \(endTitleDate)"
+    }
+    let detailDate = startDate.toString(format: "MMM d 'at' h:mm a") + " to " + endDate.toString(format: "MMM d 'at' h:mm a")
+    dateLabel.text =  titleDate
+    detailDateLabel.text = detailDate
     let place = event["place"] as! [String: AnyObject]
     let coordinate = CLLocationCoordinate2D(latitude: place["latitude"] as! Double, longitude: place["longitude"] as! Double)
     mapView.region = MKCoordinateRegionMakeWithDistance(coordinate, 500, 500)
@@ -43,7 +51,7 @@ class EventDetailsViewController: UIViewController {
   }
 
   func checkAttended() {
-    let eventId = event["uId"] as! String
+    let eventId = event["id"] as! String
     FirebaseService.shareInstance.isAttendEvent(eventId, userId: User.currentUId) { value in
       self.attended = value
     }
@@ -57,7 +65,7 @@ class EventDetailsViewController: UIViewController {
     if attended {
       performSegueWithIdentifier("showParticipants", sender: nil)
     } else {
-      let eventId = event["uId"] as! String
+      let eventId = event["id"] as! String
       FirebaseService.shareInstance.attendEvent(eventId, userId: User.currentUId) { error, firebase in
         if let error = error{
           self.showAlert(message: error.localizedDescription, completion: nil)

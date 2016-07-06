@@ -8,6 +8,7 @@
 
 import UIKit
 import Material
+import Haneke
 
 class ProfileViewController: UIViewController {
 
@@ -34,7 +35,8 @@ class ProfileViewController: UIViewController {
   }
 
   @IBOutlet weak var tableView: UITableView!
-  @IBOutlet weak var profilePictureView: MaterialView!
+  @IBOutlet weak var profilePictureContainerView: MaterialView!
+  @IBOutlet weak var profilePictureView: UIImageView!
   @IBOutlet weak var nameLabel: UILabel!
 
   class func instantiateStoryboard() -> ProfileViewController {
@@ -44,7 +46,8 @@ class ProfileViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     tableView.tableFooterView = UIView()
-    profilePictureView.depth = .Depth3
+    profilePictureContainerView.backgroundColor = UIColor.blueColor()
+    profilePictureContainerView.depth = .Depth5
     if user == nil {
       let context = CoreDataStackManager.sharedInstance.mainQueueContext
       context.performBlock {
@@ -67,7 +70,15 @@ class ProfileViewController: UIViewController {
   }
 
   func reloadData() {
-    profilePictureView.image = user?.image ?? UIImage.defaultProfilePicture()
+    if let image = user?.image {
+      profilePictureView.image = image
+    } else {
+      profilePictureView.image = UIImage.defaultProfilePicture()
+      guard let user = user, imageUrlString = user.imageUrl, imageUrl = NSURL(string: imageUrlString) else {
+        return
+      }
+      profilePictureView.hnk_setImageFromURL(imageUrl)
+    }
     nameLabel.text = user?.name
     tableView.reloadData()
   }

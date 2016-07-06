@@ -41,13 +41,13 @@ class ExploreViewController: UIViewController {
 
   func reload() {
     var receivedFirst = false
-    FirebaseService.shareInstance.getAllEvents() { keys, receivedDict, receivedUid in
+    FirebaseService.shareInstance.getAllEvents() { keys, receivedDict, receivedId in
       if !receivedFirst {
         self.keys = keys
         receivedFirst = true
       }
-      self.data[receivedUid] = receivedDict
-      self.receiveKeys.append(receivedUid)
+      self.data[receivedId] = receivedDict
+      self.receiveKeys.append(receivedId)
       let annotation = EventAnnotation(event: receivedDict)
       self.mapView.addAnnotation(annotation)
     }

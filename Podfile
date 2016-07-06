@@ -8,9 +8,7 @@ target 'EventBuilder' do
   pod 'Firebase/Core'
   pod 'Firebase/Database'
   pod 'Firebase/Auth'
-  # pod 'FirebaseUI/Core'
-  # pod 'FirebaseUI/Facebook'
-  # pod 'FirebaseUI/Password'
+  pod 'Firebase/Storage'
   pod 'SwiftSpinner'
   pod 'EZLoadingActivity'
   pod 'IQKeyboardManagerSwift'
@@ -28,6 +26,7 @@ target 'EventBuilder' do
   pod 'DOAlertController' , git: 'https://github.com/buubui/DOAlertController', branch: 'dev'
   pod 'ALCameraViewController'
   pod 'EZSwiftExtensions'
+  pod 'HanekeSwift'
 end
 
 target 'EventBuilderTests' do

@@ -22,7 +22,7 @@ class EditProfileScreenTests: BaseIntegrationTest {
     tester().clearTextFromAndThenEnterText(newPhone, intoViewWithAccessibilityLabel: "EditProfile - PhoneField")
     tester().tapViewWithAccessibilityLabel("EditProfile - ChangeProfilePictureButton")
     tester().tapViewWithAccessibilityLabel("Gallery")
-    tester().waitForTimeInterval(2)
+    tester().acknowledgeSystemAlert()
     tester().tapScreenAtPoint(CGPoint(x: 35, y: 110))
     tester().tapViewWithAccessibilityLabel("confirmButton")
     tester().tapViewWithAccessibilityLabel("Save")

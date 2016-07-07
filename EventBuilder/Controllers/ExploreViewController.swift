@@ -18,7 +18,7 @@ class ExploreViewController: UIViewController {
 
   var data =  [String: AnyObject]()
   var keys = [String]()
-  var receiveKeys = [String]()
+  var receivedKeys = [String]()
 
 
   class func instantiateStoryboard() -> ExploreViewController {
@@ -41,20 +41,20 @@ class ExploreViewController: UIViewController {
 
   func reload() {
     var receivedFirst = false
-    FirebaseService.shareInstance.getAllEvents() { keys, receivedDict, receivedId in
+    Event.getAllEvents(CoreDataStackManager.sharedInstance.mainQueueContext) { keys, receivedEvent in
       if !receivedFirst {
         self.keys = keys
         receivedFirst = true
       }
-      self.data[receivedId] = receivedDict
-      self.receiveKeys.append(receivedId)
-      let annotation = EventAnnotation(event: receivedDict)
+      self.data[receivedEvent.id!] = receivedEvent
+      self.receivedKeys.append(receivedEvent.id!)
+      let annotation = EventAnnotation(event: receivedEvent)
       self.mapView.addAnnotation(annotation)
     }
   }
 
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    if let event = sender as? [String: AnyObject], controller = segue.destinationViewController as? EventDetailsViewController where segue.identifier == "showEventDetails" {
+    if let event = sender as? Event, controller = segue.destinationViewController as? EventDetailsViewController where segue.identifier == "showEventDetails" {
       controller.event = event
     }
   }
@@ -82,7 +82,6 @@ extension ExploreViewController: MKMapViewDelegate {
     performSegueWithIdentifier("showEventDetails", sender: annotation.event)
   }
 }
-
 
 extension ExploreViewController: CLLocationManagerDelegate {
 

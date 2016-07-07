@@ -13,6 +13,24 @@ class Place: NSManagedObject {
 
   static let entityName = "Place"
 
+  class func updateOrCreateByDictionary(dictionary: [String: AnyObject], context: NSManagedObjectContext) -> Place? {
+    guard let anId = dictionary["id"] as? String else {
+      return nil
+    }
+    let request = NSFetchRequest(entityName: Place.entityName)
+    request.predicate = NSPredicate(format: "id = %@", anId)
+    do {
+      let result = try context.executeFetchRequest(request) as! [Place]
+      if let place = result.first {
+        place.update(dictionary)
+        return place
+      }
+    } catch {
+      print(error)
+    }
+    return Place(dictionary: dictionary, context: context)
+  }
+
   override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
     super.init(entity: entity, insertIntoManagedObjectContext: context)
   }
@@ -22,6 +40,10 @@ class Place: NSManagedObject {
     let entity =  NSEntityDescription.entityForName(Place.entityName, inManagedObjectContext: context)!
     self.init(entity: entity, insertIntoManagedObjectContext: context)
 
+    update(dictionary)
+  }
+
+  func update(dictionary: [String: AnyObject]) {
     if let theId = dictionary["Id"] as? String {
       id = theId
     }
@@ -45,6 +67,8 @@ class Place: NSManagedObject {
     if let long = dictionary["longitude"] as? Double {
       longitude = NSNumber(double: long)
     }
+
+    save()
   }
 
   convenience init(venue: FQVenue, context: NSManagedObjectContext) {

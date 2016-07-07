@@ -20,7 +20,7 @@ class EventDetailsViewController: UIViewController {
   @IBOutlet weak var mapView: MKMapView!
   @IBOutlet weak var scrollView: UIScrollView!
 
-  var event: [String: AnyObject]!
+  var event: Event!
   var attended: Bool = false {
     didSet {
       reloadRightBarButton()
@@ -31,27 +31,31 @@ class EventDetailsViewController: UIViewController {
     super.viewDidLoad()
     checkAttended()
     print(event)
-    nameLabel.text = event["name"] as? String
+    nameLabel.text = event.name
     descriptionLabel.text = "descriptionLabel"
-    let startDate = NSDate(timeIntervalSince1970: event["startDate"] as! NSTimeInterval)
-    let endDate = NSDate(timeIntervalSince1970: event["endDate"] as! NSTimeInterval)
-    var titleDate = startDate.toString(format: "MMM d")
-    let endTitleDate = endDate.toString(format: "MMM d")
-    if endTitleDate != titleDate {
-      titleDate += " -  \(endTitleDate)"
+    if let startDate = event.startDate, endDate = event.endDate {
+      var titleDate = startDate.toString(format: "MMM d")
+      let endTitleDate = endDate.toString(format: "MMM d")
+      if endTitleDate != titleDate {
+        titleDate += " -  \(endTitleDate)"
+      }
+      let detailDate = startDate.toString(format: "MMM d 'at' h:mm a") + " to " + endDate.toString(format: "MMM d 'at' h:mm a")
+      dateLabel.text =  titleDate
+      detailDateLabel.text = detailDate
     }
-    let detailDate = startDate.toString(format: "MMM d 'at' h:mm a") + " to " + endDate.toString(format: "MMM d 'at' h:mm a")
-    dateLabel.text =  titleDate
-    detailDateLabel.text = detailDate
-    let place = event["place"] as! [String: AnyObject]
-    let coordinate = CLLocationCoordinate2D(latitude: place["latitude"] as! Double, longitude: place["longitude"] as! Double)
-    mapView.region = MKCoordinateRegionMakeWithDistance(coordinate, 500, 500)
-    mapView.addAnnotation(EventAnnotation(event: event))
-    venueLabel.text = place["name"] as? String
+    if let place = event.place {
+
+      let coordinate = CLLocationCoordinate2D(latitude: place.latitude!.doubleValue, longitude: place.longitude!.doubleValue)
+      mapView.region = MKCoordinateRegionMakeWithDistance(coordinate, 500, 500)
+      mapView.addAnnotation(EventAnnotation(event: event))
+      venueLabel.text = place.name
+    }
   }
 
   func checkAttended() {
-    let eventId = event["id"] as! String
+    guard let eventId = event.id else {
+      return
+    }
     FirebaseService.shareInstance.isAttendEvent(eventId, userId: User.currentUId) { value in
       self.attended = value
     }
@@ -64,8 +68,7 @@ class EventDetailsViewController: UIViewController {
   @IBAction func rightBarButtonDidTap(sender: UIBarButtonItem) {
     if attended {
       performSegueWithIdentifier("showParticipants", sender: nil)
-    } else {
-      let eventId = event["id"] as! String
+    } else if let eventId = event.id {
       FirebaseService.shareInstance.attendEvent(eventId, userId: User.currentUId) { error, firebase in
         if let error = error{
           self.showAlert(message: error.localizedDescription, completion: nil)

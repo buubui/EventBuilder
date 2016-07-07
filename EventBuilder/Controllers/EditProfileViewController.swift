@@ -128,7 +128,7 @@ extension EditProfileViewController: UITextFieldDelegate {
     guard let row = EditProfileRow(rawValue: textField.tag), context = user.managedObjectContext else {
       return
     }
-    context.performBlock {
+    context.performBlockAndWait {
       switch row {
       case .Name:
         self.user.name = textField.text

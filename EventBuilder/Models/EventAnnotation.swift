@@ -10,12 +10,12 @@ import UIKit
 import MapKit
 
 class EventAnnotation: MKPointAnnotation {
-  let event: [String: AnyObject]
-  init(event: [String: AnyObject]) {
+  let event: Event
+  init(event: Event) {
     self.event = event
     super.init()
-    title = event["name"] as? String
-    let place = event["place"] as! [String: AnyObject]
-    coordinate = CLLocationCoordinate2D(latitude: place["latitude"] as! Double, longitude: place["longitude"] as! Double)
+    title = event.name
+    let place = event.place!
+    coordinate = CLLocationCoordinate2D(latitude: place.latitude!.doubleValue, longitude: place.longitude!.doubleValue)
   }
 }

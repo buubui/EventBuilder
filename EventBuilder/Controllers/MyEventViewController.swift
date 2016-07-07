@@ -13,7 +13,7 @@ import FlatUIKit
 class MyEventViewController: UIViewController {
   @IBOutlet weak var tableView: UITableView!
 
-  var data =  [String: AnyObject]()
+  var data =  [String: Event]()
   var keys = [String]()
   var receivedKeys = [String]()
 
@@ -31,25 +31,28 @@ class MyEventViewController: UIViewController {
   }
 
   func reload() {
+    guard let user = User.currentUser() else {
+      return
+    }
     var receivedFirst = false
-    FirebaseService.shareInstance.getMyEvents(User.currentUId) { (keys, receivedEventDict, receivedEventId) in
+    user.getMyEvents { keys, receivedEvent in
       if !receivedFirst {
         self.keys = keys
         receivedFirst = true
       }
-      self.data[receivedEventId] = receivedEventDict
-      self.receivedKeys.append(receivedEventId)
+      self.data[receivedEvent.id!] = receivedEvent
+      self.receivedKeys.append(receivedEvent.id!)
       self.tableView.reloadData()
     }
   }
 
-  func itemAtIndex(index: Int) -> AnyObject? {
+  func itemAtIndex(index: Int) -> Event? {
     let key = receivedKeys[index]
     return data[key]
   }
 
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    if let item = sender as? [String: AnyObject], controller =  segue.destinationViewController as? EventDetailsViewController where segue.identifier == "showEventDetails"  {
+    if let item = sender as? Event, controller =  segue.destinationViewController as? EventDetailsViewController where segue.identifier == "showEventDetails"  {
       controller.event = item
     }
   }
@@ -67,7 +70,7 @@ extension MyEventViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("EventCell")!
     let item = itemAtIndex(indexPath.row)!
-    cell.textLabel?.text = item["name"] as? String
+    cell.textLabel?.text = item.name
     return cell
   }
 

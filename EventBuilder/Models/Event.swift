@@ -23,6 +23,28 @@ class Event: NSManagedObject {
     let entity =  NSEntityDescription.entityForName(Event.entityName, inManagedObjectContext: context)!
     self.init(entity: entity, insertIntoManagedObjectContext: context)
 
+    update(dictionary)
+  }
+
+  class func updateOrCreateByDictionary(dictionary: [String: AnyObject], context: NSManagedObjectContext) -> Event? {
+    guard let anId = dictionary["id"] as? String else {
+      return nil
+    }
+    let request = NSFetchRequest(entityName: Event.entityName)
+    request.predicate = NSPredicate(format: "id = %@", anId)
+    do {
+      let result = try context.executeFetchRequest(request) as! [Event]
+      if let event = result.first {
+        event.update(dictionary)
+        return event
+      }
+    } catch {
+      print(error)
+    }
+    return Event(dictionary: dictionary, context: context)
+  }
+
+  func update(dictionary: [String: AnyObject]) {
     if let theId = dictionary["id"] as? String {
       id = theId
     }
@@ -41,25 +63,15 @@ class Event: NSManagedObject {
     if let timeInterval = dictionary["endDate"] as? NSTimeInterval {
       endDate = NSDate(timeIntervalSince1970: timeInterval)
     }
-  }
 
-//  class func updateOrCreateByDictionary(dictionary: [String: AnyObject], context: NSManagedObjectContext) -> Event? {
-//    guard let anId = dictionary["id"] as? String else {
-//      return nil
-//    }
-//    let request = NSFetchRequest(entityName: User.entityName)
-//    request.predicate = NSPredicate(format: "id = %@", anId)
-//    do {
-//      let result = try context.executeFetchRequest(request) as! [User]
-//      if let user = result.first {
-//        user.update(dictionary)
-//        return user
-//      }
-//    } catch {
-//      print(error)
-//    }
-//    return User(dictionary: dictionary, context: context)
-//  }
+    if let placeDict = dictionary["place"] as? [String: AnyObject], context = managedObjectContext {
+      if let place = Place.updateOrCreateByDictionary(placeDict, context: context) {
+        self.place = place
+      }
+    }
+
+    save()
+  }
 
   func createFirebaseEvent(completion: ((error: NSError?) -> Void)? = nil) {
     if let context = managedObjectContext where  creator == nil {
@@ -77,10 +89,24 @@ class Event: NSManagedObject {
       return
     }
     FirebaseService.shareInstance.getParticipantsOfEventId(id) { keys, receivedDict, receivedUid in
-      guard let user = User.updateOrCreateByDictionary(receivedDict, context: CoreDataStackManager.sharedInstance.newPrivateQueueContext()) else {
-        return
+      let context = CoreDataStackManager.sharedInstance.newPrivateQueueContext()
+      context.performBlockAndWait {
+        guard let user = User.updateOrCreateByDictionary(receivedDict, context: context) else {
+          return
+        }
+        completion?(keys: keys, receivedUser: user)
       }
-      completion?(keys: keys, receivedUser: user)
+    }
+  }
+
+  class func getAllEvents(context: NSManagedObjectContext, completion:((keys:[String], receivedEvent: Event) -> Void)?) {
+    FirebaseService.shareInstance.getAllEvents { keys, receivedDict, receivedId in
+      context.performBlockAndWait {
+        guard let event = Event.updateOrCreateByDictionary(receivedDict, context: context) else {
+          return
+        }
+        completion?(keys: keys, receivedEvent: event)
+      }
     }
   }
 
@@ -107,7 +133,6 @@ class Event: NSManagedObject {
       }
       dict["participants"] = participantsDict
     }
-
     return dict
   }
 }

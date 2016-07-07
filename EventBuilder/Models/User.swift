@@ -23,6 +23,21 @@ class User: NSManagedObject {
     }
   }
 
+  class func currentUser(context: NSManagedObjectContext = CoreDataStackManager.sharedInstance.mainQueueContext) -> User? {
+    let request = NSFetchRequest(entityName: User.entityName)
+    request.predicate = NSPredicate(format: "id = %@", currentUId)
+
+    do {
+      let result = try context.executeFetchRequest(request) as! [User]
+      if let user = result.first {
+        return user
+      }
+    } catch {
+      print(error)
+    }
+    return nil
+  }
+
   class func findOrNewByUId(anId: String, context: NSManagedObjectContext) -> User {
     let request = NSFetchRequest(entityName: User.entityName)
     request.predicate = NSPredicate(format: "id = %@", anId)
@@ -86,11 +101,17 @@ class User: NSManagedObject {
   }
 
   func getMyEvents(completion:((keys:[String], receivedEvent: Event) -> Void)?) {
-    guard let id = id else {
+    guard let id = id, context = managedObjectContext else {
       return
     }
-    FirebaseService.shareInstance.getMyEvents(id) { keys, receivedEventDict, receivedEventId in
+    FirebaseService.shareInstance.getMyEvents(id) { keys, receivedDict, receivedId in
 
+      context.performBlockAndWait {
+        guard let event = Event.updateOrCreateByDictionary(receivedDict, context: context) else {
+          return
+        }
+        completion?(keys: keys, receivedEvent: event)
+      }
     }
   }
 
@@ -190,12 +211,4 @@ class User: NSManagedObject {
       }
     }
   }
-
-  func save() {
-    guard let context = managedObjectContext else {
-      return
-    }
-    context.saveRecursively()
-  }
-
 }

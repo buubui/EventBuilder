@@ -11,7 +11,7 @@ import UIKit
 class ParticipantsViewController: UIViewController {
 
   @IBOutlet weak var tableView: UITableView!
-  var event: [String: AnyObject]!
+  var event: Event!
   var data =  [String: AnyObject]()
   var keys = [String]()
   var receiveKeys = [String]()
@@ -23,8 +23,11 @@ class ParticipantsViewController: UIViewController {
   }
 
   func reload() {
+    guard let id = event.id else {
+      return
+    }
     var receivedFirst = false
-    FirebaseService.shareInstance.getParticipantsOfEventId(event["id"] as! String) { keys, receivedDict, receivedUid in
+    FirebaseService.shareInstance.getParticipantsOfEventId(id) { keys, receivedDict, receivedUid in
       if !receivedFirst {
         self.keys = keys
         receivedFirst = true

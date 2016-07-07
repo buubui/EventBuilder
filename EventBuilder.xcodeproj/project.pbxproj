@@ -67,6 +67,7 @@
 		02982B871CBE53C40034E174 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02982B851CBE53C40034E174 /* User+CoreDataProperties.swift */; };
 		02982B881CBE53C40034E174 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02982B861CBE53C40034E174 /* User.swift */; };
 		02A943301CD091A700E66693 /* VenueAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A9432F1CD091A700E66693 /* VenueAnnotation.swift */; };
+		02AD1B5A1D2D68FF00A046E8 /* NSManagedObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AD1B591D2D68FF00A046E8 /* NSManagedObject+Extension.swift */; };
 		02B9A3001CD3607A00D44311 /* BTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B9A2FF1CD3607A00D44311 /* BTextView.swift */; };
 		02CCC1851D26BDA200195665 /* ParticipantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCC1841D26BDA200195665 /* ParticipantsViewController.swift */; };
 		02EE300B1D153B6800FDB934 /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EE300A1D153B6800FDB934 /* EventDetailsViewController.swift */; };
@@ -149,6 +150,7 @@
 		02982B851CBE53C40034E174 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		02982B861CBE53C40034E174 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		02A9432F1CD091A700E66693 /* VenueAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueAnnotation.swift; sourceTree = "<group>"; };
+		02AD1B591D2D68FF00A046E8 /* NSManagedObject+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Extension.swift"; sourceTree = "<group>"; };
 		02B9A2FF1CD3607A00D44311 /* BTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTextView.swift; sourceTree = "<group>"; };
 		02CCC1841D26BDA200195665 /* ParticipantsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantsViewController.swift; sourceTree = "<group>"; };
 		02EE300A1D153B6800FDB934 /* EventDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 				0272A9971CC0FA2900DCFDF9 /* UIStoryboard+Extension.swift */,
 				0272A9981CC0FA2900DCFDF9 /* UIViewController+Extension.swift */,
 				0272A9CD1CC47DD500DCFDF9 /* NSError+Extension.swift */,
+				02AD1B591D2D68FF00A046E8 /* NSManagedObject+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -613,6 +616,7 @@
 				0272A9D01CC48A1700DCFDF9 /* PlaceSearchViewController.swift in Sources */,
 				0272A9C61CC1056F00DCFDF9 /* Event+CoreDataProperties.swift in Sources */,
 				0272A9C91CC105A000DCFDF9 /* Place.swift in Sources */,
+				02AD1B5A1D2D68FF00A046E8 /* NSManagedObject+Extension.swift in Sources */,
 				022E57A01D26DAF900E5DDDD /* ExploreViewController.swift in Sources */,
 				0272A9B91CC0FA5E00DCFDF9 /* Constant.swift in Sources */,
 				0272A99C1CC0FA2900DCFDF9 /* UIStoryboard+Extension.swift in Sources */,

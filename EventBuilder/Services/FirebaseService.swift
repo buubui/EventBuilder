@@ -54,6 +54,10 @@ class FirebaseService: NSObject {
         return
       }
       User.currentUId = user.uid
+      let context = CoreDataStackManager.sharedInstance.newPrivateQueueContext()
+      context.performBlockAndWait {
+        User.updateOrCreateByDictionary(["id": user.uid, "email": email], context: context)
+      }
     }
   }
 
@@ -158,7 +162,7 @@ class FirebaseService: NSObject {
     }
   }
 
-  func getMyEvents(uId: String, completion: ((keys:[String], receivedEventDict: [String: AnyObject], receivedEventId: String) -> Void)?) {
+  func getMyEvents(uId: String, completion: ((keys:[String], receivedDict: [String: AnyObject], receivedId: String) -> Void)?) {
     let firebase = ref.child(Constant.Firebase.profiles).child(uId).child("events")
 
     retrieveData(firebase) { data in
@@ -170,7 +174,7 @@ class FirebaseService: NSObject {
         self.getEvent(key) { data in
           var newData = data
           newData["id"] = key
-          completion?(keys: keys, receivedEventDict: newData, receivedEventId: key)
+          completion?(keys: keys, receivedDict: newData, receivedId: key)
         }
       }
     }

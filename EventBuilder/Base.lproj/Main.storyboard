@@ -221,13 +221,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="68"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Vh3-T6-CDf" customClass="FUISegmentedControl">
-                                        <rect key="frame" x="27" y="20" width="266" height="29"/>
+                                        <rect key="frame" x="45" y="20" width="230" height="29"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="28" id="NVw-vr-TMy"/>
                                         </constraints>
                                         <segments>
                                             <segment title="Current"/>
-                                            <segment title="Upcomming"/>
+                                            <segment title="Upcoming"/>
                                             <segment title="Past"/>
                                         </segments>
                                         <connections>

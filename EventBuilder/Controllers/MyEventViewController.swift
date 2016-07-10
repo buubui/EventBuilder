@@ -175,15 +175,15 @@ extension MyEventViewController {
   class MyEvents {
     var events = [String: Event]()
     var currentEvents = [String]()
-    var upcommingEvents = [String]()
+    var upcomingEvents = [String]()
     var pastEvents = [String]()
 
     func numberOfEvents(timeType timeType: EventTimeType) -> Int {
       switch timeType {
       case .Current:
         return currentEvents.count
-      case .Upcomming:
-        return upcommingEvents.count
+      case .Upcoming:
+        return upcomingEvents.count
       case .Past:
         return pastEvents.count
       }
@@ -194,8 +194,8 @@ extension MyEventViewController {
         switch timeType {
         case .Current:
           return currentEvents
-        case .Upcomming:
-          return upcommingEvents
+        case .Upcoming:
+          return upcomingEvents
         case .Past:
           return pastEvents
         }
@@ -221,8 +221,8 @@ extension MyEventViewController {
       guard let id = event.id, type = event.timeType else { return false }
 
       switch type {
-      case .Upcomming:
-        upcommingEvents.append(id)
+      case .Upcoming:
+        upcomingEvents.append(id)
       case .Current:
         currentEvents.append(id)
       case .Past:
@@ -233,7 +233,7 @@ extension MyEventViewController {
 
     func reCategorize() {
       currentEvents.removeAll()
-      upcommingEvents.removeAll()
+      upcomingEvents.removeAll()
       pastEvents.removeAll()
       for event in events.values {
         categorizeEvent(event)
@@ -243,7 +243,7 @@ extension MyEventViewController {
     func removeAll() {
       events.removeAll()
       currentEvents.removeAll()
-      upcommingEvents.removeAll()
+      upcomingEvents.removeAll()
       pastEvents.removeAll()
     }
   }

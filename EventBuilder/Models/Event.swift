@@ -11,13 +11,13 @@ import CoreData
 
 enum EventTimeType: Int {
   case Current = 0
-  case Upcomming
+  case Upcoming
   case Past
 
   var title: String {
     switch self {
     case .Current: return "Current"
-    case .Upcomming: return "Upcomming"
+    case .Upcoming: return "Upcoming"
     case .Past: return "Past"
     }
   }
@@ -212,7 +212,7 @@ class Event: NSManagedObject {
     if let startDate = startDate, endDate = endDate {
       let currentDate = NSDate()
       if startDate > currentDate {
-        return .Upcomming
+        return .Upcoming
       } else if endDate > currentDate {
         return .Current
       } else {

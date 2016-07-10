@@ -13,12 +13,14 @@ import EZSwiftExtensions
 class EventDetailsViewController: UIViewController {
 
   @IBOutlet weak var venueLabel: UILabel!
+  @IBOutlet weak var addressLabel: UILabel!
   @IBOutlet weak var dateLabel: UILabel!
   @IBOutlet weak var detailDateLabel: UILabel!
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var descriptionLabel: UILabel!
   @IBOutlet weak var mapView: MKMapView!
   @IBOutlet weak var scrollView: UIScrollView!
+  @IBOutlet weak var creatorLabel: UILabel!
 
   var event: Event!
   var attended: Bool = false {
@@ -31,24 +33,31 @@ class EventDetailsViewController: UIViewController {
     super.viewDidLoad()
     checkAttended()
     print(event)
+    reload()
+
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(EventDetailsViewController.eventDidSave), name: event.saveNotificationName, object: event)
+  }
+
+  func eventDidSave() {
+    print("Event Saved!")
+  }
+
+  func reload() {
     nameLabel.text = event.name
-    descriptionLabel.text = "descriptionLabel"
-    if let startDate = event.startDate, endDate = event.endDate {
-      var titleDate = startDate.toString(format: "MMM d")
-      let endTitleDate = endDate.toString(format: "MMM d")
-      if endTitleDate != titleDate {
-        titleDate += " -  \(endTitleDate)"
-      }
-      let detailDate = startDate.toString(format: "MMM d 'at' h:mm a") + " to " + endDate.toString(format: "MMM d 'at' h:mm a")
-      dateLabel.text =  titleDate
-      detailDateLabel.text = detailDate
+    descriptionLabel.text = event.details
+    dateLabel.text =  event.shortDateRangeString()
+    detailDateLabel.text = event.fullDateRangeString()
+    if let creator = event.creator {
+      creatorLabel.text = creator.name
+    } else {
+      creatorLabel.text = ""
     }
     if let place = event.place {
-
       let coordinate = CLLocationCoordinate2D(latitude: place.latitude!.doubleValue, longitude: place.longitude!.doubleValue)
       mapView.region = MKCoordinateRegionMakeWithDistance(coordinate, 500, 500)
       mapView.addAnnotation(EventAnnotation(event: event))
       venueLabel.text = place.name
+      addressLabel.text = place.address
     }
   }
 

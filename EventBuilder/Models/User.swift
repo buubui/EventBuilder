@@ -23,7 +23,7 @@ class User: NSManagedObject {
     }
   }
 
-  class func currentUser(context: NSManagedObjectContext = CoreDataStackManager.sharedInstance.mainQueueContext) -> User? {
+  class func currentUser(context context: NSManagedObjectContext = CoreDataStackManager.sharedInstance.mainQueueContext) -> User? {
     let request = NSFetchRequest(entityName: User.entityName)
     request.predicate = NSPredicate(format: "id = %@", currentUId)
 
@@ -38,7 +38,7 @@ class User: NSManagedObject {
     return nil
   }
 
-  class func findOrNewByUId(anId: String, context: NSManagedObjectContext) -> User {
+  class func findById(anId: String, context: NSManagedObjectContext) -> User? {
     let request = NSFetchRequest(entityName: User.entityName)
     request.predicate = NSPredicate(format: "id = %@", anId)
     do {
@@ -48,6 +48,13 @@ class User: NSManagedObject {
       }
     } catch {
       print(error)
+    }
+    return nil
+  }
+
+  class func findOrNewById(anId: String, context: NSManagedObjectContext) -> User {
+    if let user = User.findById(anId, context: context) {
+      return user
     }
     return User(dictionary: ["id": anId], context: context)
   }
@@ -115,6 +122,16 @@ class User: NSManagedObject {
     }
   }
 
+  class func getUser(userId userId: String, context: NSManagedObjectContext, completion: ((receivedUser: User) -> Void)?) {
+    FirebaseService.shareInstance.getProfile(userId) { data in
+      var newData = data
+      newData["id"] = userId
+      context.performBlock {
+        guard let user = User.updateOrCreateByDictionary(newData, context: context) else { return }
+        completion?(receivedUser: user)
+      }
+    }
+  }
 
   func startObserveFirebaseChange() {
     guard let id = id, context = managedObjectContext where firebase == nil else {

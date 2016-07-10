@@ -36,7 +36,7 @@ class ProfileViewController: UIViewController {
 
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var profilePictureContainerView: MaterialView!
-  @IBOutlet weak var profilePictureView: UIImageView!
+//  @IBOutlet weak var profilePictureView: UIImageView!
   @IBOutlet weak var nameLabel: UILabel!
 
   class func instantiateStoryboard() -> ProfileViewController {
@@ -46,12 +46,11 @@ class ProfileViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     tableView.tableFooterView = UIView()
-    profilePictureContainerView.backgroundColor = UIColor.blueColor()
     profilePictureContainerView.depth = .Depth5
     if user == nil {
       let context = CoreDataStackManager.sharedInstance.mainQueueContext
       context.performBlock {
-        self.user = User.findOrNewByUId(User.currentUId, context: context)
+        self.user = User.findOrNewById(User.currentUId, context: context)
         self.reloadData()
       }
     }
@@ -71,15 +70,14 @@ class ProfileViewController: UIViewController {
 
   func reloadData() {
     if let image = user?.image {
-      profilePictureView.image = image
+      profilePictureContainerView.image = image
     } else {
-      profilePictureView.image = UIImage.defaultProfilePicture()
-      guard let user = user, imageUrlString = user.imageUrl, imageUrl = NSURL(string: imageUrlString) else {
-        return
+      nameLabel.text = user?.name
+      profilePictureContainerView.image = UIImage.defaultProfilePicture()
+      if let user = user, imageUrlString = user.imageUrl, imageUrl = NSURL(string: imageUrlString){
+        profilePictureContainerView.setImageFromUrl(imageUrl, placeHolder: UIImage.defaultProfilePicture(), errorImage: nil)
       }
-      profilePictureView.hnk_setImageFromURL(imageUrl)
     }
-    nameLabel.text = user?.name
     tableView.reloadData()
   }
 

@@ -58,7 +58,7 @@ class EditProfileViewController: UIViewController {
 
   @IBAction func saveButtonDidTap(sender: UIBarButtonItem) {
     view.endEditing(true)
-    NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: #selector(EditProfileViewController.save), userInfo: nil, repeats: false)
+    NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: #selector(save), userInfo: nil, repeats: false)
   }
 
   @IBAction func changeProfilePictureDidTap(sender: UIButton) {

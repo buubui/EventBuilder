@@ -60,6 +60,15 @@ class CoreDataStackManager {
     // Create the coordinator and store
     let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
     let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent(Constant.sqliteFileName)
+    print("SQLITE: ", url)
+    if Helper.isTestMode() {
+      do {
+        try NSFileManager.defaultManager().removeItemAtURL(url)
+        print("Delete the old sqlite file.")
+      } catch {
+        print("Old sqlite file does not exist.")
+      }
+    }
     var failureReason = "There was an error creating or loading the application's saved data."
     do {
       try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil)

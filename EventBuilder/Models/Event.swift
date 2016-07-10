@@ -9,10 +9,27 @@
 import Foundation
 import CoreData
 
+enum EventTimeType: Int {
+  case Current = 0
+  case Upcomming
+  case Past
+
+  var title: String {
+    switch self {
+    case .Current: return "Current"
+    case .Upcomming: return "Upcomming"
+    case .Past: return "Past"
+    }
+  }
+}
 
 class Event: NSManagedObject {
 
   static let entityName = "Event"
+
+  override var saveNotificationName: String {
+    return "EventDidSave"
+  }
   
   override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
     super.init(entity: entity, insertIntoManagedObjectContext: context)
@@ -52,6 +69,10 @@ class Event: NSManagedObject {
       name = theName
     }
 
+    if let theDetails = dictionary["details"] as? String {
+      details = theDetails
+    }
+
     if let theStatus = dictionary["status"] as? String {
       status = theStatus
     }
@@ -70,17 +91,40 @@ class Event: NSManagedObject {
       }
     }
 
+    if let creatorId = dictionary["creator"] as? String, context = managedObjectContext {
+      if let user = User.findById(creatorId, context: context) {
+        creator = user
+      } else {
+        User.getUser(userId: creatorId, context: context) { receivedUser in
+          context.performBlockAndWait {
+            self.creator = receivedUser
+            self.save()
+
+          }
+        }
+      }
+    }
+    NSNotificationCenter.defaultCenter().postNotificationName(Constant.Notification.didChangeEventCreator, object: self)
     save()
   }
 
   func createFirebaseEvent(completion: ((error: NSError?) -> Void)? = nil) {
     if let context = managedObjectContext where  creator == nil {
-      creator = User.findOrNewByUId(User.currentUId, context: context)
+      creator = User.findOrNewById(User.currentUId, context: context)
       participants = NSSet(object: creator!)
     }
     let data = toDictionary()
     FirebaseService.shareInstance.createEvent(data) { error, firebase in
-      completion?(error: error)
+      if let error = error {
+        completion?(error: error)
+        return
+      } else {
+        self.managedObjectContext?.performBlock {
+          self.id = firebase.key
+          self.save()
+          completion?(error: nil)
+        }
+      }
     }
   }
 
@@ -114,6 +158,7 @@ class Event: NSManagedObject {
     var dict = [String: AnyObject]()
     dict["name"] = name
     dict["status"] = status
+    dict["details"] = details
     if let creator = creator {
       dict["creator"] = creator.id
     }
@@ -134,5 +179,46 @@ class Event: NSManagedObject {
       dict["participants"] = participantsDict
     }
     return dict
+  }
+
+  func shortDateRangeString() -> String {
+    guard let startDate = startDate, endDate = endDate else { return "" }
+    var string = startDate.toString(format: "MMM d")
+    let endString = endDate.toString(format: "MMM d")
+    if string != endString {
+      string += " - \(endString)"
+    }
+
+    return string
+  }
+
+  func fullDateRangeString() -> String {
+    guard let startDate = startDate, endDate = endDate else { return "" }
+    var string = startDate.toString(format: "MMM d 'at' h:mm a")
+    let endDateString = endDate.toString(format: "MMM d")
+    let endTimeString = endDate.toString(format: "h:mm a")
+    if string.containsString(endDateString) {
+      if !string.contains(endTimeString) {
+        string += " to \(endTimeString)"
+      }
+    } else {
+      string += " to \(endDateString) at \(endTimeString)"
+    }
+
+    return string
+  }
+
+  var timeType: EventTimeType? {
+    if let startDate = startDate, endDate = endDate {
+      let currentDate = NSDate()
+      if startDate > currentDate {
+        return .Upcomming
+      } else if endDate > currentDate {
+        return .Current
+      } else {
+        return .Past
+      }
+    }
+    return nil
   }
 }

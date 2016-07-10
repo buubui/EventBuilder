@@ -79,14 +79,6 @@ class FirebaseService: NSObject {
     firebase.updateChildValues(data)
   }
 
-  func getProfile(id id: String, completion:( (data: [String: AnyObject]?) -> Void)?) {
-    let firebase = ref.child(Constant.Firebase.profiles).child(id)
-    firebase.observeSingleEventOfType(.Value, withBlock: { snapshot in
-      let dict = snapshot.value as? [String: AnyObject]
-      completion?(data: dict)
-    })
-  }
-
   func observeProfile(id id: String, completion:( (data: [String: AnyObject]?) -> Void)?) -> FIRDatabaseReference {
     let firebase = ref.child(Constant.Firebase.profiles).child(id)
     firebase.observeEventType(.Value, withBlock: { snapshot in
@@ -144,7 +136,14 @@ class FirebaseService: NSObject {
 
   func attendEvent(eventId: String, userId: String, completion: FirebaseCompletion? ) {
     let firebase = ref.child(Constant.Firebase.events).child(eventId).child(Constant.Firebase.participants).child(userId)
-    setValue(true, firebase: firebase, completion: completion)
+    setValue(true, firebase: firebase) { (error, firebase) in
+      if let error = error {
+        completion?(error: error, firebase: firebase)
+        return
+      }
+      let firebase2 = self.ref.child(Constant.Firebase.profiles).child(userId).child(Constant.Firebase.events).child(eventId)
+      self.setValue(true, firebase: firebase2, completion: completion)
+    }
   }
 
   func updatePlace(placeId placeId: String, data: [String: AnyObject], completion:FirebaseCompletion?) {
@@ -228,7 +227,9 @@ class FirebaseService: NSObject {
 
   func observeEvents(id id: String, completion:( (data: [String: AnyObject]?) -> Void)?) -> FIRDatabaseReference {
     let firebase = ref.child(Constant.Firebase.profiles).child(id)
+    UIApplication.sharedApplication().networkActivityIndicatorVisible = true
     firebase.observeEventType(.ChildAdded, withBlock: { snapshot in
+      UIApplication.sharedApplication().networkActivityIndicatorVisible = false
       let dict = snapshot.value as? [String: AnyObject]
       completion?(data: dict)
     })
@@ -236,20 +237,26 @@ class FirebaseService: NSObject {
   }
 
   func retrieveData(firebase: FIRDatabaseReference, completion: ((data: AnyObject) -> Void)?) {
+    UIApplication.sharedApplication().networkActivityIndicatorVisible = true
     firebase.observeSingleEventOfType(.Value, withBlock: { snapshot in
+      UIApplication.sharedApplication().networkActivityIndicatorVisible = false
       completion?(data: snapshot.value!)
     })
   }
 
   func setValue(value: AnyObject, firebase: FIRDatabaseReference, completion: FirebaseCompletion?) {
+    UIApplication.sharedApplication().networkActivityIndicatorVisible = true
     firebase.setValue(value) { error, firebase in
+      UIApplication.sharedApplication().networkActivityIndicatorVisible = false
       completion?(error: error, firebase: firebase)
     }
   }
 
   func updateChildValues(value: [NSObject: AnyObject], firebase: FIRDatabaseReference, completion: FirebaseCompletion?) {
+    UIApplication.sharedApplication().networkActivityIndicatorVisible = true
     firebase.updateChildValues(value) { error, firebase in
       completion?(error: error, firebase: firebase)
+      UIApplication.sharedApplication().networkActivityIndicatorVisible = false
     }
   }
 }

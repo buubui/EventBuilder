@@ -36,11 +36,14 @@ class NewEventViewController: UIViewController {
   func setupUI() {
     venueLabel.text = venue.name
     descriptionTextView.placeholderLabel?.text = "Description"
+    startDatePicker.minimumDate = NSDate()
+    endDatePicker.minimumDate = NSDate()
   }
 
   func eventInfo() -> [String: AnyObject] {
     return [
       "name" : nameTextField.text!,
+      "details": descriptionTextView.text,
       "startDate": startDatePicker.date.timeIntervalSince1970,
       "endDate": endDatePicker.date.timeIntervalSince1970,
       "description": descriptionTextView.text]
@@ -52,7 +55,12 @@ class NewEventViewController: UIViewController {
     let event = Event(dictionary: eventInfo(), context: context)
     let place = Place(venue: venue, context: context)
     event.place = place
+    if let creator = User.currentUser(context: context) {
+      event.creator = creator
+      event.participants = NSSet(object: creator)
+    }
     event.createFirebaseEvent { [weak self] error in
+      print(error)
       defer {
         self?.hideLoadingActivity()
       }
@@ -60,28 +68,37 @@ class NewEventViewController: UIViewController {
         self?.showNotificationMessage(error.localizedDescription, error: true)
         return
       }
+      NSNotificationCenter.defaultCenter().postNotificationName(Constant.Notification.didCreateEvent, object: event)
       self?.dismissViewControllerAnimated(true, completion: nil)
     }
   }
 
   @IBAction func startDateButtonDidTap(sender: FlatButton) {
     view.endEditing(true)
+    startDatePicker.minimumDate = NSDate()
     startDatePicker.hidden = !startDatePicker.hidden
     endDatePicker.hidden = true
   }
 
   @IBAction func endDateButtonDidTap(sender: FlatButton) {
     view.endEditing(true)
+    endDatePicker.minimumDate = startDatePicker.date
     endDatePicker.hidden = !endDatePicker.hidden
     startDatePicker.hidden = true
   }
 
   @IBAction func startDatePickerDidChangeValue(sender: UIDatePicker) {
-    startDateButton.setTitle("\(sender.date)", forState: .Normal)
+    let timeString = sender.date.toString(format: "MMM d, yyyy 'at' h:mm a")
+    startDateButton.setTitle("From \(timeString)", forState: .Normal)
+    if endDatePicker.date < startDatePicker.date {
+      endDatePicker.date = startDatePicker.date
+      endDateButton.setTitle("To \(timeString)", forState: .Normal)
+    }
   }
 
   @IBAction func endDatePickerDidChangeValue(sender: UIDatePicker) {
-    endDateButton.setTitle("\(sender.date)", forState: .Normal)
+    let timeString = sender.date.toString(format: "MMM d, yyyy 'at' h:mm a")
+    endDateButton.setTitle("To \(timeString)", forState: .Normal)
   }
 
   @IBAction func createButtonDidTap(sender: UIBarButtonItem) {

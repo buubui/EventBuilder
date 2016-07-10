@@ -44,7 +44,7 @@ class Place: NSManagedObject {
   }
 
   func update(dictionary: [String: AnyObject]) {
-    if let theId = dictionary["Id"] as? String {
+    if let theId = dictionary["id"] as? String {
       id = theId
     }
 

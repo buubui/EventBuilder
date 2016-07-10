@@ -9,13 +9,17 @@
 import UIKit
 
 struct Constant {
-  static let sqliteFileName = "EventBuilder.sqlite"
+  static var sqliteFileName: String {
+    return Helper.isTestMode() ? "EventBuilderTest.sqlite" : "EventBuilder.sqlite"
+  }
   static let defaultProfilePicture = "sample_profile_picture"
   static let locationDistanceFilter = 100.0
 
   struct Notification {
     static let didSignOut = "didSignOutNotification"
     static let didChangeUserObject = "didChangeUserObject"
+    static let didChangeEventCreator = "didChangeEventCreator"
+    static let didCreateEvent = "didCreateEvent"
   }
 
   struct Firebase {

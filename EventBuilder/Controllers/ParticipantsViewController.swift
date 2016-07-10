@@ -54,10 +54,13 @@ extension ParticipantsViewController: UITableViewDelegate, UITableViewDataSource
   }
 
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier("ParticipantCell")!
+    let cell = tableView.dequeueReusableCellWithIdentifier("ParticipantCell")as! ParticipantCell
     let key = receiveKeys[indexPath.row]
     let participant = data[key]!
-    cell.textLabel?.text = participant["name"] as? String
+    cell.customTitleLabel.text = participant["name"] as? String
+    if let imageUrlString = participant["imageUrl"] as? String, imageUrl = NSURL(string: imageUrlString) {
+      cell.customImageView.hnk_setImageFromURL(imageUrl)
+    }
 
     return cell
   }

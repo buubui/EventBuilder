@@ -8,12 +8,20 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 extension NSManagedObject {
+  var saveNotificationName: String {
+    return "NSManagedObjectDidSave"
+  }
   func save() {
     guard let context = managedObjectContext else {
+
       return
     }
+
     context.saveRecursively()
+
+    NSNotificationCenter.defaultCenter().postNotificationName(saveNotificationName, object: self)
   }
 }

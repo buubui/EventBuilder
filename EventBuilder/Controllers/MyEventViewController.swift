@@ -11,11 +11,18 @@ import DZNEmptyDataSet
 import FlatUIKit
 
 class MyEventViewController: UIViewController {
-  @IBOutlet weak var tableView: UITableView!
 
-  var data =  [String: Event]()
-  var keys = [String]()
-  var receivedKeys = [String]()
+  @IBOutlet weak var tableView: UITableView!
+  @IBOutlet weak var tabControl: FUISegmentedControl!
+
+  var data =  MyEvents()
+
+  private var activeTab = EventTimeType.Current {
+    didSet {
+      tableView.reloadData()
+    }
+  }
+  private var timer: NSTimer?
 
   class func instantiateStoryboard() -> MyEventViewController {
     return UIStoryboard.mainStoryBoard.instantiateViewControllerWithIdentifier("MyEventViewController") as! MyEventViewController
@@ -24,31 +31,82 @@ class MyEventViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     tableView.tableFooterView = UIView()
+    setupUI()
+    tabControl.selectedSegmentIndex = activeTab.rawValue
     tableView.emptyDataSetSource = self
     tableView.emptyDataSetDelegate = self
     setupRootViewController()
     reload()
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(didCreateEvent(_:)), name: Constant.Notification.didCreateEvent, object: nil)
+  }
+
+  func setupUI() {
+    tabControl.selectedFont = UIFont.boldFlatFontOfSize(14)
+    tabControl.selectedFontColor = UIColor.pomegranateColor()
+    tabControl.deselectedFont = UIFont.flatFontOfSize(14)
+    tabControl.deselectedFontColor = UIColor.flatWhiteColor()
+    tabControl.selectedColor = UIColor.flatWhiteColor()
+    tabControl.deselectedColor = UIColor.pomegranateColor()
+    tabControl.dividerColor = UIColor.flatWhiteColor()
+    tabControl.cornerRadius = 4.0
+    tabControl.borderColor = UIColor.flatWhiteColor()
+    tabControl.borderWidth = 1.0
+  }
+
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+    if self.timer == nil {
+      self.timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: #selector(reCategorize), userInfo: nil, repeats: true)
+    }
+  }
+
+  override func viewWillDisappear(animated: Bool) {
+    super.viewWillDisappear(animated)
+    if let timer = timer {
+      timer.invalidate()
+      self.timer = nil
+    }
   }
 
   func reload() {
     guard let user = User.currentUser() else {
       return
     }
-    var receivedFirst = false
+
+    var firstItem = false
     user.getMyEvents { keys, receivedEvent in
-      if !receivedFirst {
-        self.keys = keys
-        receivedFirst = true
+      if !firstItem {
+        firstItem = true
+        self.data.removeAll()
       }
-      self.data[receivedEvent.id!] = receivedEvent
-      self.receivedKeys.append(receivedEvent.id!)
+      if self.data.addEvent(receivedEvent) != nil {
+      }
       self.tableView.reloadData()
     }
   }
 
+  func reCategorize() {
+    data.reCategorize()
+    tableView.reloadData()
+  }
+
   func itemAtIndex(index: Int) -> Event? {
-    let key = receivedKeys[index]
-    return data[key]
+    return data.eventAtIndex(index, timeType: activeTab)
+  }
+
+  @IBAction func reloadButtonDidTap(sender: UIBarButtonItem) {
+    reload()
+  }
+
+  @IBAction func tabDidChange(sender: FUISegmentedControl) {
+    activeTab = EventTimeType(rawValue: sender.selectedSegmentIndex)!
+  }
+
+  func didCreateEvent(notification: NSNotification) {
+    guard let event = notification.object as? Event else { return }
+    if data.addEvent(event) == activeTab {
+      tableView.reloadData()
+    }
   }
 
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -64,13 +122,14 @@ extension MyEventViewController: UITableViewDataSource, UITableViewDelegate {
   }
 
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return receivedKeys.count
+    return data.numberOfEvents(timeType: activeTab)
   }
 
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("EventCell")!
     let item = itemAtIndex(indexPath.row)!
     cell.textLabel?.text = item.name
+    cell.detailTextLabel?.text = item.fullDateRangeString()
     return cell
   }
 
@@ -86,7 +145,84 @@ extension MyEventViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate 
   }
 
   func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-    return NSAttributedString(string: "No Event", attributes: [NSForegroundColorAttributeName: UIColor(red: 0.929, green: 0.945, blue: 0.949, alpha: 1)])
+    return NSAttributedString(string: "No \(activeTab.title) Event", attributes: [NSForegroundColorAttributeName: UIColor(red: 0.929, green: 0.945, blue: 0.949, alpha: 1)])
   }
+}
 
+extension MyEventViewController {
+  class MyEvents {
+    var events = [String: Event]()
+    var currentEvents = [String]()
+    var upcommingEvents = [String]()
+    var pastEvents = [String]()
+
+    func numberOfEvents(timeType timeType: EventTimeType) -> Int {
+      switch timeType {
+      case .Current:
+        return currentEvents.count
+      case .Upcomming:
+        return upcommingEvents.count
+      case .Past:
+        return pastEvents.count
+      }
+    }
+
+    func eventAtIndex(index: Int, timeType: EventTimeType) -> Event? {
+      let list = { () -> [String] in
+        switch timeType {
+        case .Current:
+          return currentEvents
+        case .Upcomming:
+          return upcommingEvents
+        case .Past:
+          return pastEvents
+        }
+      }()
+
+      let key = list[index]
+
+      return events[key]
+    }
+
+    func addEvent(event: Event) -> EventTimeType? {
+      guard let id = event.id, type = event.timeType else { return nil }
+
+      if categorizeEvent(event) {
+        events[id] = event
+        return type
+      }
+
+      return nil
+    }
+
+    func categorizeEvent(event: Event) -> Bool {
+      guard let id = event.id, type = event.timeType else { return false }
+
+      switch type {
+      case .Upcomming:
+        upcommingEvents.append(id)
+      case .Current:
+        currentEvents.append(id)
+      case .Past:
+        pastEvents.append(id)
+      }
+      return true
+    }
+
+    func reCategorize() {
+      currentEvents.removeAll()
+      upcommingEvents.removeAll()
+      pastEvents.removeAll()
+      for event in events.values {
+        categorizeEvent(event)
+      }
+    }
+
+    func removeAll() {
+      events.removeAll()
+      currentEvents.removeAll()
+      upcommingEvents.removeAll()
+      pastEvents.removeAll()
+    }
+  }
 }

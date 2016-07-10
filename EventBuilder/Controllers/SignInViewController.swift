@@ -12,6 +12,7 @@ import Firebase
 import SwiftValidator
 import FlatUIKit
 import ChameleonFramework
+import CoreData
 
 class SignInViewController: SignInBaseViewController {
 
@@ -36,6 +37,8 @@ class SignInViewController: SignInBaseViewController {
             self?.showNotificationMessage(error.localizedDescription, error: true)
           }
         } else {
+          let context = CoreDataStackManager.sharedInstance.newPrivateQueueContext()
+          User.getUser(userId: User.currentUId, context: context, completion: nil)
           self?.performSegueWithIdentifier("showMainView", sender: self)
         }
       }

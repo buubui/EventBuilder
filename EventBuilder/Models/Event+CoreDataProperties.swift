@@ -17,6 +17,7 @@ extension Event {
     @NSManaged var endDate: NSDate?
     @NSManaged var id: String?
     @NSManaged var name: String?
+    @NSManaged var details: String?
     @NSManaged var startDate: NSDate?
     @NSManaged var status: String?
     @NSManaged var participants: NSSet?

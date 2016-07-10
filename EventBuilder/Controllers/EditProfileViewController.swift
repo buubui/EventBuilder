@@ -33,7 +33,6 @@ class EditProfileViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    profilePictureView.image = user.image ?? UIImage.defaultProfilePicture()
     tableView.tableFooterView = UIView()
   }
 

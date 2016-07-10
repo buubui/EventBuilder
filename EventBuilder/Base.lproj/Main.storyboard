@@ -832,7 +832,7 @@
                                                         <constraint firstAttribute="width" constant="100" id="Z8B-0i-xqZ"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="image" keyPath="image" value="sample_profile_picture"/>
+                                                        <userDefinedRuntimeAttribute type="image" keyPath="image" value="camera"/>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                             <real key="value" value="50"/>
                                                         </userDefinedRuntimeAttribute>
@@ -1522,6 +1522,7 @@
     </scenes>
     <resources>
         <image name="add" width="512" height="512"/>
+        <image name="camera" width="500" height="500"/>
         <image name="edit" width="512" height="512"/>
         <image name="home" width="33" height="33"/>
         <image name="sample_profile_picture" width="500" height="500"/>

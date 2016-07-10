@@ -13,13 +13,11 @@ target 'EventBuilder' do
   pod 'EZLoadingActivity'
   pod 'IQKeyboardManagerSwift'
   pod 'ForecastView', git: 'https://github.com/buubui/ForecastView.git', branch: 'dev'
-  pod 'MXParallaxHeader'
   pod 'SwiftValidator'
   # design color & icon
   pod 'Material'
   pod 'FlatUIKit'
   pod 'ChameleonFramework/Swift'
-  pod 'Font-Awesome-Swift', '~> 1.4.6'
   pod 'DZNEmptyDataSet'
   pod "StatusBarNotificationCenter"
   pod 'SSASideMenu', git: 'https://github.com/mbalex99/SSASideMenu.git'

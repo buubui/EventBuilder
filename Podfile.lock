@@ -40,7 +40,6 @@ PODS:
     - FirebaseAnalytics (~> 3.2)
     - GoogleNetworkingUtilities (~> 1.2)
   - FlatUIKit (1.6.2)
-  - Font-Awesome-Swift (1.4.6)
   - ForecastView (0.3.1)
   - GoogleInterchangeUtilities (1.2.1):
     - GoogleSymbolUtilities (~> 1.0)
@@ -58,7 +57,6 @@ PODS:
     - KIF/Core (= 3.4.2)
   - KIF/Core (3.4.2)
   - Material (1.38.5)
-  - MXParallaxHeader (0.5.0)
   - Nimble (4.0.1)
   - OHHTTPStubs (5.0.0):
     - OHHTTPStubs/Default (= 5.0.0)
@@ -95,13 +93,11 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Storage
   - FlatUIKit
-  - Font-Awesome-Swift (~> 1.4.6)
   - ForecastView (from `https://github.com/buubui/ForecastView.git`, branch `dev`)
   - HanekeSwift
   - IQKeyboardManagerSwift
   - KIF
   - Material
-  - MXParallaxHeader
   - Nimble
   - OHHTTPStubs
   - Quick
@@ -149,7 +145,6 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: a9d923f3d0b6fbf9fac89310860357aaadc34be5
   FirebaseStorage: fa2a87dee81f682f553af6839daa37a750e65f6a
   FlatUIKit: 1b41f0d4952ce8d970d8479ce79df54a960242c4
-  Font-Awesome-Swift: a965c23e619514be65de9b113f49038ca683c1bb
   ForecastView: b21b11748e45204dac52dde179eb2905f56c69ce
   GoogleInterchangeUtilities: def8415a862effc67d549d5b5b0b9c7a2f97d4de
   GoogleNetworkingUtilities: 3e83269048cfb498dc7ec83ab36813360965c74f
@@ -160,7 +155,6 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: ede2a27b4e1ce053d03073b9c7fa439322f5e405
   KIF: b518c9831453abea5afdbbde3908ec47832d6d56
   Material: e382debf52b8070a235f5f67d9394524f16a8e6e
-  MXParallaxHeader: c7dfdf8d769a8eb868a431ec3aeaf994a147b8bc
   Nimble: 0f3c8b8b084cda391209c3c5efbb48bedeeb920a
   OHHTTPStubs: a5d2e9eea07869d42ec03338325f398bc520e159
   Quick: 18d057bc66451eedd5d1c8dc99ba2a5db6e60226
@@ -171,6 +165,6 @@ SPEC CHECKSUMS:
   SwiftValidator: 0b6a48bf10364411b0d64c97f78665ff87ca9f8b
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: e60a4bcde7405b255a7819399cf12cdd9e260344
+PODFILE CHECKSUM: 50e64de4d59d8fbbe204ca487a06c0488ca48ec1
 
 COCOAPODS: 1.0.1

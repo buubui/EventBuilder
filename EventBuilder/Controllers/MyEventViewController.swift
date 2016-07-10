@@ -36,8 +36,10 @@ class MyEventViewController: UIViewController {
     tableView.emptyDataSetSource = self
     tableView.emptyDataSetDelegate = self
     setupRootViewController()
+    loadEventsFromDatabase()
     reload()
     NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(didCreateEvent(_:)), name: Constant.Notification.didCreateEvent, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(reload), name: Constant.Notification.didAttendEvent, object: nil)
   }
 
   func setupUI() {
@@ -68,8 +70,16 @@ class MyEventViewController: UIViewController {
     }
   }
 
+  func loadEventsFromDatabase() {
+    if let user = User.currentUser(), events = user.events?.allObjects as? [Event] {
+      for event in events {
+        self.data.addEvent(event)
+      }
+    }
+  }
+
   func reload() {
-    guard let user = User.currentUser() else {
+    guard let user = User.currentUser() where isOnline() else {
       return
     }
 
@@ -95,6 +105,10 @@ class MyEventViewController: UIViewController {
   }
 
   @IBAction func reloadButtonDidTap(sender: UIBarButtonItem) {
+    if !isOnline() {
+      showNotificationMessage("Cannot perform this function in offline mode, please check the internet connection.", error: true)
+      return
+    }
     reload()
   }
 
@@ -113,6 +127,14 @@ class MyEventViewController: UIViewController {
     if let item = sender as? Event, controller =  segue.destinationViewController as? EventDetailsViewController where segue.identifier == "showEventDetails"  {
       controller.event = item
     }
+  }
+
+  override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+    if identifier == "showAddNewEvent" && !isOnline() {
+      showNotificationMessage("Cannot create new event in offline mode, please check the internet connection.", error: true)
+      return false
+    }
+    return true
   }
 }
 

@@ -9,17 +9,45 @@
 import UIKit
 import CoreData
 import IQKeyboardManagerSwift
+import ReachabilitySwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
+  var online: Bool {
+    return _online
+  }
+  private var reachability: Reachability!
+  private var _online = true
 
 
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    setupReachability()
     setupIQKeyboardManager()
     setupNotifications()
     return true
+  }
+
+  func setupReachability() {
+    do {
+      reachability = try Reachability(hostname: "firebase.google.com")
+    } catch {
+      print("Cannot initilize Reachability")
+      return
+    }
+
+    reachability.whenReachable = { reachability in
+      self._online = true
+    }
+    reachability.whenUnreachable = { reachability in
+      self._online = false
+    }
+    do {
+      try reachability.startNotifier()
+    } catch {
+      print("Unable to start notifier")
+    }
   }
 
   func setupIQKeyboardManager() {

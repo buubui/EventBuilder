@@ -214,7 +214,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="editButtonDidTap:" destination="kjS-Z5-nGU" eventType="touchUpInside" id="GOe-pu-zwg"/>
-                                    <segue destination="5j0-LB-cL0" kind="showDetail" id="T3G-K6-RI7"/>
+                                    <segue destination="5j0-LB-cL0" kind="showDetail" identifier="showAddNewEvent" id="T3G-K6-RI7"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wHY-9y-ahD">

@@ -37,3 +37,9 @@ func runInMainThread(completion: (() -> Void)) {
   }
 }
 
+func isOnline() -> Bool {
+  guard let delegate = UIApplication.sharedApplication().delegate as? AppDelegate else {
+    return false
+  }
+  return delegate.online
+}

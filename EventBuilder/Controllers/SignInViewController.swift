@@ -10,7 +10,6 @@ import UIKit
 import Material
 import Firebase
 import SwiftValidator
-import FlatUIKit
 import ChameleonFramework
 import CoreData
 
@@ -60,7 +59,9 @@ class SignInViewController: SignInBaseViewController {
     if let userId = NSUserDefaults.standardUserDefaults().objectForKey(Constant.savedUserId) as? String {
       showLoadingActivity(text: "Restoring session...")
       User.currentUId = userId
-      User.getUser(userId: User.currentUId, context: CoreDataStackManager.sharedInstance.newPrivateQueueContext(), completion: nil)
+      if isOnline() {
+        User.getUser(userId: User.currentUId, context: CoreDataStackManager.sharedInstance.newPrivateQueueContext(), completion: nil)
+      }
       performSelector(#selector(showMainView), withObject: nil, afterDelay: 1)
     }
   }

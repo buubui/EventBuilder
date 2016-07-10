@@ -62,7 +62,7 @@ class EventDetailsViewController: UIViewController {
   }
 
   func checkAttended() {
-    guard let eventId = event.id else {
+    guard let eventId = event.id where isOnline() else {
       return
     }
     FirebaseService.shareInstance.isAttendEvent(eventId, userId: User.currentUId) { value in
@@ -71,7 +71,7 @@ class EventDetailsViewController: UIViewController {
   }
 
   func reloadRightBarButton() {
-    navigationItem.rightBarButtonItem?.title = attended ? "Participants" : "Attend"
+    navigationItem.rightBarButtonItem?.title = attended ? "Participants" : "Join"
   }
 
   @IBAction func rightBarButtonDidTap(sender: UIBarButtonItem) {
@@ -82,6 +82,8 @@ class EventDetailsViewController: UIViewController {
         if let error = error{
           self.showAlert(message: error.localizedDescription, completion: nil)
         } else {
+          NSNotificationCenter.defaultCenter().postNotificationName(Constant.Notification.didAttendEvent, object: self)
+          self.showNotificationMessage("Join this event successfully", error: false)
           self.checkAttended()
         }
       }

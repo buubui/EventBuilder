@@ -111,11 +111,16 @@ class User: NSManagedObject {
     guard let id = id, context = managedObjectContext else {
       return
     }
+    let newEvents = NSMutableSet()
     FirebaseService.shareInstance.getMyEvents(id) { keys, receivedDict, receivedId in
-
       context.performBlockAndWait {
         guard let event = Event.updateOrCreateByDictionary(receivedDict, context: context) else {
           return
+        }
+        newEvents.addObject(event)
+        if newEvents.count == keys.count {
+          self.events = newEvents
+          self.save()
         }
         completion?(keys: keys, receivedEvent: event)
       }

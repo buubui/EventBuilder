@@ -21,6 +21,7 @@ struct Constant {
     static let didChangeUserObject = "didChangeUserObject"
     static let didChangeEventCreator = "didChangeEventCreator"
     static let didCreateEvent = "didCreateEvent"
+    static let didAttendEvent = "didAttendEvent"
   }
 
   struct Firebase {

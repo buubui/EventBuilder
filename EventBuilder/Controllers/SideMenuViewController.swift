@@ -39,7 +39,12 @@ class SideMenuViewController: UIViewController {
     var controller: UIViewController? {
       switch self {
       case .MyEvent: return MyEventViewController.instantiateStoryboard()
-      case .Explore: return ExploreViewController.instantiateStoryboard()
+      case .Explore:
+        if isOnline() {
+          return ExploreViewController.instantiateStoryboard()
+        } else {
+          return nil
+        }
       case .Profile: return ProfileViewController.instantiateStoryboard()
       case .SignOut: return nil
       }
@@ -99,8 +104,16 @@ extension SideMenuViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     guard let controller = item.controller else {
-      showAlert(message: "Do you really want to sign out?") {
-        FirebaseService.shareInstance.signOut()
+      switch item {
+      case .SignOut:
+        showAlert(message: "Do you really want to sign out?") {
+          FirebaseService.shareInstance.signOut()
+        }
+
+      default:
+        if !isOnline() {
+          showNotificationMessage("Cannot use this feature in offline mode, please check the internet connection.", error: true)
+        }
       }
       return
     }

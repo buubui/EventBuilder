@@ -33,6 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   func didSignOut() {
+    NSUserDefaults.standardUserDefaults().removeObjectForKey(Constant.savedUserId)
+    NSUserDefaults.standardUserDefaults().synchronize()
     let loginController = UIStoryboard.mainStoryBoard.instantiateInitialViewController()!
     window?.rootViewController = loginController
   }

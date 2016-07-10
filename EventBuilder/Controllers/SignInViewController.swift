@@ -16,10 +16,20 @@ import CoreData
 
 class SignInViewController: SignInBaseViewController {
 
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+  }
+
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
     emailTextField.text = "buu@suremail.info"
     passwordTextField.text = "password"
+    restoreSession()
+  }
+
+  override func viewDidDisappear(animated: Bool) {
+    super.viewDidDisappear(animated)
+    hideLoadingActivity()
   }
 
   func signInWithPassword() {
@@ -39,10 +49,29 @@ class SignInViewController: SignInBaseViewController {
         } else {
           let context = CoreDataStackManager.sharedInstance.newPrivateQueueContext()
           User.getUser(userId: User.currentUId, context: context, completion: nil)
-          self?.performSegueWithIdentifier("showMainView", sender: self)
+          self?.saveUserId()
+          self?.showMainView()
         }
       }
     }
+  }
+
+  func restoreSession() {
+    if let userId = NSUserDefaults.standardUserDefaults().objectForKey(Constant.savedUserId) as? String {
+      showLoadingActivity(text: "Restoring session...")
+      User.currentUId = userId
+      User.getUser(userId: User.currentUId, context: CoreDataStackManager.sharedInstance.newPrivateQueueContext(), completion: nil)
+      performSelector(#selector(showMainView), withObject: nil, afterDelay: 1)
+    }
+  }
+
+  func showMainView() {
+    performSegueWithIdentifier("showMainView", sender: self)
+  }
+
+  func saveUserId() {
+    NSUserDefaults.standardUserDefaults().setObject(User.currentUId, forKey: Constant.savedUserId)
+    NSUserDefaults.standardUserDefaults().synchronize()
   }
 
   @IBAction func signInButtonDidTap(sender: RaisedButton) {

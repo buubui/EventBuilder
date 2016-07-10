@@ -14,6 +14,7 @@ struct Constant {
   }
   static let defaultProfilePicture = "sample_profile_picture"
   static let locationDistanceFilter = 100.0
+  static let savedUserId = "savedUserId"
 
   struct Notification {
     static let didSignOut = "didSignOutNotification"

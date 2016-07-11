@@ -14,7 +14,6 @@ target 'EventBuilder' do
   pod 'IQKeyboardManagerSwift'
   pod 'ForecastView', git: 'https://github.com/buubui/ForecastView.git', branch: 'dev'
   pod 'SwiftValidator'
-  # design color & icon
   pod 'Material'
   pod 'FlatUIKit'
   pod 'ChameleonFramework/Swift'
@@ -30,9 +29,6 @@ end
 target 'EventBuilderTests' do
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
-  pod 'Quick'
-  pod 'Nimble'
-  pod 'OHHTTPStubs'
   pod 'KIF'
   pod 'Fakery'
 end

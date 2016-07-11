@@ -57,21 +57,6 @@ PODS:
     - KIF/Core (= 3.4.2)
   - KIF/Core (3.4.2)
   - Material (1.38.5)
-  - Nimble (4.0.1)
-  - OHHTTPStubs (5.0.0):
-    - OHHTTPStubs/Default (= 5.0.0)
-  - OHHTTPStubs/Core (5.0.0)
-  - OHHTTPStubs/Default (5.0.0):
-    - OHHTTPStubs/Core
-    - OHHTTPStubs/JSON
-    - OHHTTPStubs/NSURLSession
-    - OHHTTPStubs/OHPathHelpers
-  - OHHTTPStubs/JSON (5.0.0):
-    - OHHTTPStubs/Core
-  - OHHTTPStubs/NSURLSession (5.0.0):
-    - OHHTTPStubs/Core
-  - OHHTTPStubs/OHPathHelpers (5.0.0)
-  - Quick (0.9.2)
   - ReachabilitySwift (2.3.3)
   - SSASideMenu (1.0.4)
   - StatusBarNotificationCenter (1.1.3)
@@ -98,9 +83,6 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - KIF
   - Material
-  - Nimble
-  - OHHTTPStubs
-  - Quick
   - ReachabilitySwift
   - SSASideMenu (from `https://github.com/mbalex99/SSASideMenu.git`)
   - StatusBarNotificationCenter
@@ -155,9 +137,6 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: ede2a27b4e1ce053d03073b9c7fa439322f5e405
   KIF: b518c9831453abea5afdbbde3908ec47832d6d56
   Material: e382debf52b8070a235f5f67d9394524f16a8e6e
-  Nimble: 0f3c8b8b084cda391209c3c5efbb48bedeeb920a
-  OHHTTPStubs: a5d2e9eea07869d42ec03338325f398bc520e159
-  Quick: 18d057bc66451eedd5d1c8dc99ba2a5db6e60226
   ReachabilitySwift: e0f6b6f280effb47731acfaaa2d5ffe223703793
   SSASideMenu: 3f2de95caf05725520213eee731f8b92dd4e3016
   StatusBarNotificationCenter: f788bd9192bf5f7a40117f96a173a138be739823
@@ -165,6 +144,6 @@ SPEC CHECKSUMS:
   SwiftValidator: 0b6a48bf10364411b0d64c97f78665ff87ca9f8b
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: 50e64de4d59d8fbbe204ca487a06c0488ca48ec1
+PODFILE CHECKSUM: b77ca6310b6ff63d6a19f938c60a1115795c80f6
 
 COCOAPODS: 1.0.1

@@ -85,8 +85,8 @@
                                     <action selector="signInButtonDidTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RmF-rn-fJH"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xhd-R8-TmX" customClass="FlatButton" customModule="Material">
-                                <rect key="frame" x="37" y="298" width="246" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xhd-R8-TmX" customClass="FlatButton" customModule="Material">
+                                <rect key="frame" x="37" y="298" width="246" height="29"/>
                                 <accessibility key="accessibilityConfiguration" label="SignIn - SignUpButton"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
@@ -287,8 +287,8 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Fqe-TR-deQ">
-                                <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Fqe-TR-deQ">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <connections>
                                     <outlet property="delegate" destination="xc5-Vv-Ly0" id="j6z-lp-fk1"/>
                                 </connections>
@@ -326,8 +326,8 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ICu-wd-hfF">
-                                <rect key="frame" x="0.0" y="64" width="320" height="166"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ICu-wd-hfF">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="166"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dQm-3G-40f">
                                         <rect key="frame" x="32" y="38" width="256" height="90"/>
@@ -700,8 +700,8 @@
                                     <constraint firstAttribute="width" secondItem="k9D-nb-B2w" secondAttribute="height" multiplier="1:1" id="soZ-4B-LD9"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zxq-mu-kPl" customClass="RaisedButton" customModule="Material">
-                                <rect key="frame" x="36" y="395" width="248" height="35"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zxq-mu-kPl" customClass="RaisedButton" customModule="Material">
+                                <rect key="frame" x="36" y="407" width="248" height="35"/>
                                 <accessibility key="accessibilityConfiguration" label="SignUp - SignUpButton"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="p1M-hf-VwX"/>
@@ -718,8 +718,8 @@
                                     <action selector="signupButtonDidTap:" destination="Vf9-Mv-ekz" eventType="touchUpInside" id="imS-Ix-dBF"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CPm-rQ-Z1p" customClass="FlatButton" customModule="Material">
-                                <rect key="frame" x="47" y="368" width="226" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CPm-rQ-Z1p" customClass="FlatButton" customModule="Material">
+                                <rect key="frame" x="47" y="368" width="226" height="29"/>
                                 <accessibility key="accessibilityConfiguration" label="SignUp - SignInButton"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
@@ -975,8 +975,8 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WbN-kq-I02">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VDp-fv-KNH" customClass="ForecastView" customModule="ForecastView">
-                                                        <rect key="frame" x="114" y="59" width="92" height="70"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VDp-fv-KNH" customClass="ForecastView" customModule="ForecastView">
+                                                        <rect key="frame" x="114" y="60" width="92" height="70"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="70" id="GKV-Md-2oM"/>

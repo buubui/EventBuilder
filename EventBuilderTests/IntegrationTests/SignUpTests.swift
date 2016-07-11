@@ -28,7 +28,7 @@ class SignUpTests: BaseIntegrationTest {
     signUpWithEmail(email, password: password, name: name)
     tester().waitForViewWithAccessibilityLabel("Sign up successfully, please sign in")
     signInWithEmail(email, password: password)
-    tester().waitForViewWithAccessibilityLabel("No Event")
+    tester().waitForViewWithAccessibilityLabel("Upcoming")
     FIRAuth.auth()?.currentUser?.deleteWithCompletion() { error in
 
     }

@@ -20,3 +20,4 @@ This is an iOS app for creating & manage events. You can search for interesting 
 ## Testing
 
 This app has integration tests using KIF. Click `Product - Test` or press `Cmd+U` to begin.
+You can use account `buu@suremail.info` / `password` for test

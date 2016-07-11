@@ -111,9 +111,7 @@ extension SideMenuViewController: UITableViewDataSource, UITableViewDelegate {
         }
 
       default:
-        if !isOnline() {
-          showNotificationMessage("Cannot use this feature in offline mode, please check the internet connection.", error: true)
-        }
+        performActionIfOnline(nil)
       }
       return
     }

@@ -37,6 +37,7 @@ class ExploreViewController: UIViewController {
       locationManager.requestWhenInUseAuthorization()
     }
     locationManager.distanceFilter = Constant.locationDistanceFilter
+    locationManager.startUpdatingLocation()
   }
 
   func reload() {
@@ -98,6 +99,6 @@ extension ExploreViewController: CLLocationManagerDelegate {
   func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     let newLocation = locations.last!
     print("didUpdateToLocation", newLocation)
-    mapView.region = MKCoordinateRegionMakeWithDistance(newLocation.coordinate, 500, 500)
+    mapView.setRegion(MKCoordinateRegionMakeWithDistance(newLocation.coordinate, 500, 500), animated: true)
   }
 }

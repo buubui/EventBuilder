@@ -47,9 +47,9 @@ class PlaceResultsViewController: UIViewController {
     }
   }
 
-  func startSearch(location location: CLLocation) {
-    let coordinate = location.coordinate
-    FoursquareService.shareInstance.search(query: query, latitude: coordinate.latitude, longitude: coordinate.longitude) { [weak self] error, data in
+  func startSearch(latitude latitude: Double, longitude: Double) {
+    HttpClient.sharedInstance.cancelAll()
+    FoursquareService.shareInstance.search(query: query, latitude: latitude, longitude: longitude) { [weak self] error, data in
       if let data = data {
         self?.data = data
       }
@@ -57,7 +57,9 @@ class PlaceResultsViewController: UIViewController {
   }
 
   func selectVenueAnnotation(annotation: VenueAnnotation) {
-    performSegueWithIdentifier("showNewEvent", sender: annotation)
+    performActionIfOnline {
+      self.performSegueWithIdentifier("showNewEvent", sender: annotation)
+    }
   }
 
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -77,9 +79,7 @@ extension PlaceResultsViewController: CLLocationManagerDelegate {
 
   func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     let newLocation = locations.last!
-    print("didUpdateToLocation", newLocation)
-    startSearch(location: newLocation)
-    mapView.region = MKCoordinateRegionMakeWithDistance(newLocation.coordinate, 500, 500)
+    mapView.setRegion(MKCoordinateRegionMakeWithDistance(newLocation.coordinate, 500, 500), animated: true)
   }
 }
 
@@ -99,5 +99,9 @@ extension PlaceResultsViewController: MKMapViewDelegate {
       return
     }
     selectVenueAnnotation(annotation)
+  }
+
+  func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+    startSearch(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
   }
 }

@@ -74,4 +74,12 @@ extension UIViewController {
     alertController.addAction(DOAlertAction(title: "Cancel", style: .Cancel, handler: nil))
     presentViewController(alertController, animated: true, completion: nil)
   }
+
+  func performActionIfOnline(action: (() -> Void)?) {
+    if isOnline() {
+      action?()
+    } else {
+      showNotificationMessage("Cannot perform this function in offline mode, please check the internet connection.", error: true)
+    }
+  }
 }

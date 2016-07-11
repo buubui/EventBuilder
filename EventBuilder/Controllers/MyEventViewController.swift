@@ -105,11 +105,9 @@ class MyEventViewController: UIViewController {
   }
 
   @IBAction func reloadButtonDidTap(sender: UIBarButtonItem) {
-    if !isOnline() {
-      showNotificationMessage("Cannot perform this function in offline mode, please check the internet connection.", error: true)
-      return
+    performActionIfOnline { 
+      self.reload()
     }
-    reload()
   }
 
   @IBAction func tabDidChange(sender: FUISegmentedControl) {
@@ -131,7 +129,7 @@ class MyEventViewController: UIViewController {
 
   override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
     if identifier == "showAddNewEvent" && !isOnline() {
-      showNotificationMessage("Cannot create new event in offline mode, please check the internet connection.", error: true)
+      performActionIfOnline(nil)
       return false
     }
     return true

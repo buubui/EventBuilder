@@ -88,10 +88,8 @@ class ProfileViewController: UIViewController {
   }
 
   @IBAction func editButtonDidTap(sender: UIButton) {
-    if isOnline() {
-      showEditProfileScreen()
-    } else {
-      showNotificationMessage("Cannot edit profile in offline mode, please check the internet connection.", error: true)
+    performActionIfOnline { 
+      self.showEditProfileScreen()
     }
   }
 

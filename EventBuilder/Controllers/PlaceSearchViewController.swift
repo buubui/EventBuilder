@@ -36,7 +36,9 @@ class PlaceSearchViewController: UIViewController {
 extension PlaceSearchViewController: UITextFieldDelegate {
 
   func textFieldShouldReturn(textField: UITextField) -> Bool {
-    performSegueWithIdentifier("showSearchResults", sender: self)
+    performActionIfOnline {
+      self.performSegueWithIdentifier("showSearchResults", sender: self)
+    }
     return true
   }
 }

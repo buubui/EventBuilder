@@ -104,9 +104,9 @@ class NewEventViewController: UIViewController {
   }
 
   @IBAction func createButtonDidTap(sender: UIBarButtonItem) {
-    createEvent()
+    view.endEditing(true)
+    performActionIfOnline {
+      self.createEvent()
+    }
   }
-
-
 }
-

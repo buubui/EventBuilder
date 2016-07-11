@@ -134,10 +134,6 @@ extension EditProfileViewController: UITextFieldDelegate {
       case .Phone:
         self.user.phone = textField.text
       }
-//      if self.shouldSave {
-//        self.shouldSave = false
-//        self.save()
-//      }
     }
   }
 }

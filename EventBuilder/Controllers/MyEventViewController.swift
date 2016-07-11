@@ -57,8 +57,8 @@ class MyEventViewController: UIViewController {
 
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
-    if self.timer == nil {
-      self.timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: #selector(reCategorize), userInfo: nil, repeats: true)
+    if timer == nil {
+      timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: #selector(reCategorize), userInfo: nil, repeats: true)
     }
   }
 
@@ -73,7 +73,7 @@ class MyEventViewController: UIViewController {
   func loadEventsFromDatabase() {
     if let user = User.currentUser(), events = user.events?.allObjects as? [Event] {
       for event in events {
-        self.data.addEvent(event)
+        data.addEvent(event)
       }
     }
   }

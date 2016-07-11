@@ -16,7 +16,7 @@ class HttpClient: NSObject {
 
   func cancelAll() {
     manager.session.invalidateAndCancel()
-    self.manager = Alamofire.Manager()
+    manager = Alamofire.Manager()
   }
 
   func request(method: Alamofire.Method, url: URLStringConvertible, parameters: [String: AnyObject]?, completion: ((JSON?, NSError?) -> Void)) {

@@ -91,22 +91,22 @@ class User: NSManagedObject {
 
   func update(dictionary: [String: AnyObject]) {
     if let theId = dictionary["id"] as? String {
-      self.id = theId
+      id = theId
     }
     if let theName = dictionary["name"] as? String {
-      self.name = theName
+      name = theName
     }
 
     if let theEmail = dictionary["email"] as? String {
-      self.email = theEmail
+      email = theEmail
     }
 
     if let thePhone = dictionary["phone"] as? String {
-      self.phone = thePhone
+      phone = thePhone
     }
 
-    if let imageUrl = dictionary["imageUrl"] as? String {
-      self.imageUrl = imageUrl
+    if let theImageUrl = dictionary["imageUrl"] as? String {
+      imageUrl = theImageUrl
     }
 
     save()

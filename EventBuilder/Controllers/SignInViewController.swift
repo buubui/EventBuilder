@@ -15,14 +15,8 @@ import CoreData
 
 class SignInViewController: SignInBaseViewController {
 
-  override func viewWillAppear(animated: Bool) {
-    super.viewWillAppear(animated)
-  }
-
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
-    emailTextField.text = "buu@suremail.info"
-    passwordTextField.text = "password"
     restoreSession()
   }
 

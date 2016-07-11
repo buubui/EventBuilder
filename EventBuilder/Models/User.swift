@@ -91,19 +91,24 @@ class User: NSManagedObject {
 
   func update(dictionary: [String: AnyObject]) {
     if let theId = dictionary["id"] as? String {
-      id = theId
+      self.id = theId
     }
     if let theName = dictionary["name"] as? String {
-      name = theName
+      self.name = theName
     }
 
     if let theEmail = dictionary["email"] as? String {
-      email = theEmail
+      self.email = theEmail
     }
 
     if let thePhone = dictionary["phone"] as? String {
-      phone = thePhone
+      self.phone = thePhone
     }
+
+    if let imageUrl = dictionary["imageUrl"] as? String {
+      self.imageUrl = imageUrl
+    }
+
     save()
   }
 
@@ -146,7 +151,8 @@ class User: NSManagedObject {
       self.firebase = FirebaseService.shareInstance.observeProfile(id: id) { data in
         if let data = data {
           context.performBlock {
-            self.updateWithDictionary(data)
+            self.update(data)
+            NSNotificationCenter.defaultCenter().postNotificationName(Constant.Notification.didChangeUserObject, object: self)
           }
         }
       }
@@ -164,34 +170,6 @@ class User: NSManagedObject {
       print(error.localizedDescription)
     }
     self.firebase = nil
-  }
-
-  func updateWithDictionary(dictionary: [String: AnyObject]) {
-    guard let context = managedObjectContext else {
-      return
-    }
-    context.performBlockAndWait {
-      if let theId = dictionary["id"] as? String {
-        self.id = theId
-      }
-      if let theName = dictionary["name"] as? String {
-        self.name = theName
-      }
-
-      if let theEmail = dictionary["email"] as? String {
-        self.email = theEmail
-      }
-
-      if let thePhone = dictionary["phone"] as? String {
-        self.phone = thePhone
-      }
-
-      if let imageUrl = dictionary["imageUrl"] as? String {
-        self.imageUrl = imageUrl
-      }
-      context.saveRecursively()
-      NSNotificationCenter.defaultCenter().postNotificationName(Constant.Notification.didChangeUserObject, object: self)
-    }
   }
 
   func toDictionary() -> [String: AnyObject] {
@@ -217,10 +195,8 @@ class User: NSManagedObject {
       FirebaseService.shareInstance.uploadProfileImage(image, userId: id) { url, error in
         if let error = error {
           completion?(error: error)
-        } else {
-          if let url = url {
-            data["imageUrl"] = url.absoluteString
-          }
+        } else if let url = url {
+          data["imageUrl"] = url.absoluteString
           self.imageChanged = false
           FirebaseService.shareInstance.updateProfile(id: id, data: data) { error, firebase in
             completion?(error: error)

@@ -72,11 +72,11 @@ class ProfileViewController: UIViewController {
     if let image = user?.image {
       profilePictureContainerView.image = image
     } else {
-      nameLabel.text = user?.name
       profilePictureContainerView.image = UIImage.defaultProfilePicture()
-      if let user = user, imageUrlString = user.imageUrl, imageUrl = NSURL(string: imageUrlString){
-        profilePictureContainerView.setImageFromUrl(imageUrl, placeHolder: UIImage.defaultProfilePicture(), errorImage: nil)
-      }
+    }
+    nameLabel.text = user?.name
+    if let user = user, imageUrlString = user.imageUrl, imageUrl = NSURL(string: imageUrlString){
+      profilePictureContainerView.setImageFromUrl(imageUrl, placeHolder: UIImage.defaultProfilePicture(), errorImage: nil)
     }
     tableView.reloadData()
   }

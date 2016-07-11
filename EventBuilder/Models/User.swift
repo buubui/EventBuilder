@@ -33,7 +33,6 @@ class User: NSManagedObject {
         return user
       }
     } catch {
-      print(error)
     }
     return nil
   }

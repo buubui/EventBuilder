@@ -30,7 +30,6 @@ class HttpClient: NSObject {
         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         if let data: AnyObject = data {
           let json = JSON(data: data as! NSData)
-          print(json)
           if json.rawValue.isMemberOfClass(NSNull.self) {
             if let error = error {
               completion(nil, error)

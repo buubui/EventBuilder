@@ -60,7 +60,6 @@ class NewEventViewController: UIViewController {
       event.participants = NSSet(object: creator)
     }
     event.createFirebaseEvent { [weak self] error in
-      print(error)
       defer {
         self?.hideLoadingActivity()
       }

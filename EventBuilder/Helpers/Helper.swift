@@ -20,9 +20,6 @@ class Helper {
 
   class func env(key: String) -> String? {
     let dict = NSProcessInfo.processInfo().environment
-    if dict[key] == nil {
-      print("CAN NOT LOAD ENV VAR: \(key)")
-    }
     return dict[key]
   }
 

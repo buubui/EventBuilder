@@ -32,7 +32,6 @@ class EventDetailsViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     checkAttended()
-    print(event)
     reload()
 
     NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(EventDetailsViewController.eventDidSave), name: event.saveNotificationName, object: event)

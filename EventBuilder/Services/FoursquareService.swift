@@ -32,7 +32,6 @@ class FoursquareService: NSObject {
         completion?(error: NSError.invalidDataError(), data: nil)
         return
       }
-      print(json)
     }
   }
 
@@ -55,7 +54,6 @@ class FoursquareService: NSObject {
         completion?(error: NSError.invalidDataError(), data: nil)
         return
       }
-      print(json)
       guard let response = json.dictionaryObject?["response"] as? [String: AnyObject], venueList = response["venues"] as? [[String: AnyObject]] else {
         return
       }

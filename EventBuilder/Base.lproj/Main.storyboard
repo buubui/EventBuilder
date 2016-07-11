@@ -653,7 +653,7 @@
                                 <rect key="frame" x="36" y="178" width="248" height="30"/>
                                 <accessibility key="accessibilityConfiguration" label="SignUp - NameField"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                 <connections>
                                     <outlet property="delegate" destination="Vf9-Mv-ekz" id="rhc-CZ-rai"/>
                                 </connections>

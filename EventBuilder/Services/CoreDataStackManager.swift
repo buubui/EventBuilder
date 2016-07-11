@@ -60,7 +60,6 @@ class CoreDataStackManager {
     // Create the coordinator and store
     let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
     let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent(Constant.sqliteFileName)
-    print("SQLITE: ", url)
     if Helper.isTestMode() {
       do {
         try NSFileManager.defaultManager().removeItemAtURL(url)

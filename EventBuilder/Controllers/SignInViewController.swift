@@ -26,6 +26,7 @@ class SignInViewController: SignInBaseViewController {
   }
 
   func signInWithPassword() {
+    view.endEditing(true)
     validateWithCompletion(textField: nil) {
       self.showLoadingActivity(text: "Signing in...")
       FirebaseService.shareInstance.signIn(email: self.emailTextField.text!, password: self.passwordTextField.text!) { [weak self] error in
@@ -33,7 +34,6 @@ class SignInViewController: SignInBaseViewController {
           self?.hideLoadingActivity(success: error == nil)
         }
         if let error = error {
-          print(error.localizedDescription)
           if error.domain == "FirebaseAuthentication" && (error.code == -8 || error.code == -6) {
             self?.showNotificationMessage("Invalid email or password", error: true)
           } else {

@@ -27,6 +27,7 @@ class SignUpViewController: SignInBaseViewController {
   }
 
   func signUp() {
+    view.endEditing(true)
     let email = emailTextField.text!
     let password = passwordTextField.text!
     let name = nameTextField.text!
@@ -40,9 +41,6 @@ class SignUpViewController: SignInBaseViewController {
           unwrappedSelf.hideLoadingActivity(success: error == nil)
         }
         if let error = error {
-          print(error.domain)
-          print(error.code)
-          print(error.localizedDescription)
           if error.domain == "FirebaseAuthentication" && (error.code == -8 || error.code == -9) {
             unwrappedSelf.showNotificationMessage("This email address is already in use", error: true)
           } else {
@@ -76,6 +74,8 @@ extension SignUpViewController {
     if textField == passwordTextField {
       view.endEditing(true)
       signUp()
+    } else if textField == nameTextField {
+      emailTextField.becomeFirstResponder()
     } else {
       passwordTextField.becomeFirstResponder()
     }

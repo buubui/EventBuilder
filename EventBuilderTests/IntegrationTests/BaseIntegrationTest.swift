@@ -18,11 +18,13 @@ class BaseIntegrationTest: KIFTestCase {
 
   override func beforeAll() {
     super.beforeAll()
-    initFirebaseProfiles()
+    initFirebaseData()
   }
 
   override func beforeEach() {
     super.beforeEach()
+    NSUserDefaults.standardUserDefaults().removeObjectForKey(Constant.savedUserId)
+    NSUserDefaults.standardUserDefaults().synchronize()
     returnLoginScreen()
     if shouldSignIn {
       signInWithValidCredential()
@@ -40,9 +42,9 @@ class BaseIntegrationTest: KIFTestCase {
     tester().waitForViewWithAccessibilityLabel("My Events")
   }
 
-  func initFirebaseProfiles() {
-    let firebase = FirebaseService.shareInstance.ref.childByAppendingPath("profiles")
-    firebase.setValue(TestConstant.defaultFireBaseProfiles) { (error, firebase) in
+  func initFirebaseData() {
+    let firebase = FirebaseService.shareInstance.ref
+    firebase.setValue(TestConstant.testFireBaseData) { (error, firebase) in
 
     }
   }

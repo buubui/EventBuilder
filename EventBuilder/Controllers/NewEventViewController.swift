@@ -78,6 +78,7 @@ class NewEventViewController: UIViewController {
     startDatePicker.minimumDate = NSDate()
     startDatePicker.hidden = !startDatePicker.hidden
     endDatePicker.hidden = true
+    startDatePickerDidChangeValue(startDatePicker)
   }
 
   @IBAction func endDateButtonDidTap(sender: FlatButton) {
@@ -85,6 +86,7 @@ class NewEventViewController: UIViewController {
     endDatePicker.minimumDate = startDatePicker.date
     endDatePicker.hidden = !endDatePicker.hidden
     startDatePicker.hidden = true
+    endDatePickerDidChangeValue(endDatePicker)
   }
 
   @IBAction func startDatePickerDidChangeValue(sender: UIDatePicker) {
@@ -92,7 +94,7 @@ class NewEventViewController: UIViewController {
     startDateButton.setTitle("From \(timeString)", forState: .Normal)
     if endDatePicker.date < startDatePicker.date {
       endDatePicker.date = startDatePicker.date
-      endDateButton.setTitle("To \(timeString)", forState: .Normal)
+      endDatePickerDidChangeValue(endDatePicker)
     }
   }
 

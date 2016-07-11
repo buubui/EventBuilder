@@ -35,6 +35,7 @@ class PlaceResultsViewController: UIViewController {
       locationManager.requestWhenInUseAuthorization()
     }
     locationManager.distanceFilter = Constant.locationDistanceFilter
+    locationManager.startUpdatingLocation()
   }
 
   func reloadData() {
@@ -87,7 +88,9 @@ extension PlaceResultsViewController: MKMapViewDelegate {
   func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
     let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "VenueAnnotation")
     annotationView.canShowCallout = true
+    annotationView.accessibilityLabel = annotation.title!
     annotationView.rightCalloutAccessoryView = UIButton(type: .ContactAdd)
+    annotationView.rightCalloutAccessoryView?.accessibilityLabel = "calloutAccessoryButton"
     return annotationView
   }
 

@@ -70,8 +70,12 @@ extension ExploreViewController: MKMapViewDelegate {
       annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "eventAnnotationView")
       annotationView.canShowCallout = true
     }
+    annotationView.accessibilityLabel = annotation.title!
     annotationView.annotation = annotation
-    annotationView.rightCalloutAccessoryView = UIButton(type: UIButtonType.DetailDisclosure)
+    let button = UIButton(type: UIButtonType.DetailDisclosure)
+    button.accessibilityLabel = "calloutAccessoryButton"
+    annotationView.rightCalloutAccessoryView = button
+    annotationView.rightCalloutAccessoryView?.accessibilityLabel = "calloutAccessoryButton"
     return annotationView
   }
 

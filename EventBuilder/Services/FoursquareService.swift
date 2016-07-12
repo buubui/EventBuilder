@@ -28,7 +28,7 @@ class FoursquareService: NSObject {
         completion?(error: error, data: nil)
         return
       }
-      guard let json = json else {
+      guard json != nil else {
         completion?(error: NSError.invalidDataError(), data: nil)
         return
       }
